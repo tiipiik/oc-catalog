@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Category
+
+# Model Form Field configuration
+form: $/tiipiik/catalog/models/category/fields.yaml
+
+# Model Class name
+modelClass: Tiipiik\Catalog\Models\Category
+
+# Default redirect location
+defaultRedirect: tiipiik/catalog/categories
+
+# Create page
+create:
+    title: Create Categories
+    redirect: tiipiik/catalog/categories/update/:id
+    redirectClose: tiipiik/catalog/categories
+
+# Update page
+update:
+    title: Edit Categories
+    redirect: tiipiik/catalog/categories
+    redirectClose: tiipiik/catalog/categories
+
+# Preview page
+preview:
+    title: Preview Categories

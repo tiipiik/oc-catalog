@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Product
+
+# Model Form Field configuration
+form: $/tiipiik/catalog/models/product/fields.yaml
+
+# Model Class name
+modelClass: Tiipiik\Catalog\Models\Product
+
+# Default redirect location
+defaultRedirect: tiipiik/catalog/products
+
+# Create page
+create:
+    title: Create Products
+    redirect: tiipiik/catalog/products/update/:id
+    redirectClose: tiipiik/catalog/products
+
+# Update page
+update:
+    title: Edit Products
+    redirect: tiipiik/catalog/products
+    redirectClose: tiipiik/catalog/products
+
+# Preview page
+preview:
+    title: Preview Products
