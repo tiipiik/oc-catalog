@@ -4,9 +4,9 @@ use BackendMenu;
 use Backend\Classes\Controller;
 
 /**
- * Products Back-end Controller
+ * CustomFields Back-end Controller
  */
-class Products extends Controller
+class CustomFields extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
@@ -16,14 +16,10 @@ class Products extends Controller
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
 
-    public $requiredPermissions = ['products.manage_products'];
-
-    public $bodyClass = 'compact-container';
-
     public function __construct()
     {
         parent::__construct();
 
-        BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'products');
+        BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'customfields');
     }
 }

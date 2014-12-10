@@ -1,1 +1,4 @@
-1.0.1: First version of Catalog
+1.0.1:
+    - First version of Catalog
+    - create_tables.php
+    - feed_tables.php

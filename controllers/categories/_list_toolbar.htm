@@ -1,3 +1,4 @@
 <div data-control="toolbar">
-    <a href="<?= Backend::url('tiipiik/catalog/categories/create') ?>" class="btn btn-primary oc-icon-plus">New Category</a>
+    <a href="<?= Backend::url('tiipiik/catalog/categories/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('tiipiik.catalog::lang.categories.new_category')) ?></a>
+    <a href="<?= Backend::url('tiipiik/catalog/categories/reorder') ?>" class="btn btn-default oc-icon-bars"><?= e(trans('tiipiik.catalog::lang.categories.reorder_category')) ?></a>
 </div>

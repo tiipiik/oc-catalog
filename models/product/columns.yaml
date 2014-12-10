@@ -4,5 +4,24 @@
 
 columns:
     id:
-        label: ID
+        label: tiipiik.catalog::lang.products.id
+        invisible: true
+    
+    title:
+        label: tiipiik.catalog::lang.products.title
+    
+    categories:
+        label: tiipiik.catalog::lang.products.category
+        relation: categories
+        select: name
         searchable: true
+        sortable: false
+    
+    price:
+        label: tiipiik.catalog::lang.products.price
+    
+    discount_price:
+        label: tiipiik.catalog::lang.products.discount_price
+        
+    items_available:
+        label: tiipiik.catalog::lang.products.items_available

@@ -2,6 +2,7 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use Tiipiik\Catalog\Models\Category;
 
 /**
  * Categories Back-end Controller
@@ -21,5 +22,54 @@ class Categories extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'categories');
+    }
+
+    /**
+     * From Benefreke MenuManager plugin
+     * Displays the categories items in a tree list view so they can be reordered
+     */
+    public function reorder()
+    {
+        // Ensure the correct sidemenu is active
+        BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'reorder');
+
+        $this->pageTitle = 'Reorder Categories';
+
+        $toolbarConfig          = $this->makeConfig();
+        $toolbarConfig->buttons = '@/plugins/tiipiik/catalog/controllers/categories/_reorder_toolbar.htm';
+
+        $this->vars['toolbar'] = $this->makeWidget('Backend\Widgets\Toolbar', $toolbarConfig);
+        $this->vars['records'] = Category::make()->getEagerRoot();
+    }
+
+    /**
+     * From Benefreke MenuManager plugin
+     * Update the menu item position
+     */
+    public function reorder_onMove()
+    {
+        /*
+        $sourceNode = self->find(post('sourceNode'));
+        $targetNode = post('targetNode') ? Category::find(post('targetNode')) : null;
+
+        if ($sourceNode == $targetNode) {
+            return;
+        }
+
+        switch (post('position')) {
+            case 'before':
+                $sourceNode->moveBefore($targetNode);
+                break;
+            case 'after':
+                $sourceNode->moveAfter($targetNode);
+                break;
+            case 'child':
+                $sourceNode->makeChildOf($targetNode);
+                break;
+            default:
+                $sourceNode->makeRoot();
+                break;
+        }
+        */
     }
 }

@@ -3,6 +3,61 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    
+    title:
+        label:  tiipiik.catalog::lang.products.title
+        placeholder: tiipiik.catalog::lang.products.title_ph
+        span: left
+        
+    slug:
+        label: tiipiik.catalog::lang.products.slug
+        span: right
+        placeholder: tiipiik.catalog::lang.products.slug_ph
+        attributes:
+            data-input-preset: 'input[name="Product[title]"]'
+            data-input-preset-type: slug
+            data-input-preset-closest-parent: form
+
+tabs:
+    fields:
+    
+        items_available:
+            tab: tiipiik.catalog::lang.products.details_tab_title
+            label: tiipiik.catalog::lang.products.items_available
+            placeholder: tiipiik.catalog::lang.products.items_available_ph
+            span: full
+        
+        price:
+            tab: tiipiik.catalog::lang.products.details_tab_title
+            label: tiipiik.catalog::lang.products.price
+            placeholder: tiipiik.catalog::lang.products.price_ph
+            span: left
+        
+        discount_price:
+            tab: tiipiik.catalog::lang.products.details_tab_title
+            label: tiipiik.catalog::lang.products.discount_price
+            placeholder: tiipiik.catalog::lang.products.discount_price_ph
+            default: 0
+            span: right
+            
+        description:
+            tab: tiipiik.catalog::lang.products.details_tab_title
+            label: tiipiik.catalog::lang.products.description
+            placeholder: tiipiik.catalog::lang.products.description_ph
+            type: textarea
+                            
+        categories:
+            tab: tiipiik.catalog::lang.products.category_tab_title
+            type: relation
+            commentAbove: tiipiik.catalog::lang.products.categories_cmt
+        
+secondaryTabs:
+    fields:
+    
+        featured_images:
+            label: tiipiik.catalog::lang.products.featured_images
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260
+        

@@ -3,6 +3,23 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    name:
+        label: tiipiik.catalog::lang.products.title
+        placeholder: tiipiik.catalog::lang.products.title_ph
+        span: left
+    
+    slug:
+        label: tiipiik.catalog::lang.products.slug
+        placeholder: tiipiik.catalog::lang.products.slug_ph
+        span: right
+        attributes:
+            data-input-preset: 'input[name="Category[name]"]'
+            data-input-preset-type: slug
+            data-input-preset-closest-parent: form
+    
+    #parent_id:
+    #    label: Parent Category
+    #    type: dropdown
+    #    placeholder: -- Select category --
+    #    options: getCategoriesOptions
+        

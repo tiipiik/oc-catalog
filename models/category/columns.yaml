@@ -4,5 +4,12 @@
 
 columns:
     id:
-        label: ID
+        label: tiipiik.catalog::lang.products.id
         searchable: true
+        invisible: true
+    
+    name:
+        label: tiipiik.catalog::lang.products.title
+    
+    slug:
+        label: tiipiik.catalog::lang.products.slug

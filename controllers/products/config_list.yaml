@@ -2,43 +2,17 @@
 #  List Behavior Config
 # ===================================
 
-# Model List Column configuration
+title: tiipiik.catalog::lang.config.list.title
 list: $/tiipiik/catalog/models/product/columns.yaml
-
-# Model Class name
 modelClass: Tiipiik\Catalog\Models\Product
-
-# List Title
-title: Manage Products
-
-# Link URL for each record
 recordUrl: tiipiik/catalog/products/update/:id
-
-# Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
-
-# Records to display per page
 recordsPerPage: 20
-
-# Displays the list column set up button
+showCheckboxes: false
 showSetup: true
-
-# Displays the sorting link on each column
 showSorting: true
 
-# Default sorting column
-# defaultSort:
-#     column: created_at
-#     direction: desc
-
-# Display checkboxes next to each record
-# showCheckboxes: true
-
-# Toolbar widget configuration
 toolbar:
-    # Partial for toolbar buttons
     buttons: list_toolbar
-
-    # Search widget configuration
     search:
         prompt: backend::lang.list.search_prompt
