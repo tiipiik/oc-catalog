@@ -39,7 +39,8 @@ class CreateTables extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->string('title');
+            $table->integer('product_id')->unsigned()->nullable()->index();
+            $table->string('name');
             $table->text('value');
             $table->timestamps();
         });

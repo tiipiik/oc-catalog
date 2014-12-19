@@ -21,7 +21,7 @@ class SeedTables extends Seeder
         ]);
         
         CustomField::create([
-            'title' => 'color',
+            'name' => 'color',
             'value' => '{"green", "black"}'
         ]);
         

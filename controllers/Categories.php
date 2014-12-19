@@ -16,6 +16,9 @@ class Categories extends Controller
 
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
+    #public $relationConfig = 'config_relation.yaml';
+
+    public $requiredPermissions = ['catalog.manage_categories'];
 
     public function __construct()
     {
@@ -35,7 +38,7 @@ class Categories extends Controller
 
         $this->pageTitle = 'Reorder Categories';
 
-        $toolbarConfig          = $this->makeConfig();
+        $toolbarConfig = $this->makeConfig();
         $toolbarConfig->buttons = '@/plugins/tiipiik/catalog/controllers/categories/_reorder_toolbar.htm';
 
         $this->vars['toolbar'] = $this->makeWidget('Backend\Widgets\Toolbar', $toolbarConfig);
@@ -48,8 +51,8 @@ class Categories extends Controller
      */
     public function reorder_onMove()
     {
-        /*
-        $sourceNode = self->find(post('sourceNode'));
+        
+        $sourceNode = Category::find(post('sourceNode'));
         $targetNode = post('targetNode') ? Category::find(post('targetNode')) : null;
 
         if ($sourceNode == $targetNode) {
@@ -70,6 +73,5 @@ class Categories extends Controller
                 $sourceNode->makeRoot();
                 break;
         }
-        */
     }
 }

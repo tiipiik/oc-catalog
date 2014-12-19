@@ -3,6 +3,12 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    name:
+        label: Name
+        placeholder: Field name
+        
+    value:
+        type: textarea
+        label: Value
+        placeholder: Field value
+        commentAbove: To add multiple values separate each value by a semicolon (ie. green; blue) 

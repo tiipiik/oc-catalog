@@ -16,6 +16,8 @@ class CustomFields extends Controller
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
 
+    public $requiredPermissions = ['catalog.manage_custom_fields'];
+
     public function __construct()
     {
         parent::__construct();

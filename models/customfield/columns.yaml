@@ -6,3 +6,10 @@ columns:
     id:
         label: ID
         searchable: true
+        invisible: true
+    
+    name:
+        label: Name
+    
+    value:
+        label: Value

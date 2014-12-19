@@ -67,6 +67,8 @@ class Category extends Model
      * Returns the list of menu items, where the key is the id and the value is the title, indented with '-' for depth
      * @return array
      */
+     // SERT A RIEN ?
+     /*
     public function getSelectList()
     {
         $items  = $this->getAll();
@@ -75,8 +77,10 @@ class Category extends Model
             $depthIndicator         = $this->getDepthIndicators($item->nest_depth);
             $output["id-$item->id"] = $depthIndicator . ' ' . $item->title;
         }
+        die('<pre>'.print_r($output));
         return $output;
     }
+    */
 
     /**
      * From Benefreke MenuManager plugin
@@ -87,6 +91,7 @@ class Category extends Model
      *
      * @return string
      */
+     /*
     protected function getDepthIndicators($depth = 0, $indicators = '')
     {
         if ($depth < 1) {
@@ -94,6 +99,7 @@ class Category extends Model
         }
         return $this->getDepthIndicators(--$depth, $indicators . '-');
     }
+    */
     
     /*
      *

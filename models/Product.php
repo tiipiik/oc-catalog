@@ -41,12 +41,16 @@ class Product extends Model
     /**
      * @var array Relations
      */
+    public $hasMany = [
+        'customfields' => ['Tiipiik\Catalog\Models\CustomField']
+    ];
+    
     public $attachMany = [
         'featured_images' => ['System\Models\File'],
     ];
     
     public $belongsToMany = [
-        'categories' => ['Tiipiik\Catalog\Models\Category', 'table' => 'tiipiik_catalog_prods_cats', 'order' => 'name']
+        'categories' => ['Tiipiik\Catalog\Models\Category', 'table' => 'tiipiik_catalog_prods_cats', 'order' => 'name'],
     ];
     
      /**

@@ -1,0 +1,9 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+customfields:
+    label: Custom Fields # Could not translate in lang.php because it's not parsed in custom field creation form
+    list: @/plugins/tiipiik/catalog/models/customfield/columns.yaml
+    form: @/plugins/tiipiik/catalog/models/customfield/fields.yaml
+    emptyMessage: Product has no custom field

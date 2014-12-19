@@ -21,19 +21,18 @@ class CustomField extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'value'];
 
     /**
      * @var array Relations
      */
-    public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+    public $belongsTo = [
+        'products' => ['Tiipiik\Catalog\Models\Product']
+    ];
+    
+    public function onSave()
+    {
+        return 'Saving...';
+    }
 
 }
