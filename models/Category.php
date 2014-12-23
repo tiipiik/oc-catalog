@@ -33,12 +33,12 @@ class Category extends Model
      */
     protected $guarded = ['*'];
 
-    public $belongsToMany = [
-        'products' => ['Tiipiik\Catalog\Models\Product', 'table' => 'tiipiik_catalog_prods_cats', 'order' => 'name'],
+    public $hasMany = [
+        'products' => ['Tiipiik\Catalog\Models\Product', 'table' => 'tiipiik_catalog_prods_cats', 'order' => 'title'],
     ];
 
     public $attachOne = [
-        'category_image'    =>  ['System\Models\File']
+        'category_image' => ['System\Models\File']
     ];
     
      /**
@@ -109,32 +109,32 @@ class Category extends Model
         return $this->orderBy('name')->lists('name', 'id');
     }
     
-    /**
-     * Lists rooms for the front end
-     * @param  array $options Display options
-     * @return self
+    /*
+     * Return the number of product for given category
      */
-    public function listFrontEnd($options)
+    public function getProductCountAttribute()
     {
-        /*
-         * Default options
-         */
-        extract(array_merge([
-            'page' => 1,
-            'perPage' => 30,
-            'sort' => 'name',
-            'search' => '',
-        ], $options));
+        return $this->products()->count();
+    }
 
-        App::make('paginator')->setCurrentPage($page);
-        $obj = $this->newQuery();
-        
-        return $obj->paginate($perPage);
+    /**
+     * Sets the "url" attribute with a URL to this object
+     * @param string $pageName
+     * @param Cms\Classes\Controller $controller
+     */
+    public function setUrl($pageName, $controller)
+    {
+        $params = [
+            'slug' => $this->slug,
+        ];
+
+        return $this->url = $controller->pageUrl($pageName, $params);
     }
     
-    public function category($param)
+    public static function categoryDetails($param)
     {
-        $category = Category::where('slug', '=', $param)->first();
+        if (!$category = self::where('slug', '=', $param['category'])->first())
+            return null;
         
         return $category;
     }

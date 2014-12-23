@@ -33,6 +33,15 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerComponents()
+    {
+        return [
+            '\Tiipiik\Catalog\Components\Categories' => 'categories',
+            '\Tiipiik\Catalog\Components\ProductList' => 'product_list',
+            '\Tiipiik\Catalog\Components\ProductDetails' => 'product_details',
+        ];
+    }
+
     public function registerNavigation()
     {
         return [

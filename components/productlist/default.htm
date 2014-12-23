@@ -1,0 +1,24 @@
+{% set category = __SELF__.category %}
+{% set product_list = __SELF__.products %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Viewing products of {{ category.name }}</h3>
+        {% if (category.cover_image != '') %}
+        <img src="{{ category.cover_image.thumb(300, 300) }}" title="{{ category.cover_image.title }}" alt="{{ category.cover_image.description }}">
+        {% endif %}
+    </div>
+</div>
+<ul class="post-list">
+    {% for product in product_list %}
+        <li>
+            <a href="{{ __SELF__.productPage|app }}/{{ product.slug }}">{{ product.title }}</a>
+        </li>
+    {% else %}
+        <li class="no-data">{{ __SELF__.noProductsMessage }}</li>
+    {% endfor %}
+</ul>
+
+{% if product_list %}
+    {% partial __SELF__ ~ "::pagination" %}
+{% endif %}

@@ -1,0 +1,19 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    product_id:
+        label: Product Id (dont foget to remove)
+        hidden: true
+
+    #custom_field:
+    #    label: Name
+    #    type: relation
+    #    nameFrom: display_name
+    #    disabled: true # DOES NOT WORK
+    #    commentAbove: DO NOT EDIT THIS FIELD
+    #    attributes: disabled # DOES NOT WORK
+    
+    value:
+        label: Value

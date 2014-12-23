@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <h1>{{ product.title }}</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            {{ product.description }}
+            <br><b>Price</b> : {{ product.price  }}€
+            <br><b>Discount price</b> : {{ product.discount_price }}€
+            <br><b>Items available</b> : {{  product.items_available  }}
+            <br><b>Available colors</b> : {{ product.customfields[0].value }}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <img src="{{ product.featured_images[0].thumb(300, 300) }}" title="{{ product.featured_images[0].title }}" alt="{{ product.featured_images[0].description }}">
+        </div>
+    </div>
+</div>

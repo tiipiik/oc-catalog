@@ -2,43 +2,17 @@
 #  List Behavior Config
 # ===================================
 
-# Model List Column configuration
-list: $/tiipiik/catalog/models/customfield/columns.yaml
-
-# Model Class name
-modelClass: Tiipiik\Catalog\Models\CustomField
-
-# List Title
 title: Manage CustomFields
-
-# Link URL for each record
+list: $/tiipiik/catalog/models/customfield/columns.yaml
+modelClass: Tiipiik\Catalog\Models\CustomField
 recordUrl: tiipiik/catalog/customfields/update/:id
-
-# Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
-
-# Records to display per page
 recordsPerPage: 20
-
-# Displays the list column set up button
 showSetup: true
-
-# Displays the sorting link on each column
 showSorting: true
+showCheckboxes: true
 
-# Default sorting column
-# defaultSort:
-#     column: created_at
-#     direction: desc
-
-# Display checkboxes next to each record
-# showCheckboxes: true
-
-# Toolbar widget configuration
 toolbar:
-    # Partial for toolbar buttons
     buttons: list_toolbar
-
-    # Search widget configuration
     search:
         prompt: backend::lang.list.search_prompt

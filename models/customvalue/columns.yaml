@@ -1,0 +1,13 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: Custom field
+        relation: custom_field
+        select: display_name
+        sortable: false
+    
+    value:
+        label: Value

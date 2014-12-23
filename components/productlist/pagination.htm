@@ -1,0 +1,46 @@
+{% set products = __SELF__.products %}
+
+{% set paginationEnabled = products.getCurrentPage > 1 or products.getLastPage > 1 or products.getLastPage > products.getCurrentPage %}
+
+<div class="row forum-pagination {{ paginationEnabled ? "enabled" : "disabled" }}">
+    <div class="col-md-8">
+        <ul class="pagination">
+            {% if products.currentPage > 1 %}
+                <li>
+                    <a href="{{ paginationUrl ~ (products.currentPage - 1) }}">
+                        &larr; Previous
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <span>
+                        &larr; Previous
+                    </span>
+                </li>
+            {% endif %}
+            {% if products.lastPage > 1 %}
+                {% for page in 1..products.lastPage %}
+                    <li class="{{ page == products.currentPage ? 'active' }}">
+                        <a href="{{ paginationUrl ~ page }}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+            {% if products.lastPage > products.currentPage %}
+                <li>
+                    <a href="{{ paginationUrl ~ (products.currentPage + 1) }}">
+                        Next &rarr;
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <span>
+                        Next &rarr;
+                    </span>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="col-md-4 text-right posts-total-summary">
+        <p>{{ products.from }}-{{ products.to }} of {{ products.total }}</p>
+    </div>
+</div>

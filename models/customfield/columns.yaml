@@ -8,8 +8,11 @@ columns:
         searchable: true
         invisible: true
     
-    name:
-        label: Name
+    template_code:
+        label: Template Code
     
-    value:
+    display_name:
+        label: Display name
+    
+    default_value:
         label: Value

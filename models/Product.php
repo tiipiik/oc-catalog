@@ -1,6 +1,9 @@
 <?php namespace Tiipiik\Catalog\Models;
 
+use DB;
+use App;
 use Model;
+use Tiipiik\Catalog\Models\CustomField as CustomFieldModel;
 
 /**
  * Product Model
@@ -41,12 +44,12 @@ class Product extends Model
     /**
      * @var array Relations
      */
-    public $hasMany = [
-        'customfields' => ['Tiipiik\Catalog\Models\CustomField']
-    ];
-    
     public $attachMany = [
         'featured_images' => ['System\Models\File'],
+    ];
+    
+    public $hasMany = [
+        'customfields' => ['Tiipiik\Catalog\Models\CustomValue', 'order' => 'csfield_id']
     ];
     
     public $belongsToMany = [
@@ -75,13 +78,6 @@ class Product extends Model
         });
     }
     
-    
-    public function scopeOfCategory($query, $category)
-    {
-        return $query->whereCategory($category);
-    }
-    
-    
     /**
      * Lists rooms for the front end
      * @param  array $options Display options
@@ -100,15 +96,31 @@ class Product extends Model
         ], $options));
 
         App::make('paginator')->setCurrentPage($page);
-        //$obj = $this->newQuery();
-        //$test = $this->ofCategory($this->newQuery(), 1)->get();
-        
-        $obj = $this->ofCategory(parent::newQuery(), '1')->get();
-
-        //echo '<pre>';
-          //  print_r($obj);
-            //die;
+        $obj = $this->newQuery();
+        $obj->where('category_id', '=', $category);
             
         return $obj->paginate($perPage);
+    }
+    
+    /*
+     * Add existing custom fields to newly created product
+     */
+    public function afterCreate()
+    {
+        // Get all custom fields
+        $customFields = CustomFieldModel::all();
+        
+        // Add to product
+        $this->customfields = [
+            '' => '',
+        ];
+    }
+    
+    /*
+     * Delete all relations before deleting product
+     */
+    public function beforeDelete()
+    {
+        
     }
 }

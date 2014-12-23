@@ -3,12 +3,16 @@
 # ===================================
 
 fields:
-    name:
-        label: Name
-        placeholder: Field name
+    template_code:
+        label: Template code
+        placeholder: Name for using in templates
+    
+    display_name:
+        label: Display name
+        placeholder: Display name for fromtend
         
-    value:
+    default_value:
         type: textarea
-        label: Value
-        placeholder: Field value
-        commentAbove: To add multiple values separate each value by a semicolon (ie. green; blue) 
+        label: Default value
+        placeholder: Default value
+        # commentAbove: To add multiple values separate each value by a semicolon (ie. green; blue)

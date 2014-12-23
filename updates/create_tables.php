@@ -26,6 +26,7 @@ class CreateTables extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('category_id')->unsigned()->nullable()->index();
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();
@@ -39,9 +40,19 @@ class CreateTables extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
+            $table->string('template_code');
+            $table->string('display_name');
+            $table->text('default_value');
+            $table->timestamps();
+        });
+        
+        Schema::create('tiipiik_catalog_custom_values', function($table)
+        {
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
             $table->integer('product_id')->unsigned()->nullable()->index();
-            $table->string('name');
-            $table->text('value');
+            $table->integer('custom_field_id')->unsigned()->nullable()->index();
+            $table->text('value')->nullable();
             $table->timestamps();
         });
         
@@ -54,14 +65,13 @@ class CreateTables extends Migration
             $table->primary(['product_id', 'category_id']);
         });
         
-        // Relation between products and custom fields
-        Schema::create('tiipiik_catalog_prods_fields', function($table)
+        // Relation between custom fields and custom values
+        Schema::create('tiipiik_catalog_csf_csv', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->integer('product_id')->unsigned();
-            $table->integer('field_id')->unsigned();
-            $table->string('selected_value');
-            $table->primary(['product_id', 'field_id']);
+            $table->integer('custom_value_id')->unsigned();
+            $table->integer('custom_field_id')->unsigned();
+            $table->primary(['custom_value_id', 'custom_field_id']);
         });
         
     }
@@ -71,8 +81,9 @@ class CreateTables extends Migration
         Schema::dropIfExists('tiipiik_catalog_categories');
         Schema::dropIfExists('tiipiik_catalog_products');
         Schema::dropIfExists('tiipiik_catalog_custom_fields');
+        Schema::dropIfExists('tiipiik_catalog_custom_values');
         Schema::dropIfexists('tiipiik_catalog_prods_cats');
-        Schema::dropIfExists('tiipiik_catalog_prods_fields');
+        Schema::dropIfExists('tiipiik_catalog_csf_csv');
     }
 
 }
