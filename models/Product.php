@@ -4,6 +4,7 @@ use DB;
 use App;
 use Model;
 use Tiipiik\Catalog\Models\CustomField as CustomFieldModel;
+use Tiipiik\Catalog\Models\CustomValue as CustomValueModel;
 
 /**
  * Product Model
@@ -49,7 +50,7 @@ class Product extends Model
     ];
     
     public $hasMany = [
-        'customfields' => ['Tiipiik\Catalog\Models\CustomValue', 'order' => 'csfield_id']
+        'customfields' => ['Tiipiik\Catalog\Models\CustomValue', 'order' => 'custom_field_id']
     ];
     
     public $belongsToMany = [
@@ -110,10 +111,18 @@ class Product extends Model
         // Get all custom fields
         $customFields = CustomFieldModel::all();
         
-        // Add to product
-        $this->customfields = [
-            '' => '',
-        ];
+        $customFields->each(function($customField)
+        {
+            // Add to product as custom value, with default value
+            $customValue = CustomValueModel::create([
+                'product_id' =>$this->id,
+                'custom_field_id' => $customField->id,
+                'value' => $customField->default_value,
+            ]);
+                        
+            // Create relation between custom value and custom field for this product
+            DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$customValue->id.'", "'.$customField->id.'")');
+        });
     }
     
     /*
@@ -121,6 +130,18 @@ class Product extends Model
      */
     public function beforeDelete()
     {
+        // Find the related custom value
+        $customValues = CustomValueModel::where('product_id', '=', $this->id)->get();
         
+        $customValues->each(function($value)
+        {
+            // Delete relation
+            $relation = DB::table('tiipiik_catalog_csf_csv')
+                ->where('custom_value_id', '=', $value->id)
+                ->delete();
+                
+            // Delete custom value
+            CustomValueModel::find($value->id)->delete();
+        });
     }
 }

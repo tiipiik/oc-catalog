@@ -39,7 +39,7 @@ class CustomValue extends Model
             'Tiipiik\Catalog\Models\CustomField',
             'table' => 'tiipiik_catalog_csf_csv',
             //'order' => 'display_name',
-            'foreignKey' => 'custom_field_id'
+            //'foreignKey' => 'custom_field_id'
         ],
     ];
     

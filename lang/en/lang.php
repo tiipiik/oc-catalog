@@ -21,7 +21,7 @@ return [
         'discount_price_ph' => 'Discount price',
         'featured_images' => 'Featured images',
         'category' => 'Category',
-        'category_tab_title' => 'Category',
+        'category_tab_title' => 'Categories',
         'categories_cmt' => 'Select category the product belongs to',
         'return_to_list' => 'Return to product list',
     ],
@@ -54,5 +54,8 @@ return [
         'access_categories' => 'Manage the Catalog categories',
         'access_products' => 'Manage the Catalog products',
         'access_custom_fields' => 'Manage the Catalog product\'s custom fields',
+    ],
+    'catalog' => [
+        'delete_confirm' => 'Do you really want to delete this product ?',
     ],
 ];
