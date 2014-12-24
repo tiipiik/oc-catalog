@@ -4,21 +4,46 @@
 <div class="row">
     <div class="col-xs-12">
         <h3>Viewing products of {{ category.name }}</h3>
-        {% if (category.cover_image != '') %}
-        <img src="{{ category.cover_image.thumb(300, 300) }}" title="{{ category.cover_image.title }}" alt="{{ category.cover_image.description }}">
-        {% endif %}
+        <div class="row">
+            {% if (category.description) != '' %}
+            <div class="col-xs-{% if not (category.cover) %}12{% else %}8{% endif %}">
+                {{ category.description }}
+            </div>
+            {% endif %}
+            {% if (category.cover != '') %}
+            <div class="col-xs-{% if not (category.description) %}12{% else %}4{% endif %}">
+                <img src="{{ category.cover.thumb(300, 300) }}" title="{{ category.cover.title }}" alt="{{ category.cover.description }}">
+            </div>
+            {% endif %}
+        </div>
     </div>
 </div>
-<ul class="post-list">
-    {% for product in product_list %}
-        <li>
-            <a href="{{ __SELF__.productPage|app }}/{{ product.slug }}">{{ product.title }}</a>
-        </li>
-    {% else %}
-        <li class="no-data">{{ __SELF__.noProductsMessage }}</li>
-    {% endfor %}
-</ul>
 
-{% if product_list %}
-    {% partial __SELF__ ~ "::pagination" %}
+<br>
+
+{% if not product_list|length %}
+<p class="alert alert-info">{{ __SELF__.noProductsMessage }}</p>
+{% else %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            {% for product in product_list %}
+            <div class="col-xs-6 col-md-3">
+                <a href="{{ __SELF__.productPage|app }}/{{ product.slug }}" class="thumbnail text-center">
+                    {% if category.cover %}
+                    <img src="{{ product.featured_images[0].thumb(300, 300) }}"
+                         title="{{ product.featured_images[0].title }}"
+                            alt="{{ product.featured_images[0].description }}">
+                    {% endif %}
+                    {{ product.title }}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+    {% if product_list %}
+        {% partial __SELF__ ~ "::pagination" %}
+    {% endif %}
 {% endif %}

@@ -17,9 +17,16 @@ fields:
             data-input-preset-type: slug
             data-input-preset-closest-parent: form
     
-    #parent_id:
-    #    label: Parent Category
-    #    type: dropdown
-    #    placeholder: -- Select category --
-    #    options: getCategoriesOptions
-        
+    description:
+        label: Description
+        placeholder: Description
+        type: textarea
+                     
+secondaryTabs:
+    fields:
+        cover:
+            label: Image
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260

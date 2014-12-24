@@ -53,6 +53,13 @@ class Plugin extends PluginBase
                 'order'       => 20,
 
                 'sideMenu' => [
+                    'categories' => [
+                        'label'       => 'tiipiik.catalog::lang.categories.menu_label',
+                        'icon'        => 'icon-list-ul',
+                        'url'         => Backend::url('tiipiik/catalog/categories'),
+                        'attributes'  => ['data-menu-item'=>'categories'],
+                        'permissions' => ['tiipiik.catalog.manage_categories'],
+                    ],
                     'products' => [
                         'label'       => 'tiipiik.catalog::lang.products.menu_label',
                         'icon'        => 'icon-th',
@@ -66,13 +73,6 @@ class Plugin extends PluginBase
                         'url'         => Backend::url('tiipiik/catalog/customfields'),
                         'attributes'  => ['data-menu-item'=>'custom_fields'],
                         'permissions' => ['tiipiik.catalog.manage_custom_fields'],
-                    ],
-                    'categories' => [
-                        'label'       => 'tiipiik.catalog::lang.categories.menu_label',
-                        'icon'        => 'icon-list-ul',
-                        'url'         => Backend::url('tiipiik/catalog/categories'),
-                        'attributes'  => ['data-menu-item'=>'categories'],
-                        'permissions' => ['tiipiik.catalog.manage_categories'],
                     ],
                     'reorder' => [
                         'label'       => 'tiipiik.catalog::lang.categories.reorder_category',

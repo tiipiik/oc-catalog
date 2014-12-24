@@ -12,9 +12,21 @@ class SeedTables extends Seeder
 
     public function run()
     {
-        Category::create(['name' => 'Toys', 'slug' => 'toys']);
         Category::create(['name' => 'Motorbike', 'slug' => 'motorbike']);
+        Category::create(['name' => 'Kawasaki', 'slug' => 'kawasaki']);
         
+        // Create custom fields first, as they are automatically added to product after create
+        CustomField::create([
+            'template_code' => 'color',
+            'display_name' => 'Color',
+            'default_value' => 'Green'
+        ]);
+        CustomField::create([
+            'template_code' => 'options',
+            'display_name' => 'Options'
+        ]);
+        
+        // Create product. custom fields are added after creation
         Product::create([
             'category_id' => 2,
             'title' => 'Kawasaki 1400 ZZR',
@@ -22,28 +34,9 @@ class SeedTables extends Seeder
             'price' => '10000',
         ]);
         
-        CustomField::create([
-            'template_code' => 'color',
-            'display_name' => 'Color'
-        ]);
-        CustomField::create([
-            'template_code' => 'options',
-            'display_name' => 'Options'
-        ]);
-        
-        // Insert custom field values
-        CustomValue::create([
-            'product_id' => '1',
-            'custom_field_id' => '1',
-            'value' => 'Green, Black'
-        ]);
-        
-        // Product custom fields and values
-        DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values (1, 1)');
-        
-        // Product categories
+        // Link product to categories
         DB::insert('insert into tiipiik_catalog_prods_cats (category_id, product_id) values (?, ?)', ['2', '1']);
-
+        
     }
 
 }

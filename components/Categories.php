@@ -36,6 +36,13 @@ class Categories extends ComponentBase
                 'type'         => 'string',
                 'default'      => 'No categories found'
             ],
+            'renderView' => [
+                'title'        => 'View',
+                'description'  => 'Indicate which partial file of the component should be used to render view.',
+                'type'         => 'string',
+                'default'      => 'menu_list',
+                'group'       => 'Render',
+            ],
             'categoryPage' => [
                 'title'       => 'Category page',
                 'description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
@@ -53,6 +60,7 @@ class Categories extends ComponentBase
     
     public function onRun()
     {
+        $this->render_view                  = $this->property('renderView');
         $this->noProductCategoriesMessage   = $this->property('noCategoriesMessage');
         $this->productCategoryPage          = $this->property('categoryPage');
         $this->currentProductCategorySlug   = $this->propertyOrParam('idParam');

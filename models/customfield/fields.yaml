@@ -15,4 +15,4 @@ fields:
         type: textarea
         label: Default value
         placeholder: Default value
-        # commentAbove: To add multiple values separate each value by a semicolon (ie. green; blue)
+        commentAbove: Default value will be added to products only on custom field creation. Updated value will only be added to the products created after this update.

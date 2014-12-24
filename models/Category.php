@@ -26,7 +26,7 @@ class Category extends Model
     /**
      * @var array Translatable fields
      */
-    public $translatable = ['title', 'description'];
+    public $translatable = ['name', 'description'];
     
     /**
      * @var array Guarded fields
@@ -38,7 +38,7 @@ class Category extends Model
     ];
 
     public $attachOne = [
-        'category_image' => ['System\Models\File']
+        'cover' => ['System\Models\File']
     ];
     
      /**

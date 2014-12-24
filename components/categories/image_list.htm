@@ -1,19 +1,25 @@
 {% set category_list = __SELF__.product_categories %}
 
-{% if (renderView != 'list') %} 
-<div class="list-group">
+
+{% if not category_list|length %}
+<p class="alert alert-info">{{ __SELF__.noProductCategoriesMessage }}</p>
+{% else %}
+<div class="row">
     {% for category in category_list %}
         {% set productCount = category.product_count %}
-        <a href="{{ category.url }}" class="list-group-item {% if category.slug == __SELF__.currentProductCategorySlug %}active{% endif %}">
-            {{ category.name }}
-            {% if productCount %}
-                <span class="badge">{{ productCount }}</span>
-            {% endif %}
-        </a>
-    {% else %}
-        <p class="alert alert-info">{{ __SELF__.noProductCategoriesMessage }}</p>
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ category.url }}" class="thumbnail text-center">
+                {% if category.cover %}
+                <img src="{{ category.cover.thumb(300, 300) }}"
+                     title="{{ category.cover.title }}"
+                     alt="{{ category.cover.description }}">
+                {% endif %}
+                {{ category.name }}
+                {% if productCount %}
+                    <span class="badge">{{ productCount }}</span>
+                {% endif %}
+            </a>
+        </div>
     {% endfor %}
 </div>
-{% else %}
-    Ok
 {% endif %}
