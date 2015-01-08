@@ -12,8 +12,12 @@ class SeedTables extends Seeder
 
     public function run()
     {
-        Category::create(['name' => 'Motorbike', 'slug' => 'motorbike']);
-        Category::create(['name' => 'Kawasaki', 'slug' => 'kawasaki']);
+        Category::create(['name' => 'Motorbike', 'slug' => 'motorbike',
+        //'product_id' => 1
+        ]);
+        Category::create(['name' => 'Kawasaki', 'slug' => 'kawasaki',
+        //'product_id' => 1,
+        'parent_id' => '1']);
         
         // Create custom fields first, as they are automatically added to product after create
         CustomField::create([
@@ -28,15 +32,16 @@ class SeedTables extends Seeder
         
         // Create product. custom fields are added after creation
         Product::create([
-            'category_id' => 2,
+            //'category_id' => 2,
             'title' => 'Kawasaki 1400 ZZR',
             'slug' => 'kawasaki-1400-zzr',
             'price' => '10000',
         ]);
         
         // Link product to categories
+        DB::insert('insert into tiipiik_catalog_prods_cats (category_id, product_id) values (?, ?)', ['1', '1']);
         DB::insert('insert into tiipiik_catalog_prods_cats (category_id, product_id) values (?, ?)', ['2', '1']);
-        
+                
     }
 
 }

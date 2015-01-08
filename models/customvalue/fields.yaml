@@ -3,17 +3,9 @@
 # ===================================
 
 fields:
-    product_id:
-        label: Product Id (dont foget to remove)
-        hidden: true
-
-    #custom_field:
-    #    label: Name
-    #    type: relation
-    #    nameFrom: display_name
-    #    disabled: true # DOES NOT WORK
-    #    commentAbove: DO NOT EDIT THIS FIELD
-    #    attributes: disabled # DOES NOT WORK
+    #product_id:
+    #    label: Product Id
+    #    hidden: true
     
     value:
-        label: Value
+        label: tiipiik.catalog::lang.custom_value.value_label

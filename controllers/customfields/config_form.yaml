@@ -2,30 +2,16 @@
 #  Form Behavior Config
 # ===================================
 
-# Record name
-name: CustomField
-
-# Model Form Field configuration
+name: tiipiik.catalog::lang.config.form.customfields_name
 form: $/tiipiik/catalog/models/customfield/fields.yaml
-
-# Model Class name
 modelClass: Tiipiik\Catalog\Models\CustomField
-
-# Default redirect location
 defaultRedirect: tiipiik/catalog/customfields
 
-# Create page
 create:
-    title: Create CustomFields
+    title: tiipiik.catalog::lang.config.form.customfields_create
     redirect: tiipiik/catalog/customfields/update/:id
     redirectClose: tiipiik/catalog/customfields
-
-# Update page
 update:
-    title: Edit CustomFields
+    title: tiipiik.catalog::lang.config.form.customfields_update
     redirect: tiipiik/catalog/customfields
     redirectClose: tiipiik/catalog/customfields
-
-# Preview page
-preview:
-    title: Preview CustomFields

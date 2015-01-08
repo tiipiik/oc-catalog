@@ -17,8 +17,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Catalog',
-            'description' => 'Provide a full catalog',
+            'name'        => 'tiipiik.catalog::lang.plugin_name',
+            'description' => 'tiipiik.catalog::lang.plugin_description',
             'author'      => 'Tiipiik',
             'icon'        => 'icon-th'
         ];
@@ -60,6 +60,13 @@ class Plugin extends PluginBase
                         'attributes'  => ['data-menu-item'=>'categories'],
                         'permissions' => ['tiipiik.catalog.manage_categories'],
                     ],
+                    'reorder' => [
+                        'label'       => 'tiipiik.catalog::lang.categories.reorder_category',
+                        'icon'        => 'icon-exchange',
+                        'url'         => Backend::url('tiipiik/catalog/categories/reorder'),
+                        'attributes'  => ['data-menu-item'=>'categories'],
+                        'permissions' => ['tiipiik.catalog.manage_categories'],
+                    ],
                     'products' => [
                         'label'       => 'tiipiik.catalog::lang.products.menu_label',
                         'icon'        => 'icon-th',
@@ -73,13 +80,6 @@ class Plugin extends PluginBase
                         'url'         => Backend::url('tiipiik/catalog/customfields'),
                         'attributes'  => ['data-menu-item'=>'custom_fields'],
                         'permissions' => ['tiipiik.catalog.manage_custom_fields'],
-                    ],
-                    'reorder' => [
-                        'label'       => 'tiipiik.catalog::lang.categories.reorder_category',
-                        'icon'        => 'icon-exchange',
-                        'url'         => Backend::url('tiipiik/catalog/categories/reorder'),
-                        'attributes'  => ['data-menu-item'=>'categories'],
-                        'permissions' => ['tiipiik.catalog.manage_categories'],
                     ],
                 ]
 

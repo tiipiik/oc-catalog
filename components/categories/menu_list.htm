@@ -1,5 +1,9 @@
 {% set category_list = __SELF__.product_categories %}
 
+{% if __SELF__.subCategoriesTitle != '' %}
+<h4>{{ __SELF__.subCategoriesTitle }}</h4>
+{% endif %}
+
 {% if not category_list|length %}
 <p class="alert alert-info">{{ __SELF__.noProductCategoriesMessage }}</p>
 {% else %}

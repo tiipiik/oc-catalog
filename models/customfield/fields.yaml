@@ -4,15 +4,15 @@
 
 fields:
     template_code:
-        label: Template code
-        placeholder: Name for using in templates
+        label: tiipiik.catalog::lang.custom_fields.template_code_label
+        placeholder: tiipiik.catalog::lang.custom_fields.template_code_ph
     
     display_name:
-        label: Display name
-        placeholder: Display name for fromtend
+        label: tiipiik.catalog::lang.custom_fields.display_name_label
+        placeholder: tiipiik.catalog::lang.custom_fields.display_name_ph
         
     default_value:
         type: textarea
-        label: Default value
-        placeholder: Default value
-        commentAbove: Default value will be added to products only on custom field creation. Updated value will only be added to the products created after this update.
+        label: tiipiik.catalog::lang.custom_fields.default_value_label
+        placeholder: tiipiik.catalog::lang.custom_fields.default_value_label
+        commentAbove: tiipiik.catalog::lang.custom_fields.default_value_comment

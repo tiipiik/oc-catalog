@@ -28,77 +28,74 @@ class ProductList extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'ProductList',
-            'description' => 'Display a list of products'
+            'name'        => 'tiipiik.catalog::lang.component.product_list.name',
+            'description' => 'tiipiik.catalog::lang.component.product_list.description'
         ];
     }
 
     public function defineProperties()
     {
         return [
-            'productsPerPage' => [
-                'title'             => 'Products per page',
-                'type'              => 'string',
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Invalid format of the products per page value',
-                'default'           => '10',
-            ],
             'categoryParam' => [
-                'title' => 'Dynamic category',
-                'description' => 'Get the category from paramter.',
+                'title' => 'tiipiik.catalog::lang.component.product_list.param.category_param_title',
+                'description' => 'tiipiik.catalog::lang.component.product_list.param.category_param_desc',
                 'type' => 'string',
                 'default' => ':slug'
             ],
+            /*
             'categoryFilter' => [
                 'title' => 'Category filter',
-                'description' => 'Select a cateogry to filter the product list by. Leave empty to show all products.',
+                'description' => 'Select a category to filter the product list by. Leave empty to show all products.',
                 'type' => 'string',
                 'default' => ''
             ],
-            'pageParam' => [
-                'title'       => 'Pagination parameter name',
-                'description' => 'The expected parameter name used by the pagination pages.',
-                'type'        => 'string',
-                'default'     => ':page',
-            ],
+            */
             'productPage' => [
-                'title'       => 'Product page',
-                'description' => 'Name of the product page file for the "Learn more" links. This property is used by the default component partial.',
+                'title'       => 'tiipiik.catalog::lang.component.product_list.param.product_page_title',
+                'description' => 'tiipiik.catalog::lang.component.product_list.param.product_page_desc',
                 'type'        => 'dropdown',
                 'default'     => 'products/:slug'
             ],
             'productPageIdParam' => [
-                'title'       => 'Product page param name',
-                'description' => 'The expected parameter name used when creating links to the product page.',
+                'title'       => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_title',
+                'description' => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_desc',
                 'type'        => 'string',
                 'default'     => ':slug',
             ],
             'noProductsMessage' => [
-                'title'        => 'No products message',
-                'description'  => 'Message to display in the product list in case if there are no products. This property is used by the default component partial.',
+                'title'        => 'tiipiik.catalog::lang.component.product_list.param.no_product_title',
+                'description'  => 'tiipiik.catalog::lang.component.product_list.param.no_product_desc',
                 'type'         => 'string',
-                'default'      => 'No products found'
+                'default'      => 'tiipiik.catalog::lang.component.product_list.param.no_product_default'
+            ],
+            'productsPerPage' => [
+                'title'             => 'tiipiik.catalog::lang.component.product_list.param.products_per_page_title',
+                'type'              => 'string',
+                'validationPattern' => '^[0-9]+$',
+                'validationMessage' => 'tiipiik.catalog::lang.component.product_list.param.products_per_page_validation_message',
+                'default'           => '10',
+                'group'             => 'Pagination',
+            ],
+            'pageParam' => [
+                'title'       => 'tiipiik.catalog::lang.component.product_list.param.page_param_title',
+                'description' => 'tiipiik.catalog::lang.component.product_list.param.page_param_desc',
+                'type'        => 'string',
+                'default'     => ':page',
+                'group'       => 'Pagination',
             ],
         ];
     }
+    
     
     public function getProductPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
     
+    
     public function onRun()
     {
         // Use strict method only to avoid conflicts whith other plugins
-        self::prepareVars();
-        
-        $this->noProductsMessage = $this->property('noProductsMessage');
-        $this->productParam = $this->property('productParam');
-        $this->productPageIdParam = $this->property('productPageIdParam');
-    }
-    
-    public function prepareVars()
-    {
         $this->productPage = $this->property('productPage');
         
         $category = $this->category = $this->loadCategory();
@@ -110,7 +107,7 @@ class ProductList extends ComponentBase
         }
         
         $currentPage = post('page');
-        $products = $this->products = $this->listProducts($this->category->id, $currentPage);
+        $products = $this->products = $this->listProducts();
 
         /*
          * Pagination
@@ -125,6 +122,25 @@ class ProductList extends ComponentBase
 
             $this->page['paginationUrl'] = $paginationUrl;
         }
+        
+        $this->noProductsMessage = $this->property('noProductsMessage');
+        $this->productParam = $this->property('productParam');
+        $this->productPageIdParam = $this->property('productPageIdParam');
+    }
+    
+    public function listProducts()
+    {
+        $categories = $this->category ? $this->category->id : null;
+        
+        $products = Product::with('categories')->listFrontEnd([
+            //'product' => $this->propertyOrParam('productParam'),
+            //'category' => $categoryId,
+            'page' => $this->propertyOrParam('pageParam'),
+            'perPage' => $this->propertyOrParam('productsPerPage'),
+            'categories' => $categories,
+        ]);
+        
+        return $products;
     }
     
     protected function loadCategory()
@@ -135,20 +151,10 @@ class ProductList extends ComponentBase
         
         if (empty($category))
             return null;
-        
+            
         $this->page->title = $category->name;
         
         return $category;
-    }
-    
-    public function listProducts($categoryId, $currentPage)
-    {
-        return Product::make()->listFrontEnd([
-            'product' => $this->propertyOrParam('productParam'),
-            'category' => $categoryId,
-            'page' => $currentPage,
-            'perPage' => $this->propertyOrParam('productsPerPage')
-        ]);
     }
 
 }

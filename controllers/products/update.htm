@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('tiipiik/catalog/catalog') ?>"><?= e(trans('tiipiik.catalog::lang.products.menu_label')) ?></a></li>
+        <li><a href="<?= Backend::url('tiipiik/catalog/products') ?>"><?= e(trans('tiipiik.catalog::lang.products.menu_label')) ?></a></li>
         <li><?= e(trans($this->pageTitle)) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -56,6 +56,124 @@
         <?= Form::open(['class'=>'layout stretch']) ?>
             <?= $this->makeLayout('form-with-sidebar') ?>
         <?= Form::close() ?>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+        /*
+            // Create a map of categories tree
+            var id, parents, children = 0;
+            var category_tree = {
+                'category': []
+            };
+            
+            // Find informations about each node
+            $('#Relation-formCategories-categories .checkbox').each(function(i){
+                // Category position
+                var pos = $('input', this).attr('id');
+                pos = pos.slice(-1);
+                
+                // Get label for each checkbox
+                var label = $('label', this).html().trim();
+                // Count number of "&nbsp;", which are level indicators
+                count = label.match(/&nbsp;/gi);
+                
+                // Get correct depth of item
+                parents = (count != null) ? count.length/3 : 0;
+                
+                    
+                if (parents > 0) {
+                    // We have a child, add it to last category in Object
+                    category_tree.category[Object.keys(category_tree).length] = {
+                        'child': [{
+                            'pos': pos,
+                            'parents': parents,
+                        }]
+                    };
+                } else {
+                    // We have a root category, simply add it to the Object
+                    category_tree.category.push({
+                        'pos': pos,
+                        'parents': 0,
+                    });
+                }
+                
+            });
+            console.log(JSON.stringify(category_tree));
+        */
+        
+            $('#Relation-formCategories-categories .checkbox input[type=checkbox]').change(function(){ 
+                // Get label for each checkbox
+                var changed_input_id = $(this).attr('id');
+                var position         = changed_input_id.slice(-1);
+                var label            = $('label[for="' + changed_input_id + '"]').html().trim();
+                
+                // Count number of "&nbsp;", which are level indicators
+                count = label.match(/&nbsp;/gi);
+                
+                // Get correct depth of item
+                var depth = (count != null) ? count.length/3 : 0;
+                    
+                if (document.getElementById(changed_input_id).checked === true) {
+                    changeChecboxState(changed_input_id, position, depth);
+                }
+                if (document.getElementById(changed_input_id).checked === false) {
+                    recurse_child(changed_input_id, depth);
+                }
+            });
+    
+            function changeChecboxState(active_input_id, position, depth){
+                
+                for (i=depth; i>0; i--) {
+                    var parent_id = active_input_id.substring(0, active_input_id.length-1) + (parseInt(position) - i);
+
+                    // Check all parent elements
+                    if (document.getElementById(parent_id).checked !== true) {
+                        document.getElementById(parent_id).checked = true;
+                    }
+                }
+            }
+            
+            /*
+             * Recursive function to deactivate all children elements on current element
+             * @param str current element id
+             * @param int position of current element
+             */
+            function recurse_child(element, position) {
+                // Next element we have to look for
+                var iter = element.slice(-1);
+                iter = parseInt(iter) + 1;
+                
+                var next_el_id = element.substr(0, element.length-1) + iter;
+                
+                // Ensure that element exists
+                if (!document.getElementById(next_el_id))
+                    return;
+                
+                // Get element label to count level of this element
+                var el_label = $('label[for="' + next_el_id + '"]');
+                
+                if (el_label) {
+                    var el_label_content = el_label.html().trim();
+                    count = el_label_content.match(/&nbsp;/gi);
+                    
+                    // Get correct depth of item
+                    next_el_position = (count != null) ? count.length/3 : 0;
+                    
+                    // If this element level in < than current element level, deactivate
+                    if (next_el_position > position) {
+                        
+                        if ($('#'+next_el_id).is(':checked'))
+                        {
+                            document.getElementById(next_el_id).checked = false;
+                        }
+                        recurse_child(next_el_id, next_el_position);
+                    }
+                }
+            }
+
+        });
+        </script>
+        
     <?php Block::endPut() ?>
 
 <?php else: ?>

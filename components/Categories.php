@@ -8,6 +8,7 @@ use Tiipiik\Catalog\Models\Category;
 
 class Categories extends ComponentBase
 {
+    public $category;
     public $categories;
     public $productCategoryPage;
     public $currentProductCategorySlug;
@@ -16,8 +17,8 @@ class Categories extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'Categories',
-            'description' => 'Display a list of categories'
+            'name'        => 'tiipiik.catalog::lang.component.categories.name',
+            'description' => 'tiipiik.catalog::lang.component.categories.description'
         ];
     }
 
@@ -25,29 +26,48 @@ class Categories extends ComponentBase
     {
         return [
             'idParam' => [
-                'title'       => 'Slug param name',
-                'description' => 'The URL route parameter used for looking up the current category by its slug. This property is used by the default component partial for marking the currently active category.',
+                'title'       => 'tiipiik.catalog::lang.component.categories.param.idparam_title',
+                'description' => 'tiipiik.catalog::lang.component.categories.param.idparam_desc',
                 'default'     => ':slug',
                 'type'        => 'string'
             ],
+            'displayEmpty' => [
+                'title'       => 'tiipiik.catalog::lang.component.categories.param.display_empty_title',
+                'description' => 'tiipiik.catalog::lang.component.categories.param.display_empty_desc',
+                'type'        => 'checkbox',
+                'default'     => 0
+            ],
             'noProductCategoriesMessage' => [
-                'title'        => 'No categories message',
-                'description'  => 'Message to display in the categories list in case if there are no categories. This property is used by the default component partial.',
+                'title'        => 'tiipiik.catalog::lang.component.categories.param.no_products_title',
+                'description'  => 'tiipiik.catalog::lang.component.categories.param.no_products_desc',
                 'type'         => 'string',
-                'default'      => 'No categories found'
+                'default'      => 'tiipiik.catalog::lang.component.categories.param.no_products_default'
+            ],
+            'subCategories' => [
+                'title'        => 'tiipiik.catalog::lang.component.categories.param.subcategories_title',
+                'description'  => 'tiipiik.catalog::lang.component.categories.param.subcategories_desc',
+                'type'         => 'checkbox',
+                'default'      => 0,
+                'group'        => 'SubCategories'
+            ],
+            'subCategoriesTitle' => [
+                'title'        => 'tiipiik.catalog::lang.component.categories.param.subcategories_title_title',
+                'description'  => 'tiipiik.catalog::lang.component.categories.param.subcategories_title_desc',
+                'default'      => '',
+                'group'        => 'SubCategories'
             ],
             'renderView' => [
-                'title'        => 'View',
-                'description'  => 'Indicate which partial file of the component should be used to render view.',
+                'title'        => 'tiipiik.catalog::lang.component.categories.param.render_view_title',
+                'description'  => 'tiipiik.catalog::lang.component.categories.param.render_view_desc',
                 'type'         => 'string',
                 'default'      => 'menu_list',
-                'group'       => 'Render',
+                'group'        => 'Render',
             ],
             'categoryPage' => [
-                'title'       => 'Category page',
-                'description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
+                'title'       => 'tiipiik.catalog::lang.component.categories.param.category_page_title',
+                'description' => 'tiipiik.catalog::lang.component.categories.param.category_page_desc',
                 'type'        => 'dropdown',
-                'default'     => 'blog/category',
+                'default'     => 'category',
                 'group'       => 'Links',
             ],
         ];
@@ -61,19 +81,30 @@ class Categories extends ComponentBase
     public function onRun()
     {
         $this->render_view                  = $this->property('renderView');
-        $this->noProductCategoriesMessage   = $this->property('noCategoriesMessage');
+        $this->noProductCategoriesMessage   = $this->property('noProductCategoriesMessage');
         $this->productCategoryPage          = $this->property('categoryPage');
         $this->currentProductCategorySlug   = $this->propertyOrParam('idParam');
+        $this->subCategoriesTitle           = $this->property('subCategoriesTitle');
         $this->product_categories           = $this->loadCategories();
     }
 
     protected function loadCategories()
     {
-        $categories = Category::orderBy('name')->get();
+        
+        $categories = Category::orderBy('name');
+        
+        // If param for displaying subcategories is checked
+        if ($this->property('subCategories') == 1)
+        {
+            $category = Category::where('slug', '=', $this->propertyOrParam('idParam'))->first();
+            $categories->where('parent_id', '=', $category->id);
+        }
+        
+        $categories = $categories->get();
         
         if (!$categories)
             return null;
-
+        
         /*
          * Add a "url" helper attribute for linking to each category
          */

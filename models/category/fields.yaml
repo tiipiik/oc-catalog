@@ -18,8 +18,8 @@ fields:
             data-input-preset-closest-parent: form
     
     description:
-        label: Description
-        placeholder: Description
+        label: tiipiik.catalog::lang.products.description
+        placeholder: tiipiik.catalog::lang.products.description
         type: textarea
                      
 secondaryTabs:

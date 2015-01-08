@@ -13,6 +13,7 @@ class CreateTables extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('parent_id')->unsigned()->index()->nullable();
+            //$table->integer('product_id')->unsigned()->nullable()->index();
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
@@ -26,7 +27,7 @@ class CreateTables extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('category_id')->unsigned()->nullable()->index();
+            //$table->integer('category_id')->unsigned()->nullable()->index();
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();

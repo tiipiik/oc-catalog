@@ -4,10 +4,10 @@
 
 columns:
     name:
-        label: Custom field
+        label: tiipiik.catalog::lang.custom_value.name_label
         relation: custom_field
         select: display_name
         sortable: false
     
     value:
-        label: Value
+        label: tiipiik.catalog::lang.custom_value.value_label

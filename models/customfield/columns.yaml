@@ -9,10 +9,10 @@ columns:
         invisible: true
     
     template_code:
-        label: Template Code
+        label: tiipiik.catalog::lang.custom_fields.template_code_label
     
     display_name:
-        label: Display name
+        label: tiipiik.catalog::lang.custom_fields.display_name_label
     
     default_value:
-        label: Value
+        label: tiipiik.catalog::lang.custom_fields.default_value_label

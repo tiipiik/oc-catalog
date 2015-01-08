@@ -9,8 +9,8 @@ class ProductDetails extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'ProductDetails',
-            'description' => 'Details of displayed product'
+            'name'        => 'tiipiik.catalog::lang.component.product_details.name',
+            'description' => 'tiipiik.catalog::lang.component.product_details.description'
         ];
     }
 
@@ -18,8 +18,8 @@ class ProductDetails extends ComponentBase
     {
         return [
             'idParam' => [
-                'title'       => 'Slug param name',
-                'description' => 'The URL route parameter used for looking up the product by its slug.',
+                'title'       => 'tiipiik.catalog::lang.component.product_details.param.id_param_title',
+                'description' => 'tiipiik.catalog::lang.component.product_details.param.id_param_desc',
                 'default'     => ':slug',
                 'type'        => 'string'
             ],

@@ -32,8 +32,8 @@ class Category extends Model
      * @var array Guarded fields
      */
     protected $guarded = ['*'];
-
-    public $hasMany = [
+    
+    public $belongsToMany = [
         'products' => ['Tiipiik\Catalog\Models\Product', 'table' => 'tiipiik_catalog_prods_cats', 'order' => 'title'],
     ];
 
@@ -60,46 +60,6 @@ class Category extends Model
             $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
         });
     }
-    
-
-    /**
-     * From Benefreke MenuManager plugin
-     * Returns the list of menu items, where the key is the id and the value is the title, indented with '-' for depth
-     * @return array
-     */
-     // SERT A RIEN ?
-     /*
-    public function getSelectList()
-    {
-        $items  = $this->getAll();
-        $output = array();
-        foreach ($items as $item) {
-            $depthIndicator         = $this->getDepthIndicators($item->nest_depth);
-            $output["id-$item->id"] = $depthIndicator . ' ' . $item->title;
-        }
-        die('<pre>'.print_r($output));
-        return $output;
-    }
-    */
-
-    /**
-     * From Benefreke MenuManager plugin
-     * Recursively adds depth indicators, a '-', to a string
-     *
-     * @param int    $depth
-     * @param string $indicators
-     *
-     * @return string
-     */
-     /*
-    protected function getDepthIndicators($depth = 0, $indicators = '')
-    {
-        if ($depth < 1) {
-            return $indicators;
-        }
-        return $this->getDepthIndicators(--$depth, $indicators . '-');
-    }
-    */
     
     /*
      *

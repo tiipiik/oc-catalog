@@ -2,7 +2,7 @@
 #  List Behavior Config
 # ===================================
 
-title: Manage CustomValues
+title: tiipiik.catalog::lang.config.list.customvalue_title
 list: $/tiipiik/catalog/models/customvalue/columns.yaml
 modelClass: Tiipiik\Catalog\Models\CustomValue
 recordUrl: tiipiik/catalog/customvalues/update/:id

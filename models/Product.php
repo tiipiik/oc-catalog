@@ -50,7 +50,7 @@ class Product extends Model
     ];
     
     public $hasMany = [
-        'customfields' => ['Tiipiik\Catalog\Models\CustomValue', 'order' => 'custom_field_id']
+        'customfields' => ['Tiipiik\Catalog\Models\CustomValue', 'order' => 'custom_field_id'],
     ];
     
     public $belongsToMany = [
@@ -84,7 +84,8 @@ class Product extends Model
      * @param  array $options Display options
      * @return self
      */ 
-    public function listFrontEnd($options)
+    //public function listFrontEnd($options)
+    public function scopeListFrontEnd($query, $options)
     {
         /*
          * Default options
@@ -94,13 +95,36 @@ class Product extends Model
             'perPage' => 30,
             'sort' => 'title',
             'search' => '',
+            'categories' => null
         ], $options));
 
         App::make('paginator')->setCurrentPage($page);
         $obj = $this->newQuery();
-        $obj->where('category_id', '=', $category);
+
+        /*
+         * Categories
+         */
+        if ($categories !== null) {
+            if (!is_array($categories)) $categories = [$categories];
+            $obj = $obj->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('id', $categories);
+            });
+        }
             
         return $obj->paginate($perPage);
+    }
+
+    /**
+     * Allows filtering for specifc categories
+     * @param  Illuminate\Query\Builder  $query      QueryBuilder
+     * @param  array                     $categories List of category ids
+     * @return Illuminate\Query\Builder              QueryBuilder
+     */
+    public function scopeFilterCategories($query, $categories)
+    {
+        return $query->whereHas('categories', function($q) use ($categories) {
+            $q->whereIn('id', $categories);
+        });
     }
     
     /*
