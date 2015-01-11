@@ -41,7 +41,7 @@ class CreateTables extends Migration
             $table->increments('id')->unsigned();
             $table->string('template_code')->nullable();
             $table->string('display_name')->nullable();
-            $table->text('default_value')->default('');
+            $table->text('default_value')->nullable();
             $table->timestamps();
         });
         
