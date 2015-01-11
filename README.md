@@ -24,7 +24,7 @@ Display a list of categories, with different parameters:
 * Choose the template to render the category list
 * Display subcategories
 * Make custom title from the component parameters
-* Choose render view : you can actually use `menu_list` or `ìmage_list` to display categories by different ways. You can also create your render view if needed.
+* Choose render view : by default there's `menu_list` and `ìmage_list` to display categories by different ways. You can also create any other render view if needed.
 
 ### Product list
 Display a list of products related to the current category.

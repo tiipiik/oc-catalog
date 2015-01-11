@@ -13,9 +13,8 @@ class CreateTables extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('parent_id')->unsigned()->index()->nullable();
-            //$table->integer('product_id')->unsigned()->nullable()->index();
-            $table->string('name');
-            $table->string('slug');
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->integer('nest_left');
             $table->integer('nest_right');
@@ -27,9 +26,8 @@ class CreateTables extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            //$table->integer('category_id')->unsigned()->nullable()->index();
-            $table->string('title');
-            $table->string('slug');
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->integer('items_available')->nullable();
             $table->integer('price')->nullable();
@@ -41,9 +39,9 @@ class CreateTables extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->string('template_code');
-            $table->string('display_name');
-            $table->text('default_value');
+            $table->string('template_code')->nullable();
+            $table->string('display_name')->nullable();
+            $table->text('default_value')->default('');
             $table->timestamps();
         });
         
