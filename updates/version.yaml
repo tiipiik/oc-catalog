@@ -2,5 +2,3 @@
     - First version of Catalog
     - create_tables.php
     - feed_tables.php
-1.0.2:
-    - Fixes multiple deletion for custom fields
