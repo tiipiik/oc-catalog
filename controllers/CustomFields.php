@@ -1,7 +1,9 @@
 <?php namespace Tiipiik\Catalog\Controllers;
 
+use Flash;
 use BackendMenu;
 use Backend\Classes\Controller;
+use Tiipiik\Catalog\Models\CustomField;
 
 /**
  * CustomFields Back-end Controller
@@ -23,5 +25,25 @@ class CustomFields extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'customfields');
+    }
+
+    /*
+     * Check if fields are passde for deletion
+     */
+    public function index_onDelete()
+    {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
+
+            foreach ($checkedIds as $customFieldId) {
+                if ((!$customField = CustomField::find($customFieldId)))
+                    continue;
+
+                $customField->delete();
+            }
+
+            Flash::success('Successfully deleted those custom fields.');
+        }
+
+        return $this->listRefresh();
     }
 }
