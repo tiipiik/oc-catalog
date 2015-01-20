@@ -2,3 +2,8 @@
     - First version of Catalog
     - create_tables.php
     - feed_tables.php
+1.0.2:
+    - Change product price and discount price type from integer to decimal
+    - Fix multiple deletion for custom fields
+1.0.3:
+    - Remove deprecated idParam

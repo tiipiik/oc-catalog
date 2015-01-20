@@ -17,10 +17,10 @@ class ProductDetails extends ComponentBase
     public function defineProperties()
     {
         return [
-            'idParam' => [
+            'slug' => [
                 'title'       => 'tiipiik.catalog::lang.component.product_details.param.id_param_title',
                 'description' => 'tiipiik.catalog::lang.component.product_details.param.id_param_desc',
-                'default'     => ':slug',
+                'default'     => '{{ :slug }}',
                 'type'        => 'string'
             ],
         ];
@@ -28,6 +28,7 @@ class ProductDetails extends ComponentBase
 
     public function onRun()
     {
+        
         $loadProduct = $this->loadProduct();
         
         if (!$loadProduct)
@@ -47,7 +48,10 @@ class ProductDetails extends ComponentBase
 
     protected function loadProduct()
     {
-        $slug = $this->propertyOrParam('idParam');
+        // @deprecated remove if year >= 2015
+        $deprecatedSlug = $this->propertyOrParam('idParam');
+        
+        $slug = $this->property('slug', $deprecatedSlug);
         return ProductModel::where('slug', '=', $slug)->first();
     }
 

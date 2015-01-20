@@ -36,12 +36,20 @@ class ProductList extends ComponentBase
     public function defineProperties()
     {
         return [
+            'categorySlug' => [
+                'title'       => 'tiipiik.catalog::lang.component.product_list.param.category_param_title',
+                'description' => 'tiipiik.catalog::lang.component.product_list.param.category_param_desc',
+                'default'     => '{{ :slug }}',
+                'type'        => 'string'
+            ],
+            /*
             'categoryParam' => [
                 'title' => 'tiipiik.catalog::lang.component.product_list.param.category_param_title',
                 'description' => 'tiipiik.catalog::lang.component.product_list.param.category_param_desc',
                 'type' => 'string',
                 'default' => ':slug'
             ],
+            */
             /*
             'categoryFilter' => [
                 'title' => 'Category filter',
@@ -56,12 +64,20 @@ class ProductList extends ComponentBase
                 'type'        => 'dropdown',
                 'default'     => 'products/:slug'
             ],
+            'productPageSlug' => [
+                'title'       => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_title',
+                'description' => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_desc',
+                'default'     => '{{ :slug }}',
+                'type'        => 'string'
+            ],
+            /*
             'productPageIdParam' => [
                 'title'       => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_title',
                 'description' => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_desc',
                 'type'        => 'string',
                 'default'     => ':slug',
             ],
+            */
             'noProductsMessage' => [
                 'title'        => 'tiipiik.catalog::lang.component.product_list.param.no_product_title',
                 'description'  => 'tiipiik.catalog::lang.component.product_list.param.no_product_desc',
@@ -95,6 +111,9 @@ class ProductList extends ComponentBase
     
     public function onRun()
     {
+        // @deprecated remove if year >= 2015
+        $deprecatedSlug = $this->propertyOrParam('productPageIdParam');
+        
         // Use strict method only to avoid conflicts whith other plugins
         $this->productPage = $this->property('productPage');
         
@@ -125,7 +144,7 @@ class ProductList extends ComponentBase
         
         $this->noProductsMessage = $this->property('noProductsMessage');
         $this->productParam = $this->property('productParam');
-        $this->productPageIdParam = $this->property('productPageIdParam');
+        $this->productPageIdParam = $this->property('slug', $deprecatedSlug);
     }
     
     public function listProducts()
@@ -133,8 +152,6 @@ class ProductList extends ComponentBase
         $categories = $this->category ? $this->category->id : null;
         
         $products = Product::with('categories')->listFrontEnd([
-            //'product' => $this->propertyOrParam('productParam'),
-            //'category' => $categoryId,
             'page' => $this->propertyOrParam('pageParam'),
             'perPage' => $this->propertyOrParam('productsPerPage'),
             'categories' => $categories,
@@ -145,8 +162,11 @@ class ProductList extends ComponentBase
     
     protected function loadCategory()
     {
+        // @deprecated remove if year >= 2015
+        $deprecatedCategorySlug = $this->propertyOrParam('categoryParam');
+        
         $category = Category::make()->categoryDetails([
-            'category' => $this->propertyOrParam('categoryParam'),
+            'category' => $this->property('slug', $deprecatedCategorySlug),
         ]);
         
         if (empty($category))

@@ -25,10 +25,10 @@ class Categories extends ComponentBase
     public function defineProperties()
     {
         return [
-            'idParam' => [
+            'slug' => [
                 'title'       => 'tiipiik.catalog::lang.component.categories.param.idparam_title',
                 'description' => 'tiipiik.catalog::lang.component.categories.param.idparam_desc',
-                'default'     => ':slug',
+                'default'     => '{{ :slug }}',
                 'type'        => 'string'
             ],
             'displayEmpty' => [
@@ -80,10 +80,13 @@ class Categories extends ComponentBase
     
     public function onRun()
     {
+        // @deprecated remove if year >= 2015
+        $deprecatedSlug = $this->propertyOrParam('idParam');
+        
         $this->render_view                  = $this->property('renderView');
         $this->noProductCategoriesMessage   = $this->property('noProductCategoriesMessage');
         $this->productCategoryPage          = $this->property('categoryPage');
-        $this->currentProductCategorySlug   = $this->propertyOrParam('idParam');
+        $this->currentProductCategorySlug   = $this->property('slug', $deprecatedSlug);
         $this->subCategoriesTitle           = $this->property('subCategoriesTitle');
         $this->product_categories           = $this->loadCategories();
     }
