@@ -30,8 +30,8 @@ class CreateTables extends Migration
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->integer('items_available')->nullable();
-            $table->decimal('price', 8, 2)->nullable();
-            $table->decimal('discount_price', 8, 2)->nullable();
+            $table->decimal('price', 8, 2)->default('0.00');
+            $table->decimal('discount_price', 8, 2)->default('0.00');
             $table->timestamps();
         });
         

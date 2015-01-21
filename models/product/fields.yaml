@@ -29,15 +29,18 @@ tabs:
         
         price:
             tab: tiipiik.catalog::lang.products.details_tab_title
+            type: number
             label: tiipiik.catalog::lang.products.price
             placeholder: tiipiik.catalog::lang.products.price_ph
             span: left
+            default: "0.00"
         
         discount_price:
             tab: tiipiik.catalog::lang.products.details_tab_title
+            type: number
             label: tiipiik.catalog::lang.products.discount_price
             placeholder: tiipiik.catalog::lang.products.discount_price_ph
-            default: 0
+            default: "0.00"
             span: right
             
         description:
