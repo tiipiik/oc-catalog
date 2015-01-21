@@ -9,3 +9,4 @@ fields:
     
     value:
         label: tiipiik.catalog::lang.custom_value.value_label
+        type: textarea

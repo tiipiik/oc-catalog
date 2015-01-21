@@ -24,7 +24,8 @@ class Product extends Model
     public $rules = [
         'title' => 'required|unique:tiipiik_catalog_products',
         'slug' => 'required',
-        'price' => 'required',
+        'price' => 'required|integer',
+        'discount_price' => 'integer',
     ];
 
     /**

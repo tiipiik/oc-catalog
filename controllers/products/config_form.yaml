@@ -8,11 +8,11 @@ modelClass: Tiipiik\Catalog\Models\Product
 defaultRedirect: tiipiik/catalog/products
 
 create:
-    title:  tiipiik.catalog::lang.config.form.create_title
+    title: tiipiik.catalog::lang.config.form.create_title
     redirect: tiipiik/catalog/products/update/:id
     redirectClose: tiipiik/catalog/products
     
 update:
-    title:  tiipiik.catalog::lang.config.form.update_title
+    title: tiipiik.catalog::lang.config.form.update_title
     redirect: tiipiik/catalog/products
     redirectClose: tiipiik/catalog/products

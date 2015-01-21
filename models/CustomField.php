@@ -75,19 +75,29 @@ class CustomField extends Model
      */
     public function afterSave()
     {
+        // Need to ensure that the custom field is only in edition mode
+        
         $products = ProductModel::all();
         
         $products->each(function($product)
         {
-            // Create default value for each product
-            $customValue = CustomValueModel::create([
-                'product_id' =>$product->id,
-                'custom_field_id' => $this->id,
-                'value' => $this->default_value,
-            ]);
+            // If product alreay has the custom fiel, do nothing
+            $hasCustomValue = CustomValueModel::where('product_id', '=', $product->id)
+                ->where('custom_field_id', '=', $this->id)
+                ->first();
+            
+            if (!$hasCustomValue)
+            {
+                // Create default value for each product
+                $customValue = CustomValueModel::create([
+                    'product_id' => $product->id,
+                    'custom_field_id' => $this->id,
+                    'value' => $this->default_value,
+                ]);
                         
-            // Create relation between custom value and custom field
-            DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$customValue->id.'", "'.$this->id.'")');
+                // Create relation between custom value and custom field
+                DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$customValue->id.'", "'.$this->id.'")');
+            }
         });
     }
     

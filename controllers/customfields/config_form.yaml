@@ -3,7 +3,7 @@
 # ===================================
 
 name: tiipiik.catalog::lang.config.form.customfields_name
-form: $/tiipiik/catalog/models/customfield/fields.yaml
+form: ~/plugins/tiipiik/catalog/models/customfield/fields.yaml
 modelClass: Tiipiik\Catalog\Models\CustomField
 defaultRedirect: tiipiik/catalog/customfields
 

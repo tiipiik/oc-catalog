@@ -7,3 +7,8 @@
     - Fix multiple deletion for custom fields
 1.0.3:
     - Remove deprecated idParam
+1.0.4:
+    - Changed product price and discount price default values to 0.00
+    - Changed custom value update field type to textarea
+    - Fixed Cancel button links in products
+    - Fixed duplicate custom fields on update
