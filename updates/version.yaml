@@ -12,3 +12,5 @@
     - Changed custom value update field type to textarea
     - Fixed Cancel button links in products
     - Fixed duplicate custom fields on update
+1.0.5:
+    - Fix category param in Product list component

@@ -99,7 +99,7 @@ class Categories extends ComponentBase
         // If param for displaying subcategories is checked
         if ($this->property('subCategories') == 1)
         {
-            $category = Category::where('slug', '=', $this->propertyOrParam('idParam'))->first();
+            $category = Category::where('slug', '=', $this->property('slug', $deprecatedSlug))->first();
             $categories->where('parent_id', '=', $category->id);
         }
         

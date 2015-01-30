@@ -144,7 +144,8 @@ class ProductList extends ComponentBase
         
         $this->noProductsMessage = $this->property('noProductsMessage');
         $this->productParam = $this->property('productParam');
-        $this->productPageIdParam = $this->property('slug', $deprecatedSlug);
+        $this->productPageIdParam = $this->property('categorySlug', $deprecatedSlug);
+        //$this->productPageIdParam = $this->property('categorySlug');
     }
     
     public function listProducts()
@@ -166,7 +167,8 @@ class ProductList extends ComponentBase
         $deprecatedCategorySlug = $this->propertyOrParam('categoryParam');
         
         $category = Category::make()->categoryDetails([
-            'category' => $this->property('slug', $deprecatedCategorySlug),
+            'category' => $this->property('categorySlug', $deprecatedCategorySlug),
+            //'category' => $this->property('categorySlug'),
         ]);
         
         if (empty($category))

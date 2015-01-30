@@ -23,6 +23,7 @@ tabs:
     
         items_available:
             tab: tiipiik.catalog::lang.products.details_tab_title
+            type: number
             label: tiipiik.catalog::lang.products.items_available
             placeholder: tiipiik.catalog::lang.products.items_available_ph
             span: full
