@@ -82,7 +82,7 @@ class ProductList extends ComponentBase
                 'title'        => 'tiipiik.catalog::lang.component.product_list.param.no_product_title',
                 'description'  => 'tiipiik.catalog::lang.component.product_list.param.no_product_desc',
                 'type'         => 'string',
-                'default'      => 'tiipiik.catalog::lang.component.product_list.param.no_product_default'
+                'default'      => 'No product found'
             ],
             'productsPerPage' => [
                 'title'             => 'tiipiik.catalog::lang.component.product_list.param.products_per_page_title',

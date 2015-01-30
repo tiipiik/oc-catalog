@@ -41,7 +41,7 @@ class Categories extends ComponentBase
                 'title'        => 'tiipiik.catalog::lang.component.categories.param.no_products_title',
                 'description'  => 'tiipiik.catalog::lang.component.categories.param.no_products_desc',
                 'type'         => 'string',
-                'default'      => 'tiipiik.catalog::lang.component.categories.param.no_products_default'
+                'default'      => 'No category found'
             ],
             'subCategories' => [
                 'title'        => 'tiipiik.catalog::lang.component.categories.param.subcategories_title',

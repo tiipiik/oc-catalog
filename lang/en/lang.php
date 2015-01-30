@@ -88,8 +88,7 @@ return [
                 'display_empty_desc' => 'When disabled, display only categories which have at least one product.',
                 'no_products_title' => 'No categories message',
                 'no_products_desc' => 'Message to display in the categories list in case if there are no categories. This property is used by the default component partial.',
-                'no_products_default' => 'No categories found',
-                'subcategories_group' => '', // Translating froups does not work
+                'subcategories_group' => '', // Translating groups does not work
                 'subcategories_title' => 'Sub categories only',
                 'subcategories_desc' => 'Display only subcategories of current category.',
                 'subcategories_title_title' => 'Sub categories title',
@@ -113,7 +112,6 @@ return [
                 'product_page_id_desc' => 'The expected parameter name used when creating links to the product page.',
                 'no_product_title' => 'No products message',
                 'no_product_desc' => 'Message to display in the product list in case if there are no products. This property is used by the default component partial.',
-                'no_product_default' => 'No products found',
                 'products_per_page_title' => 'Products per page',
                 'products_per_page_validation_message' => 'Invalid format of the products per page value',
                 'page_param_title' => 'Pagination parameter name',
