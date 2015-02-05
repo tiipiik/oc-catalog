@@ -42,47 +42,40 @@ class ProductList extends ComponentBase
                 'default'     => '{{ :slug }}',
                 'type'        => 'string'
             ],
-            /*
-            'categoryParam' => [
-                'title' => 'tiipiik.catalog::lang.component.product_list.param.category_param_title',
-                'description' => 'tiipiik.catalog::lang.component.product_list.param.category_param_desc',
-                'type' => 'string',
-                'default' => ':slug'
+            'useCategoryFilter' => [
+                'title'       => 'Use category filter',
+                'description' => 'Check if you want to use the category filter function',
+                'type'        => 'checkbox',
+                'default'     => 0,
+                'group'       => 'Filter',
             ],
-            */
-            /*
             'categoryFilter' => [
-                'title' => 'Category filter',
+                'title'       => 'Category filter',
                 'description' => 'Select a category to filter the product list by. Leave empty to show all products.',
-                'type' => 'string',
-                'default' => ''
+                'type'        => 'string',
+                'default'     => '',
+                'group'       => 'Filter',
             ],
-            */
             'productPage' => [
                 'title'       => 'tiipiik.catalog::lang.component.product_list.param.product_page_title',
                 'description' => 'tiipiik.catalog::lang.component.product_list.param.product_page_desc',
                 'type'        => 'dropdown',
-                'default'     => 'products/:slug'
+                'default'     => 'products/:slug',
+                'group'       => 'Products',
             ],
             'productPageSlug' => [
                 'title'       => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_title',
                 'description' => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_desc',
                 'default'     => '{{ :slug }}',
-                'type'        => 'string'
-            ],
-            /*
-            'productPageIdParam' => [
-                'title'       => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_title',
-                'description' => 'tiipiik.catalog::lang.component.product_list.param.product_page_id_desc',
                 'type'        => 'string',
-                'default'     => ':slug',
+                'group'       => 'Products',
             ],
-            */
             'noProductsMessage' => [
                 'title'        => 'tiipiik.catalog::lang.component.product_list.param.no_product_title',
                 'description'  => 'tiipiik.catalog::lang.component.product_list.param.no_product_desc',
                 'type'         => 'string',
-                'default'      => 'No product found'
+                'default'      => 'No product found',
+                'group'       => 'Products'
             ],
             'productsPerPage' => [
                 'title'             => 'tiipiik.catalog::lang.component.product_list.param.products_per_page_title',
@@ -108,7 +101,6 @@ class ProductList extends ComponentBase
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
     
-    
     public function onRun()
     {
         // @deprecated remove if year >= 2015
@@ -119,15 +111,18 @@ class ProductList extends ComponentBase
         
         $category = $this->category = $this->loadCategory();
         
-        if (!$category)
+        // Return error only if category filter is not used
+        if ($this->propertyOrParam('useCategoryFilter') == 0)
         {
-            $this->setStatusCode(404);
-            return $this->controller->run('404');
+            if (!$category)
+            {
+                $this->setStatusCode(404);
+                return $this->controller->run('404');
+            }
         }
-        
         $currentPage = post('page');
         $products = $this->products = $this->listProducts();
-
+        
         /*
          * Pagination
          */
@@ -145,15 +140,20 @@ class ProductList extends ComponentBase
         $this->noProductsMessage = $this->property('noProductsMessage');
         $this->productParam = $this->property('productParam');
         $this->productPageIdParam = $this->property('categorySlug', $deprecatedSlug);
-        //$this->productPageIdParam = $this->property('categorySlug');
     }
     
     public function listProducts()
     {
         $categories = $this->category ? $this->category->id : null;
         
+        if ($this->propertyOrParam('useCategoryFilter') == 1 && $this->propertyOrParam('categoryFilter') != '')
+        {
+            $category = Category::whereSlug($this->property('categoryFilter'))->first();
+            $categories = $category->id;
+        }
+        
         $products = Product::with('categories')->listFrontEnd([
-            'page' => $this->propertyOrParam('pageParam'),
+             'page' => $this->propertyOrParam('pageParam'),
             'perPage' => $this->propertyOrParam('productsPerPage'),
             'categories' => $categories,
         ]);
@@ -168,7 +168,6 @@ class ProductList extends ComponentBase
         
         $category = Category::make()->categoryDetails([
             'category' => $this->property('categorySlug', $deprecatedCategorySlug),
-            //'category' => $this->property('categorySlug'),
         ]);
         
         if (empty($category))

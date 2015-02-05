@@ -1,6 +1,7 @@
 {% set category = __SELF__.category %}
 {% set product_list = __SELF__.products %}
 
+{% if (category) %}
 <div class="row">
     <div class="col-xs-12">
         <h3>Viewing products of {{ category.name }}</h3>
@@ -18,8 +19,8 @@
         </div>
     </div>
 </div>
-
 <br>
+{% endif %}
 
 {% if not product_list|length %}
 <p class="alert alert-info">{{ __SELF__.noProductsMessage }}</p>
@@ -30,10 +31,8 @@
             {% for product in product_list %}
             <div class="col-xs-6 col-md-3">
                 <a href="{{ __SELF__.productPage|app }}/{{ product.slug }}" class="thumbnail text-center">
-                    {% if category.cover %}
-                    <img src="{{ product.featured_images[0].thumb(300, 300) }}"
-                         title="{{ product.featured_images[0].title }}"
-                            alt="{{ product.featured_images[0].description }}">
+                    {% if product.featured_images[0] %}
+                    <img src="{{ product.featured_images[0].thumb(300, 300) }}" title="{{ product.featured_images[0].title }}" alt="{{ product.featured_images[0].description }}">
                     {% endif %}
                     {{ product.title }}
                 </a>

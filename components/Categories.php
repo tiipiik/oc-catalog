@@ -93,6 +93,8 @@ class Categories extends ComponentBase
 
     protected function loadCategories()
     {
+        // @deprecated remove if year >= 2015
+        $deprecatedSlug = $this->propertyOrParam('idParam');
         
         $categories = Category::orderBy('name');
         
