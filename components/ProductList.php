@@ -43,15 +43,15 @@ class ProductList extends ComponentBase
                 'type'        => 'string'
             ],
             'useCategoryFilter' => [
-                'title'       => 'Use category filter',
-                'description' => 'Check if you want to use the category filter function',
+                'title'       => 'tiipiik.catalog::lang.component.product_list.param.usecategoryfilter_param_title',
+                'description' => 'tiipiik.catalog::lang.component.product_list.param.usecategoryfilter_param_desc',
                 'type'        => 'checkbox',
                 'default'     => 0,
                 'group'       => 'Filter',
             ],
             'categoryFilter' => [
-                'title'       => 'Category filter',
-                'description' => 'Select a category to filter the product list by. Leave empty to show all products.',
+                'title'       => 'tiipiik.catalog::lang.component.product_list.param.categoryfilter_param_title',
+                'description' => 'tiipiik.catalog::lang.component.product_list.param.categoryfilter_param_desc',
                 'type'        => 'string',
                 'default'     => '',
                 'group'       => 'Filter',
