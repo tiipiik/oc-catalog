@@ -29,7 +29,8 @@ class Plugin extends PluginBase
         return [
             'tiipiik.catalog.access_categories' => ['label' => 'tiipiik.catalog::lang.settings.access_categories'],
             'tiipiik.catalog.access_products' => ['label' => 'tiipiik.catalog::lang.settings.access_products'],
-            'tiipiik.catalog.access_custom_fields' => ['label' => 'tiipiik.catalog::lang.settings.access_custom_fields']
+            'tiipiik.catalog.access_custom_fields' => ['label' => 'tiipiik.catalog::lang.settings.access_custom_fields'],
+            'tiipiik.catalog.groups' => ['label' => 'Groups'],
         ];
     }
 
@@ -80,6 +81,13 @@ class Plugin extends PluginBase
                         'url'         => Backend::url('tiipiik/catalog/customfields'),
                         'attributes'  => ['data-menu-item'=>'custom_fields'],
                         'permissions' => ['tiipiik.catalog.manage_custom_fields'],
+                    ],
+                    'groups' => [
+                        'label'       => 'Groups',
+                        'icon'        => 'icon-list-alt',
+                        'url'         => Backend::url('tiipiik/catalog/groups'),
+                        'attributes'  => ['data-menu-item'=>'groups'],
+                        'permissions' => ['tiipiik.catalog.groups'],
                     ],
                 ]
 

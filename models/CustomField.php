@@ -50,6 +50,10 @@ class CustomField extends Model
         ],
     ];
     
+    public $belongsToMany = [
+        'groups' => ['Tiipiik\Catalog\Models\Group', 'table' => 'tiipiik_catalog_group_field', 'order' => 'name'],
+    ];
+    
      /**
      * Add translation support to this model, if available.
      * @return void

@@ -18,6 +18,8 @@ class CustomFields extends Controller
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
 
+    public $bodyClass = 'compact-container';
+
     public $requiredPermissions = ['catalog.manage_custom_fields'];
 
     public function __construct()
