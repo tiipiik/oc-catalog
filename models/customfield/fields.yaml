@@ -3,14 +3,15 @@
 # ===================================
 
 fields:
-    template_code:
-        label: tiipiik.catalog::lang.custom_fields.template_code_label
-        placeholder: tiipiik.catalog::lang.custom_fields.template_code_ph
-        span: left
         
     display_name:
         label: tiipiik.catalog::lang.custom_fields.display_name_label
         placeholder: tiipiik.catalog::lang.custom_fields.display_name_ph
+        span: left
+        
+    template_code:
+        label: tiipiik.catalog::lang.custom_fields.template_code_label
+        placeholder: tiipiik.catalog::lang.custom_fields.template_code_ph
         span: right
 
     default_value:

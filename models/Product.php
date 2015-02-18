@@ -5,13 +5,17 @@ use App;
 use Model;
 use Tiipiik\Catalog\Models\CustomField as CustomFieldModel;
 use Tiipiik\Catalog\Models\CustomValue as CustomValueModel;
+use Tiipiik\Catalog\Models\Group as Group;
 
-/**
- * Product Model
- */
+//use System\Classes\SystemException;
+// throw new SystemException('Message');
+
+
 class Product extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    
+    private static $product_group;
 
     /**
      * @var string The database table used by the model.
@@ -48,6 +52,10 @@ class Product extends Model
      */
     public $attachMany = [
         'featured_images' => ['System\Models\File'],
+    ];
+    
+    public $belongsTo = [
+        'group' => ['Tiipiik\Catalog\Models\Group'],
     ];
     
     public $hasMany = [
@@ -133,21 +141,22 @@ class Product extends Model
      */
     public function afterCreate()
     {
-        // Get all custom fields
-        $customFields = CustomFieldModel::all();
-        
-        $customFields->each(function($customField)
-        {
-            // Add to product as custom value, with default value
-            $customValue = CustomValueModel::create([
-                'product_id' =>$this->id,
-                'custom_field_id' => $customField->id,
-                'value' => $customField->default_value,
-            ]);
-                        
-            // Create relation between custom value and custom field for this product
-            DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$customValue->id.'", "'.$customField->id.'")');
-        });
+        self::updateCustomFieldsAndValues('create');
+    }
+    
+    /*
+     * Get group before update to handle group change
+     */
+    public function beforeUpdate()
+    {
+        $product = self::find($this->id);
+        self::$product_group = $product->group_id;    
+    }
+    
+    
+    public function afterUpdate()
+    {   
+        self::updateCustomFieldsAndValues('update');
     }
     
     /*
@@ -168,5 +177,46 @@ class Product extends Model
             // Delete custom value
             CustomValueModel::find($value->id)->delete();
         });
+    }
+    
+    
+    public function updateCustomFieldsAndValues($context)
+    {
+        // If updating, delete fields and values only if group has changed
+        if ($context == 'update' && self::$product_group != $this->group_id)
+        {
+            CustomValueModel::whereProductId($this->id)->delete();
+        }
+                    
+        // Get custom fields from group
+        $custom_field_ids = DB::table('tiipiik_catalog_group_field')->where('group_id', '=', $this->group_id)->get();
+        
+        if ($custom_field_ids)
+        {
+            foreach ($custom_field_ids as $custom_field_id)
+            {
+                $field_exists = CustomValueModel::whereProductId($this->id)
+                    ->whereCustomFieldId($custom_field_id->custom_field_id)
+                    ->first();
+                
+                if (!$field_exists)
+                {
+                    $custom_fields = CustomFieldModel::whereId($custom_field_id->custom_field_id)->get();
+                    
+                    $custom_fields->each(function($custom_field)
+                    {
+                        // Add to product as custom value, with default value
+                        $custom_value = CustomValueModel::create([
+                            'product_id' =>$this->id,
+                            'custom_field_id' => $custom_field->id,
+                            'value' => $custom_field->default_value,
+                        ]);
+                                    
+                        // Create relation between custom value and custom field for this product
+                        DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$custom_value->id.'", "'.$custom_field->id.'")');
+                    });
+                }
+            }
+        }
     }
 }

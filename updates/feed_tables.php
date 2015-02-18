@@ -6,6 +6,7 @@ use Tiipiik\Catalog\Models\Category;
 use Tiipiik\Catalog\Models\Product;
 use Tiipiik\Catalog\Models\CustomField;
 use Tiipiik\Catalog\Models\CustomValue;
+use Tiipiik\Catalog\Models\Group;
 
 class SeedTables extends Seeder
 {
@@ -42,7 +43,10 @@ class SeedTables extends Seeder
         // Link product to categories
         DB::insert('insert into tiipiik_catalog_prods_cats (category_id, product_id) values (?, ?)', ['2', '1']);
         DB::insert('insert into tiipiik_catalog_prods_cats (category_id, product_id) values (?, ?)', ['2', '2']);
-                
+        
+        // Create groups
+        Group::create(['name' => 'Motorbikes']);
+        Group::create(['name' => 'Accessories']);
     }
 
 }

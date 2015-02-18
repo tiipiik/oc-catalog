@@ -43,7 +43,7 @@ class CustomFields extends Controller
                 $customField->delete();
             }
 
-            Flash::success('Successfully deleted those custom fields.');
+            Flash::success('Successfully deleted these custom fields.');
         }
 
         return $this->listRefresh();

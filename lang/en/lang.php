@@ -47,6 +47,11 @@ return [
         'name_label' => 'Custom Value',
         'value_label' => 'Value',
     ],
+    'groups'  =>  [
+        'new_group' => 'New Group',
+        'menu_label' => 'Groups',
+        'return_to_list' => 'Return to groupd',
+    ],
     'config' => [
         'form' => [
             'name' => 'Product',
@@ -61,12 +66,16 @@ return [
             'customfields_update' => 'Edit CustomFields',
             'customvalue_name' => 'CustomField',
             'customvalue_update' => 'Edit Custom Value',
+            'group_name' => 'Group',
+            'group_create_title' => 'Create Group',
+            'group_update_title' => 'Edit Group',
         ],
         'list' => [
             'title' => 'Manage Products',
             'category_title' => 'Manage Categories',
             'customfields_title' => 'Manage CustomFields',
             'customvalue_title' => 'Manage CustomValues',
+            'group_title' => 'Manage Groups',
         ],
     ],
     'settings' => [
@@ -76,6 +85,9 @@ return [
     ],
     'catalog' => [
         'delete_confirm' => 'Do you really want to delete this product ?',
+        'delete_custom_field_confirm' => 'Do you really want to delete this custom field ?',
+        'delete_group_confirm' => 'Do you really want to delete this group ?',
+        'delete_category_confirm' => 'Do you really want to delete this category ?',
     ],
     'component' => [
         'categories' => [
@@ -106,14 +118,10 @@ return [
             'param' => [
                 'category_param_title' => 'Dynamic category',
                 'category_param_desc' => 'Get the category from parameter.',
-                
                 'usecategoryfilter_param_title' => 'Use category filter',
                 'usecategoryfilter_param_desc' => 'Check if you want to use the category filter function',
-                
                 'categoryfilter_param_title' => 'Category filter',
                 'categoryfilter_param_desc' => 'Select a category to filter the product list by. Leave empty to show all products.',
-                
-                
                 'product_page_title' => 'Product page',
                 'product_page_desc' => 'Name of the product page file for the "Learn more" links. This property is used by the default component partial.',
                 'product_page_id_title' => 'Product page param name',

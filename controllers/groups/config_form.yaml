@@ -2,30 +2,15 @@
 #  Form Behavior Config
 # ===================================
 
-# Record name
-name: Group
-
-# Model Form Field configuration
+name: tiipiik.catalog::lang.config.form.group_name
 form: $/tiipiik/catalog/models/group/fields.yaml
-
-# Model Class name
 modelClass: Tiipiik\Catalog\Models\Group
-
-# Default redirect location
 defaultRedirect: tiipiik/catalog/groups
-
-# Create page
 create:
-    title: Create Group
+    title: tiipiik.catalog::lang.config.form.group_create_title
     redirect: tiipiik/catalog/groups/update/:id
     redirectClose: tiipiik/catalog/groups
-
-# Update page
 update:
-    title: Edit Group
+    title: tiipiik.catalog::lang.config.form.group_update_title
     redirect: tiipiik/catalog/groups
     redirectClose: tiipiik/catalog/groups
-
-# Preview page
-preview:
-    title: Preview Group

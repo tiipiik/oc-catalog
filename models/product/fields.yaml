@@ -35,6 +35,7 @@ tabs:
             placeholder: tiipiik.catalog::lang.products.price_ph
             span: left
             default: "0.00"
+            required: true
         
         discount_price:
             tab: tiipiik.catalog::lang.products.details_tab_title
@@ -54,6 +55,11 @@ tabs:
             tab: tiipiik.catalog::lang.products.category_tab_title
             type: relation
             commentAbove: tiipiik.catalog::lang.products.categories_cmt
+        
+        group:
+            tab: Group
+            type: relation
+            required: true
         
 secondaryTabs:
     fields:

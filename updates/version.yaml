@@ -1,7 +1,6 @@
 1.0.1:
     - First version of Catalog
     - create_tables.php
-    - feed_tables.php
 1.0.2:
     - Change product price and discount price type from integer to decimal
     - Fix multiple deletion for custom fields
@@ -21,4 +20,5 @@
 1.2.0:
     - Added option groups
     - create_groups_table.php
-    - create_pivot_group_field_table.php
+    - Fix some translations
+    #- feed_tables.php

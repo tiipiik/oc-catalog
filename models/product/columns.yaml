@@ -17,6 +17,12 @@ columns:
         searchable: true
         sortable: false
     
+    group:
+        label: Group
+        relation: group
+        select: name
+        sortable: false
+    
     price:
         label: tiipiik.catalog::lang.products.price
     
