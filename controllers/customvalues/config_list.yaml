@@ -3,7 +3,7 @@
 # ===================================
 
 title: tiipiik.catalog::lang.config.list.customvalue_title
-list: $/tiipiik/catalog/models/customvalue/columns.yaml
+list: ~/plugins/tiipiik/catalog/models/customvalue/columns.yaml
 modelClass: Tiipiik\Catalog\Models\CustomValue
 recordUrl: tiipiik/catalog/customvalues/update/:id
 noRecordsMessage: backend::lang.list.no_records

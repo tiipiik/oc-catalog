@@ -3,7 +3,7 @@
 # ===================================
 
 title: tiipiik.catalog::lang.config.list.title
-list: $/tiipiik/catalog/models/category/columns.yaml
+list: ~/plugins/tiipiik/catalog/models/category/columns.yaml
 modelClass: Tiipiik\Catalog\Models\Category
 recordUrl: tiipiik/catalog/categories/update/:id
 noRecordsMessage: backend::lang.list.no_records

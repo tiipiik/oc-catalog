@@ -3,7 +3,7 @@
 # ===================================
 
 title: tiipiik.catalog::lang.config.list.group_title
-list: $/tiipiik/catalog/models/group/columns.yaml
+list: ~/plugins/tiipiik/catalog/models/group/columns.yaml
 modelClass: Tiipiik\Catalog\Models\Group
 recordUrl: tiipiik/catalog/groups/update/:id
 noRecordsMessage: backend::lang.list.no_records

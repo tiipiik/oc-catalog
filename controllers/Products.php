@@ -18,7 +18,7 @@ class Products extends Controller
     public $listConfig = 'config_list.yaml';
     public $relationConfig = 'config_relation.yaml';
 
-    public $requiredPermissions = ['catalog.manage_products'];
+    public $requiredPermissions = ['tiipiik.catalog.access_products'];
 
     public $bodyClass = 'compact-container';
 

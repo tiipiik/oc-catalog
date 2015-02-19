@@ -3,7 +3,7 @@
 # ===================================
 
 name: tiipiik.catalog::lang.config.form.category_name
-form: $/tiipiik/catalog/models/category/fields.yaml
+form: ~/plugins/tiipiik/catalog/models/category/fields.yaml
 modelClass: Tiipiik\Catalog\Models\Category
 defaultRedirect: tiipiik/catalog/categories
 

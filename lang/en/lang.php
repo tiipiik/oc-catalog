@@ -79,9 +79,10 @@ return [
         ],
     ],
     'settings' => [
-        'access_categories' => 'Manage the Catalog categories',
-        'access_products' => 'Manage the Catalog products',
-        'access_custom_fields' => 'Manage the Catalog product\'s custom fields',
+        'access_categories' => 'Manage product categories',
+        'access_products' => 'Manage products',
+        'access_custom_fields' => 'Manage custom fields for products',
+        'access_groups' => 'Manage groups',
     ],
     'catalog' => [
         'delete_confirm' => 'Do you really want to delete this product ?',

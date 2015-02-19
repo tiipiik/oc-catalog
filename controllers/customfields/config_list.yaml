@@ -3,7 +3,7 @@
 # ===================================
 
 title: tiipiik.catalog::lang.config.list.customfields_title
-list: $/tiipiik/catalog/models/customfield/columns.yaml
+list: ~/plugins/tiipiik/catalog/models/customfield/columns.yaml
 modelClass: Tiipiik\Catalog\Models\CustomField
 recordUrl: tiipiik/catalog/customfields/update/:id
 noRecordsMessage: backend::lang.list.no_records

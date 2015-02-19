@@ -3,7 +3,7 @@
 # ===================================
 
 name: tiipiik.catalog::lang.config.form.group_name
-form: $/tiipiik/catalog/models/group/fields.yaml
+form: ~/plugins/tiipiik/catalog/models/group/fields.yaml
 modelClass: Tiipiik\Catalog\Models\Group
 defaultRedirect: tiipiik/catalog/groups
 create:

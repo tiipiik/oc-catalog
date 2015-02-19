@@ -3,7 +3,7 @@
 # ===================================
 
 title: tiipiik.catalog::lang.config.list.title
-list: $/tiipiik/catalog/models/product/columns.yaml
+list: ~/plugins/tiipiik/catalog/models/product/columns.yaml
 modelClass: Tiipiik\Catalog\Models\Product
 recordUrl: tiipiik/catalog/products/update/:id
 noRecordsMessage: backend::lang.list.no_records
@@ -16,3 +16,5 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: backend::lang.list.search_prompt
+
+#filter: config_filter.yaml

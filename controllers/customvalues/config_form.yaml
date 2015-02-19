@@ -3,7 +3,7 @@
 # ===================================
 
 name: tiipiik.catalog::lang.config.form.customvalue_name
-form: $/tiipiik/catalog/models/customvalue/fields.yaml
+form: ~/plugins/tiipiik/catalog/models/customvalue/fields.yaml
 modelClass: Tiipiik\Catalog\Models\CustomValue
 defaultRedirect: tiipiik/catalog/customvalues
 showCheckboxes: false
