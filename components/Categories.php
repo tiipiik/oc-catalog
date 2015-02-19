@@ -81,12 +81,12 @@ class Categories extends ComponentBase
     public function onRun()
     {
         // @deprecated remove if year >= 2015
-        $deprecatedSlug = $this->propertyOrParam('idParam');
+        //$deprecatedSlug = $this->propertyOrParam('idParam');
         
         $this->render_view                  = $this->property('renderView');
         $this->noProductCategoriesMessage   = $this->property('noProductCategoriesMessage');
         $this->productCategoryPage          = $this->property('categoryPage');
-        $this->currentProductCategorySlug   = $this->property('slug', $deprecatedSlug);
+        $this->currentProductCategorySlug   = $this->property('slug');
         $this->subCategoriesTitle           = $this->property('subCategoriesTitle');
         $this->product_categories           = $this->loadCategories();
     }
@@ -94,14 +94,14 @@ class Categories extends ComponentBase
     protected function loadCategories()
     {
         // @deprecated remove if year >= 2015
-        $deprecatedSlug = $this->propertyOrParam('idParam');
+        //$deprecatedSlug = $this->propertyOrParam('idParam');
         
         $categories = Category::orderBy('name');
         
         // If param for displaying subcategories is checked
         if ($this->property('subCategories') == 1)
         {
-            $category = Category::where('slug', '=', $this->property('slug', $deprecatedSlug))->first();
+            $category = Category::where('slug', '=', $this->property('slug'))->first();
             $categories->where('parent_id', '=', $category->id);
         }
         

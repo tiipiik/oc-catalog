@@ -8,7 +8,7 @@ use Cms\Classes\ComponentBase;
 use Tiipiik\Catalog\Models\Category;
 use Tiipiik\Catalog\Models\Product;
 
-use October\Rain\Database\DataFeed;
+//use October\Rain\Database\DataFeed;
 
 class ProductList extends ComponentBase
 {
@@ -104,7 +104,7 @@ class ProductList extends ComponentBase
     public function onRun()
     {
         // @deprecated remove if year >= 2015
-        $deprecatedSlug = $this->propertyOrParam('productPageIdParam');
+        // $deprecatedSlug = $this->property('productPageIdParam');
         
         // Use strict method only to avoid conflicts whith other plugins
         $this->productPage = $this->property('productPage');
@@ -112,7 +112,7 @@ class ProductList extends ComponentBase
         $category = $this->category = $this->loadCategory();
         
         // Return error only if category filter is not used
-        if ($this->propertyOrParam('useCategoryFilter') == 0)
+        if ($this->property('useCategoryFilter') == 0)
         {
             if (!$category)
             {
@@ -131,7 +131,7 @@ class ProductList extends ComponentBase
             $queryArr['page'] = '';
             $paginationUrl = Request::url() . '?' . http_build_query($queryArr);
 
-            if ($currentPage > ($lastPage = $products->getLastPage()) && $currentPage > 1)
+            if ($currentPage > ($lastPage = $products->lastPage()) && $currentPage > 1)
                 return Redirect::to($paginationUrl . $lastPage);
 
             $this->page['paginationUrl'] = $paginationUrl;
@@ -139,22 +139,22 @@ class ProductList extends ComponentBase
         
         $this->noProductsMessage = $this->property('noProductsMessage');
         $this->productParam = $this->property('productParam');
-        $this->productPageIdParam = $this->property('categorySlug', $deprecatedSlug);
+        $this->productPageIdParam = $this->property('categorySlug');
     }
     
     public function listProducts()
     {
         $categories = $this->category ? $this->category->id : null;
         
-        if ($this->propertyOrParam('useCategoryFilter') == 1 && $this->propertyOrParam('categoryFilter') != '')
+        if ($this->property('useCategoryFilter') == 1 && $this->property('categoryFilter') != '')
         {
             $category = Category::whereSlug($this->property('categoryFilter'))->first();
             $categories = $category->id;
         }
         
         $products = Product::with('categories')->listFrontEnd([
-             'page' => $this->propertyOrParam('pageParam'),
-            'perPage' => $this->propertyOrParam('productsPerPage'),
+            'page' => $this->property('pageParam'),
+            'perPage' => $this->property('productsPerPage'),
             'categories' => $categories,
         ]);
         
@@ -162,12 +162,9 @@ class ProductList extends ComponentBase
     }
     
     protected function loadCategory()
-    {
-        // @deprecated remove if year >= 2015
-        $deprecatedCategorySlug = $this->propertyOrParam('categoryParam');
-        
+    {        
         $category = Category::make()->categoryDetails([
-            'category' => $this->property('categorySlug', $deprecatedCategorySlug),
+            'category' => $this->property('categorySlug'),
         ]);
         
         if (empty($category))

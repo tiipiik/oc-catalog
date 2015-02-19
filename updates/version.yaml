@@ -22,3 +22,7 @@
     - create_groups_table.php
     - Fix some translations
     #- feed_tables.php
+1.2.1:
+    - Fix users permissions, Fix paths for RC compatibility
+1.2.2:
+    - Fix RC compatibility

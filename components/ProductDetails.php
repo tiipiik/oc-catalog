@@ -49,9 +49,9 @@ class ProductDetails extends ComponentBase
     protected function loadProduct()
     {
         // @deprecated remove if year >= 2015
-        $deprecatedSlug = $this->propertyOrParam('idParam');
+        //$deprecatedSlug = $this->propertyOrParam('idParam');
         
-        $slug = $this->property('slug', $deprecatedSlug);
+        $slug = $this->property('slug');
         return ProductModel::where('slug', '=', $slug)->first();
     }
 

@@ -1,6 +1,6 @@
 {% set products = __SELF__.products %}
 
-{% set paginationEnabled = products.getCurrentPage > 1 or products.getLastPage > 1 or products.getLastPage > products.getCurrentPage %}
+{% set paginationEnabled = products.currentPage > 1 or products.lastPage > 1 or products.lastPage > products.currentPage %}
 
 <div class="row forum-pagination {{ paginationEnabled ? "enabled" : "disabled" }}">
     <div class="col-md-8">
@@ -41,6 +41,6 @@
         </ul>
     </div>
     <div class="col-md-4 text-right posts-total-summary">
-        <p>{{ products.from }}-{{ products.to }} of {{ products.total }}</p>
+        <p>{{ products.firstItem }}-{{ products.lastItem }} of {{ products.total }}</p>
     </div>
 </div>

@@ -5,7 +5,7 @@ use App;
 use Model;
 use Tiipiik\Catalog\Models\CustomField as CustomFieldModel;
 use Tiipiik\Catalog\Models\CustomValue as CustomValueModel;
-use Tiipiik\Catalog\Models\Group as Group;
+use Tiipiik\Catalog\Models\Group;
 
 //use System\Classes\SystemException;
 // throw new SystemException('Message');
@@ -107,7 +107,6 @@ class Product extends Model
             'categories' => null
         ], $options));
 
-        App::make('paginator')->setCurrentPage($page);
         $obj = $this->newQuery();
 
         /*
@@ -120,7 +119,7 @@ class Product extends Model
             });
         }
             
-        return $obj->paginate($perPage);
+        return $obj->paginate($perPage, $page);
     }
 
     /**
