@@ -28,8 +28,12 @@ class Product extends Model
     public $rules = [
         'title' => 'required|unique:tiipiik_catalog_products',
         'slug' => 'required',
-        'price' => 'required|integer',
-        'discount_price' => 'integer',
+        'price' => 'required|regex:/^(0+)?\d{0,10}(\.\d{0,2})?$/',
+        'discount_price' => 'regex:/^(0+)?\d{0,10}(\.\d{0,2})?$/',
+    ];
+    
+    public $customMessages = [
+        'price.regex' => 'The price must be a valid monetary value.'
     ];
 
     /**

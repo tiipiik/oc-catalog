@@ -26,3 +26,5 @@
     - Fix users permissions, Fix paths for RC compatibility
 1.2.2:
     - Fix RC compatibility
+1.2.3:
+    - Fix validation for decimal prices and discount
