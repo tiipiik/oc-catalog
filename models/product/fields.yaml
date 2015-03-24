@@ -17,6 +17,10 @@ fields:
             data-input-preset: 'input[name="Product[title]"]'
             data-input-preset-type: slug
             data-input-preset-closest-parent: form
+    
+    is_published:
+        label: tiipiik.catalog::lang.products.published
+        type: switch
 
 tabs:
     fields:

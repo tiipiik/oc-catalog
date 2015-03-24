@@ -31,3 +31,7 @@ columns:
         
     items_available:
         label: tiipiik.catalog::lang.products.items_available
+    
+    is_published:
+        label: tiipiik.catalog::lang.products.published
+        type: switch

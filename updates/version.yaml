@@ -30,3 +30,7 @@
     - Fix validation for decimal prices and discount
 1.2.4:
     - Product price and discount validation messages are translatable
+1.2.5:
+    - Changed product description from textarea to richeditor
+    - Added Publish / Unpublish to products
+    - add_is_published_to_products.php

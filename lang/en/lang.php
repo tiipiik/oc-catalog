@@ -11,6 +11,7 @@ return [
         'title_ph' => 'Title',
         'slug' => 'Slug',
         'slug_ph' => 'Slug',
+        'published' => 'Published',
         'details_tab_title' => 'Details',
         'items_available' => 'Items available',
         'items_available_ph' => 'Items available',

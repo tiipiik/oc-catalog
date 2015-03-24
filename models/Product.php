@@ -94,7 +94,7 @@ class Product extends Model
     }
     
     /**
-     * Lists rooms for the front end
+     * Lists products for the front end
      * @param  array $options Display options
      * @return self
      */ 
@@ -109,10 +109,11 @@ class Product extends Model
             'perPage' => 30,
             'sort' => 'title',
             'search' => '',
-            'categories' => null
+            'categories' => null,
         ], $options));
 
         $obj = $this->newQuery();
+        $obj = $obj->whereIsPublished(1);
 
         /*
          * Categories

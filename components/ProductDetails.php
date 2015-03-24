@@ -52,7 +52,7 @@ class ProductDetails extends ComponentBase
         //$deprecatedSlug = $this->propertyOrParam('idParam');
         
         $slug = $this->property('slug');
-        return ProductModel::where('slug', '=', $slug)->first();
+        return ProductModel::whereSlug($slug)->whereIsPublished(1)->first();
     }
 
 }
