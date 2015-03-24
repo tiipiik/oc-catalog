@@ -28,3 +28,5 @@
     - Fix RC compatibility
 1.2.3:
     - Fix validation for decimal prices and discount
+1.2.4:
+    - Product price and discount validation messages are translatable

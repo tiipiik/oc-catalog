@@ -33,7 +33,8 @@ class Product extends Model
     ];
     
     public $customMessages = [
-        'price.regex' => 'The price must be a valid monetary value.'
+        'price.regex' => 'tiipiik.catalog::lang.validation.price_regex',
+        'discount_price.regex' => 'tiipiik.catalog::lang.validation.discount_price_regex',
     ];
 
     /**

@@ -144,4 +144,8 @@ return [
             ],
         ],
     ],
+    'validation' => [
+        'price_regex' => 'The price must be a valid monetary value.',
+        'discount_price_regex' => 'The discount price must be a valid monetary value.',
+    ]
 ];

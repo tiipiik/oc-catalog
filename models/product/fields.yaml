@@ -49,7 +49,7 @@ tabs:
             tab: tiipiik.catalog::lang.products.details_tab_title
             label: tiipiik.catalog::lang.products.description
             placeholder: tiipiik.catalog::lang.products.description_ph
-            type: textarea
+            type: richeditor
                             
         categories:
             tab: tiipiik.catalog::lang.products.category_tab_title
