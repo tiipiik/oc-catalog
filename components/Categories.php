@@ -93,16 +93,13 @@ class Categories extends ComponentBase
 
     protected function loadCategories()
     {
-        // @deprecated remove if year >= 2015
-        //$deprecatedSlug = $this->propertyOrParam('idParam');
-        
         $categories = Category::orderBy('name');
         
         // If param for displaying subcategories is checked
         if ($this->property('subCategories') == 1)
         {
-            $category = Category::where('slug', '=', $this->property('slug'))->first();
-            $categories->where('parent_id', '=', $category->id);
+            $category = Category::whereSlug($this->property('slug'))->first();
+            $categories->whereParentId($category->id);
         }
         
         $categories = $categories->get();

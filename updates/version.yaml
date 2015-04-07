@@ -32,5 +32,12 @@
     - Product price and discount validation messages are translatable
 1.2.5:
     - Changed product description from textarea to richeditor
-    - Added Publish / Unpublish to products
+    - Added Publish / Unpublish product
     - add_is_published_to_products.php
+1.2.6:
+    - Fix proper display for product description
+1.2.7:
+    - Fix correct display for product count on categories
+    - Added Polish localisation by @gzysiol, thanks !
+1.3.0:
+    - New method for accessing custom fields

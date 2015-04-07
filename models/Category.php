@@ -74,7 +74,7 @@ class Category extends Model
      */
     public function getProductCountAttribute()
     {
-        return $this->products()->count();
+        return $this->products()->whereIsPublished(1)->count();
     }
 
     /**
@@ -93,7 +93,7 @@ class Category extends Model
     
     public static function categoryDetails($param)
     {
-        if (!$category = self::where('slug', '=', $param['category'])->first())
+        if (!$category = self::whereSlug($param['category'])->first())
             return null;
         
         return $category;

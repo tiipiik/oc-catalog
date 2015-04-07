@@ -1,6 +1,7 @@
 <?php namespace Tiipiik\Catalog\Components;
 
 use Cms\Classes\ComponentBase;
+use Tiipiik\Catalog\Models\CustomField;
 use Tiipiik\Catalog\Models\Product as ProductModel;
 
 class ProductDetails extends ComponentBase
@@ -51,8 +52,22 @@ class ProductDetails extends ComponentBase
         // @deprecated remove if year >= 2015
         //$deprecatedSlug = $this->propertyOrParam('idParam');
         
+        $product = null;
         $slug = $this->property('slug');
-        return ProductModel::whereSlug($slug)->whereIsPublished(1)->first();
+        
+        $product = ProductModel::whereSlug($slug)->whereIsPublished(1)->first();
+        if ($product->customfields)
+        {
+            foreach ($product->customfields as $customfield)
+            {
+                $fieldId = $customfield['custom_field_id'];
+                // Grab custom field template code
+                $field = CustomField::find($fieldId);
+                $product->attributes[$field->template_code] = $customfield->value;
+            }
+        }
+        
+        return $product;
     }
 
 }
