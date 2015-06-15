@@ -1,0 +1,26 @@
+{% set store_list = __SELF__.stores %}
+
+{% if not store_list|length %}
+<p class="alert alert-info">{{ __SELF__.noStoreMessage }}</p>
+{% else %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            {% for store in store_list %}
+            <div class="col-xs-6 col-md-3">
+                <a href="{{ __SELF__.storePage|app }}/{{ store.slug }}" class="thumbnail text-center">
+                    {% if store.image %}
+                    <img src="{{ store.cover_image.thumb(300, 300) }}" title="{{ store.cover_image.title }}" alt="{{ store.cover_image.description }}">
+                    {% endif %}
+                    {{ store.name }}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+    {% if store_list %}
+        {% partial __SELF__ ~ "::pagination" %}
+    {% endif %}
+{% endif %}

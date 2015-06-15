@@ -1,0 +1,25 @@
+{% set store = __SELF__.store %}
+
+<div class="jumbotron">
+    <h1>{{ store.name }}</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            {{ store.description|raw }}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <img src="{{ store.cover_image.thumb(300, 300) }}" title="{{ store.cover_image.title }}" alt="{{ store.cover_image.description }}">
+        </div>
+    </div>
+    
+    {% if store.products %}
+    <div class="row">
+        {% for product in store.products %}
+            <div class="col-xs-12">
+                <h3><a href="{{ __SELF__.productPage|app }}/{{ product.slug }}" title="{{ product.title }}">{{ product.title }}</a></h3>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>

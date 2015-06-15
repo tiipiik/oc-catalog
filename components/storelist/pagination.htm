@@ -1,0 +1,46 @@
+{% set stores = __SELF__.stores %}
+
+{% set paginationEnabled = stores.currentPage > 1 or stores.lastPage > 1 or stores.lastPage > stores.currentPage %}
+
+<div class="row forum-pagination {{ paginationEnabled ? "enabled" : "disabled" }}">
+    <div class="col-md-8">
+        <ul class="pagination">
+            {% if stores.currentPage > 1 %}
+                <li>
+                    <a href="{{ paginationUrl ~ (stores.currentPage - 1) }}">
+                        &larr; Previous
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <span>
+                        &larr; Previous
+                    </span>
+                </li>
+            {% endif %}
+            {% if stores.lastPage > 1 %}
+                {% for page in 1..stores.lastPage %}
+                    <li class="{{ page == stores.currentPage ? 'active' }}">
+                        <a href="{{ paginationUrl ~ page }}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+            {% if stores.lastPage > stores.currentPage %}
+                <li>
+                    <a href="{{ paginationUrl ~ (stores.currentPage + 1) }}">
+                        Next &rarr;
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <span>
+                        Next &rarr;
+                    </span>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="col-md-4 text-right posts-total-summary">
+        <p>{{ stores.firstItem }}-{{ stores.lastItem }} of {{ stores.total }}</p>
+    </div>
+</div>

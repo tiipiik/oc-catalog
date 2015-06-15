@@ -64,6 +64,11 @@ tabs:
             tab: Group
             type: relation
             required: true
+                            
+        stores:
+            tab: Stores
+            type: relation
+            commentAbove: Select the store this product is related to
         
 secondaryTabs:
     fields:

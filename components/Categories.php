@@ -80,9 +80,6 @@ class Categories extends ComponentBase
     
     public function onRun()
     {
-        // @deprecated remove if year >= 2015
-        //$deprecatedSlug = $this->propertyOrParam('idParam');
-        
         $this->render_view                  = $this->property('renderView');
         $this->noProductCategoriesMessage   = $this->property('noProductCategoriesMessage');
         $this->productCategoryPage          = $this->property('categoryPage');

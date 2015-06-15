@@ -36,10 +36,13 @@ class CreateGroupsTable extends Migration
 
     public function down()
     {
-        Schema::table('tiipiik_catalog_products', function($table)
+        if (Schema::hasColumn('tiipiik_catalog_products', 'group_id'))
         {
-            $table->dropColumn('group_id');
-        });
+            Schema::table('tiipiik_catalog_products', function($table)
+            {
+                $table->dropColumn('group_id');
+            });
+        }
         Schema::dropIfExists('tiipiik_catalog_groups');
         Schema::dropIfExists('tiipiik_catalog_group_field');
     }

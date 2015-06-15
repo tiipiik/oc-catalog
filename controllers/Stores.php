@@ -4,9 +4,9 @@ use BackendMenu;
 use Backend\Classes\Controller;
 
 /**
- * Products Back-end Controller
+ * Stores Back-end Controller
  */
-class Products extends Controller
+class Stores extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
@@ -18,7 +18,7 @@ class Products extends Controller
     public $listConfig = 'config_list.yaml';
     public $relationConfig = 'config_relation.yaml';
 
-    public $requiredPermissions = ['catalog.access_products'];
+    public $requiredPermissions = ['catalog.access_stores'];
 
     public $bodyClass = 'compact-container';
 
@@ -26,6 +26,6 @@ class Products extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'products');
+        BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'stores');
     }
 }

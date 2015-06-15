@@ -1,0 +1,13 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+customfields:
+    label: false # Could not translate in lang.php because it's not parsed in custom field creation form
+    list: @/plugins/tiipiik/catalog/models/customvalue/columns.yaml
+    form: @/plugins/tiipiik/catalog/models/customvalue/fields.yaml    
+    emptyMessage: Store has no custom field
+    toolbar: 
+        buttons: false
+    view:
+        showCheckboxes: false

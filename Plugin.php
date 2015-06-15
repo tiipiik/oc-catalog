@@ -43,6 +43,10 @@ class Plugin extends PluginBase
                 'tab' => 'Catalog',
                 'label' => 'tiipiik.catalog::lang.settings.access_groups'
             ],
+            'tiipiik.catalog.access_stores' => [
+                'tab' => 'Catalog',
+                'label' => 'Manage Stores'
+            ],
         ];
     }
 
@@ -52,6 +56,8 @@ class Plugin extends PluginBase
             '\Tiipiik\Catalog\Components\Categories' => 'categories',
             '\Tiipiik\Catalog\Components\ProductList' => 'product_list',
             '\Tiipiik\Catalog\Components\ProductDetails' => 'product_details',
+            '\Tiipiik\Catalog\Components\StoreList' => 'store_list',
+            '\Tiipiik\Catalog\Components\StoreDetails' => 'store_details',
         ];
     }
 
@@ -102,8 +108,14 @@ class Plugin extends PluginBase
                         'permissions' => ['tiipiik.catalog.access_groups'],
 
                     ],
+                    'stores' => [
+                        'label'       => 'Stores',
+                        'icon'        => 'icon-list-ul',
+                        'url'         => Backend::url('tiipiik/catalog/stores'),
+                        'attributes'  => ['data-menu-item'=>'stores'],
+                        'permissions' => ['tiipiik.catalog.access_stores'],
+                    ],
                 ]
-
             ]
         ];
     }

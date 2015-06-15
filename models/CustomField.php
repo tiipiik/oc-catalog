@@ -2,10 +2,11 @@
 
 use DB;
 use Model;
+use Tiipiik\Catalog\Models\Store as StoreModel;
 use Tiipiik\Catalog\Models\Product as ProductModel;
 use Tiipiik\Catalog\Models\CustomValue as CustomValueModel;
 
-//use System\Classes\SystemException;
+//use SystemException;
 // throw new SystemException('Message');
 
 /**
@@ -47,7 +48,7 @@ class CustomField extends Model
      * @var array Relations
      */
     public $hasMany = [
-        'customvalues' => ['Tiipiik\Catalog\Models\CustomValue', 'table' => 'tiipiik_catalog_csf_csv',],
+        'customvalues' => ['Tiipiik\Catalog\Models\CustomValue', 'table' => 'tiipiik_catalog_csf_csv'],
     ];
     
     public $belongsToMany = [
@@ -100,7 +101,7 @@ class CustomField extends Model
                 $has_custom_value = CustomValueModel::where('product_id', '=', $product->id)
                     ->where('custom_field_id', '=', $this->id)
                     ->first();
-                
+
                 if (!$has_custom_value)
                 {
                     // Create default value for each product
@@ -109,9 +110,52 @@ class CustomField extends Model
                         'custom_field_id' => $this->id,
                         'value' => $this->default_value,
                     ]);
-                            
-                    // Create relation between custom value and custom field
-                    DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$custom_value->id.'", "'.$this->id.'")');
+                    
+                    // Create relation between custom value and custom field if not exists
+                    $relation = DB::table('tiipiik_catalog_csf_csv')
+                        ->whereCustomValueId($custom_value->id)
+                        ->whereCustomFieldId($this->id)
+                        ->first();
+                    
+                    if (! $relation)
+                    {
+                        DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$custom_value->id.'", "'.$this->id.'")');
+                    }
+                }
+            });
+            
+            // Get all stores of this group
+            $stores = StoreModel::whereGroupId($group->group_id)->get();
+
+            $stores->each(function($store)
+            {
+                // Get the group of the product
+                $store_group = $store->group_id;
+                
+                // If product alreay has the custom field, do nothing
+                $has_custom_value = CustomValueModel::whereStoreId($store->id)
+                    ->where('custom_field_id', '=', $this->id)
+                    ->first();
+
+                if (!$has_custom_value)
+                {
+                    // Create default value for each product
+                    $custom_value = new CustomValueModel();
+                    $custom_value->store_id = $store->id;
+                    $custom_value->custom_field_id = $this->id;
+                    $custom_value->value = $this->default_value;
+                    $custom_value->save();
+                    
+                    // Create relation between custom value and custom field if not exists
+                    $relation = DB::table('tiipiik_catalog_csf_csv')
+                        ->whereCustomValueId($custom_value->id)
+                        ->whereCustomFieldId($this->id)
+                        ->first();
+                    
+                    if (! $relation)
+                    {
+                        DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$custom_value->id.'", "'.$this->id.'")');
+                    }
                 }
             });
         }
@@ -142,6 +186,32 @@ class CustomField extends Model
             }
         });
         
+        // Delete fields from non selected groups if exists
+        $stores = StoreModel::with('customfields')->get();
+        
+        $stores->each(function($store)
+        {
+            $group = $store->group_id;
+            
+            foreach ($store->customfields as $custom_field)
+            {                
+                // Does this custom field belongs to the group related to the product ?
+                $relation = DB::table('tiipiik_catalog_group_field')
+                    ->where('custom_field_id', $custom_field->custom_field_id)
+                    ->where('group_id', $group)
+                    ->first();
+                
+                // There's no relation so we have to remove this custom field and it's custom value
+                if (!$relation)
+                {
+                    // Delete custom value  
+                    CustomValueModel::whereStoreId($store->id)
+                        ->whereCustomFieldId($custom_field->custom_field_id)
+                        ->delete();
+                }
+            }
+        });
+        
     }
     
     
@@ -157,6 +227,28 @@ class CustomField extends Model
         {
             // Find the related custom value
             $custom_values = CustomValueModel::whereProductId($product->id)
+                ->whereCustomFieldId($this->id)
+                ->get();
+            
+            $custom_values->each(function($custom_value)
+            {
+                // Delete relation
+                $relation = DB::table('tiipiik_catalog_csf_csv')
+                    ->where('custom_value_id', '=', $custom_value->id)
+                    ->delete();
+                
+                // Delete custom value
+                CustomValueModel::whereId($custom_value->id)->delete();
+            });
+        });
+        
+        // then grab all stores
+        $stores = StoreModel::all();
+        
+        $stores->each(function($store)
+        {
+            // Find the related custom value
+            $custom_values = CustomValueModel::whereStoreId($store->id)
                 ->whereCustomFieldId($this->id)
                 ->get();
             

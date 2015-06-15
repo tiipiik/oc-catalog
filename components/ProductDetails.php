@@ -55,8 +55,8 @@ class ProductDetails extends ComponentBase
         $product = null;
         $slug = $this->property('slug');
         
-        $product = ProductModel::whereSlug($slug)->whereIsPublished(1)->first();
-        if ($product->customfields)
+        $product = ProductModel::whereSlug($slug)->with('customfields')->whereIsPublished(1)->first();
+        if (isset($product->customfields))
         {
             foreach ($product->customfields as $customfield)
             {
