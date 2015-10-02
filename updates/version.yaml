@@ -52,3 +52,5 @@
     - Custom fields are now available in Products and Stores lists
 1.6.1:
     - WARNING : In ProductList component, product's urls are now called with {{ product.url }}, this can possibly break your links !
+1.6.2:
+    - Fixed product attributes injection in product details page

@@ -6,6 +6,7 @@ use Tiipiik\Catalog\Models\Product as ProductModel;
 
 class ProductDetails extends ComponentBase
 {
+    protected $product;
 
     public function componentDetails()
     {
@@ -29,10 +30,9 @@ class ProductDetails extends ComponentBase
 
     public function onRun()
     {
+        $product = $this->loadProduct();
         
-        $loadProduct = $this->loadProduct();
-        
-        if (!$loadProduct)
+        if (!$product)
         {
             // The line below works but return a line of details
             //return Response::make( $this->controller->run('404'), 404 );
@@ -41,15 +41,14 @@ class ProductDetails extends ComponentBase
             return $this->controller->run('404');
         }
         
-        $this->product = $this->page['product'] = $loadProduct;
+        $this->product = $this->page['product'] = $product;
         
-        $this->page->title = $this->product->title;
-        $this->page->description = $this->product->description;
+        $this->page->title = $product->title;
+        $this->page->description = $product->description;
     }
 
     protected function loadProduct()
     {
-        $product = null;
         $slug = $this->property('slug');
         
         $product = ProductModel::whereSlug($slug)->with('customfields')->whereIsPublished(1)->first();
