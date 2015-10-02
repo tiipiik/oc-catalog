@@ -13,6 +13,9 @@ class Categories extends ComponentBase
     public $productCategoryPage;
     public $currentProductCategorySlug;
     public $noProductCategoriesMessage;
+    public $render_view;
+    public $product_categories;
+    public $subCategoriesTitle;
 
     public function componentDetails()
     {

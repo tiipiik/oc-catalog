@@ -24,6 +24,11 @@ class ProductList extends ComponentBase
      */
     public $products;
 
+    public $noProductsMessage;
+    public $productParam;
+    public $productPageIdParam;
+    
+
     public function componentDetails()
     {
         return [
