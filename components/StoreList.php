@@ -4,6 +4,7 @@ use Request;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Tiipiik\Catalog\Models\Store;
+use Tiipiik\Catalog\Models\CustomField;
 
 class StoreList extends ComponentBase
 {
@@ -91,10 +92,25 @@ class StoreList extends ComponentBase
     
     public function listStores()
     {
-        $stores = Store::listFrontEnd([
+        $stores = Store::with('customfields')->listFrontEnd([
             'page' => $this->property('storeSlug'),
             'perPage' => $this->property('storesPerPage'),
         ]);
+        
+        // Injects related custom fields
+        $stores->each(function($store)
+        {
+            if ($store->customfields)
+            {
+                foreach ($store->customfields as $customfield)
+                {
+                    $fieldId = $customfield['custom_field_id'];
+                    // Grab custom field template code
+                    $field = CustomField::find($fieldId);
+                    $store->attributes[$field->template_code] = $customfield->value;
+                }
+            } 
+        });
         
         return $stores;
     }

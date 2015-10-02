@@ -30,7 +30,7 @@
         <div class="row">
             {% for product in product_list %}
             <div class="col-xs-6 col-md-3">
-                <a href="{{ __SELF__.productPage|app }}/{{ product.slug }}" class="thumbnail text-center">
+                <a href="{{ product.url }}" class="thumbnail text-center">
                     {% if product.featured_images[0] %}
                     <img src="{{ product.featured_images[0].thumb(300, 300) }}" title="{{ product.featured_images[0].title }}" alt="{{ product.featured_images[0].description }}">
                     {% endif %}

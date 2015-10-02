@@ -49,9 +49,6 @@ class ProductDetails extends ComponentBase
 
     protected function loadProduct()
     {
-        // @deprecated remove if year >= 2015
-        //$deprecatedSlug = $this->propertyOrParam('idParam');
-        
         $product = null;
         $slug = $this->property('slug');
         

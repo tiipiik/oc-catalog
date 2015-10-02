@@ -7,8 +7,7 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Tiipiik\Catalog\Models\Category;
 use Tiipiik\Catalog\Models\Product;
-
-//use October\Rain\Database\DataFeed;
+use Tiipiik\Catalog\Models\CustomField;
 
 class ProductList extends ComponentBase
 {
@@ -103,9 +102,6 @@ class ProductList extends ComponentBase
     
     public function onRun()
     {
-        // @deprecated remove if year >= 2015
-        // $deprecatedSlug = $this->property('productPageIdParam');
-        
         // Use strict method only to avoid conflicts whith other plugins
         $this->productPage = $this->property('productPage');
         
@@ -152,11 +148,28 @@ class ProductList extends ComponentBase
             $categories = $category->id;
         }
         
-        $products = Product::with('categories')->listFrontEnd([
+        $products = Product::with('customfields')->with('categories')->listFrontEnd([
             'page' => $this->property('pageParam'),
             'perPage' => $this->property('productsPerPage'),
             'categories' => $categories,
         ]);
+        
+        // Injects related custom fields
+        $products->each(function($product)
+        {
+            $product->setUrl($this->property('productPage'), $this->controller);
+
+            if ($product->customfields)
+            {
+                foreach ($product->customfields as $customfield)
+                {
+                    $fieldId = $customfield['custom_field_id'];
+                    // Grab custom field template code
+                    $field = CustomField::find($fieldId);
+                    $product->attributes[$field->template_code] = $customfield->value;
+                }
+            } 
+        });
         
         return $products;
     }
