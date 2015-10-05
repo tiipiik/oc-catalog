@@ -56,3 +56,5 @@
     - Fixed product attributes injection in product details page
 1.6.3:
     - Fixed missing variable declaration, thanks to @igorblumberg
+1.6.4:
+    - Filters enabled in products and customfields backend

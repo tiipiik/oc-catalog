@@ -74,6 +74,21 @@ class CustomField extends Model
             $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
         });
     }
+
+
+    /**
+     * Allows filtering for specifc groups
+     * @param  Illuminate\Query\Builder  $query      QueryBuilder
+     * @param  array                     $categories List of category ids
+     * @return Illuminate\Query\Builder              QueryBuilder
+     */
+    public function scopeFilterGroups($query, $groups)
+    {
+        return $query->whereHas('groups', function($q) use ($groups) {
+            $q->whereIn('id', $groups);
+        });
+    }
+
     
     /*
      * Add newly created custom fields to all products

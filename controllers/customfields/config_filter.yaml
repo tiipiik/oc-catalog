@@ -1,0 +1,18 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+scopes:
+
+    group:
+
+        # Filter name
+        label: tiipiik.catalog::lang.groups.menu_label
+
+        # Model Class name
+        modelClass: Tiipiik\Catalog\Models\Group
+
+        # Model attribute to display for the name
+        nameFrom: name
+
+        # Apply query scope
+        scope: FilterGroups
