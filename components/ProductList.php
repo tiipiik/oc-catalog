@@ -102,7 +102,7 @@ class ProductList extends ComponentBase
     
     public function getProductPageOptions()
     {
-        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
     
     public function onRun()

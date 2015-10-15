@@ -51,10 +51,12 @@
 1.6.0:
     - Custom fields are now available in Products and Stores lists
 1.6.1:
-    - WARNING : In ProductList component, product's urls are now called with {{ product.url }}, this can possibly break your links !
+    - WARNING, in ProductList component, product urls are now displayed with product.url, this can possibly break your links !
 1.6.2:
     - Fixed product attributes injection in product details page
 1.6.3:
     - Fixed missing variable declaration, thanks to @igorblumberg
 1.6.4:
     - Filters enabled in products and customfields backend
+1.6.5:
+    - Selecting render view in categories is now in dropdown mode

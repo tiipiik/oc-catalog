@@ -72,7 +72,6 @@ tabs:
         
 secondaryTabs:
     fields:
-    
         featured_images:
             label: tiipiik.catalog::lang.products.featured_images
             type: fileupload

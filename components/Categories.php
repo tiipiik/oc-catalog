@@ -13,7 +13,7 @@ class Categories extends ComponentBase
     public $productCategoryPage;
     public $currentProductCategorySlug;
     public $noProductCategoriesMessage;
-    public $render_view;
+    public $renderview;
     public $product_categories;
     public $subCategoriesTitle;
 
@@ -62,8 +62,8 @@ class Categories extends ComponentBase
             'renderView' => [
                 'title'        => 'tiipiik.catalog::lang.component.categories.param.render_view_title',
                 'description'  => 'tiipiik.catalog::lang.component.categories.param.render_view_desc',
-                'type'         => 'string',
-                'default'      => 'menu_list',
+                'type'         => 'dropdown',
+                'default'      => 'menulist',
                 'group'        => 'Render',
             ],
             'categoryPage' => [
@@ -75,15 +75,20 @@ class Categories extends ComponentBase
             ],
         ];
     }
+
+    public function getRenderViewOptions()
+    {
+        return ['menu_list' => 'Menu list', 'image_list' => 'Image list'];
+    }
     
     public function getCategoryPageOptions()
     {
-        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
     
     public function onRun()
     {
-        $this->render_view                  = $this->property('renderView');
+        $this->renderview                  = $this->property('renderView');
         $this->noProductCategoriesMessage   = $this->property('noProductCategoriesMessage');
         $this->productCategoryPage          = $this->property('categoryPage');
         $this->currentProductCategorySlug   = $this->property('slug');

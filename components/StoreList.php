@@ -59,7 +59,7 @@ class StoreList extends ComponentBase
     
     public function getStorePageOptions()
     {
-        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
     
     

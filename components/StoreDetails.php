@@ -7,6 +7,7 @@ use Tiipiik\Catalog\Models\CustomField;
 
 class StoreDetails extends ComponentBase
 {
+    protected $loadStore;
 
     public function componentDetails()
     {
@@ -44,13 +45,12 @@ class StoreDetails extends ComponentBase
     
     public function getProductPageOptions()
     {
-        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
 
     public function onRun()
     {
-        
         $loadStore = $this->loadStore();
         
         if (!$loadStore)
