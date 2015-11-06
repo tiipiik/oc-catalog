@@ -88,7 +88,7 @@ class Categories extends ComponentBase
     
     public function onRun()
     {
-        $this->renderview                  = $this->property('renderView');
+        $this->renderview                   = $this->property('renderView');
         $this->noProductCategoriesMessage   = $this->property('noProductCategoriesMessage');
         $this->productCategoryPage          = $this->property('categoryPage');
         $this->currentProductCategorySlug   = $this->property('slug');

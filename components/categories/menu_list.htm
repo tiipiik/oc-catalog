@@ -10,7 +10,11 @@
 <div class="list-group">
     {% for category in category_list %}
         {% set productCount = category.product_count %}
-        <a href="{{ category.url }}" class="list-group-item {% if category.slug == __SELF__.currentProductCategorySlug %}active{% endif %}">
+        <a href="{{ category.url }}" class="list-group-item {% if category.slug == __SELF__.currentProductCategorySlug %}active{% endif %}"
+        {% if(category.nest_depth != 0) %}
+        {% set paddingLeft = category.nest_depth*30 %}
+		style="padding-left:{{ paddingLeft }}px;"
+		{% endif %}>
             {{ category.name }}
             {% if productCount %}
                 <span class="badge">{{ productCount }}</span>

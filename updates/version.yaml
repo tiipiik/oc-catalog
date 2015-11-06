@@ -60,3 +60,5 @@
     - Filters enabled in products and customfields backend
 1.6.5:
     - Selecting render view in categories is now in dropdown mode
+1.6.6:
+    - Fix for return to product list button link, thanks to @dogiedog
