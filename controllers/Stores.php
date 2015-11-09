@@ -18,7 +18,7 @@ class Stores extends Controller
     public $listConfig = 'config_list.yaml';
     public $relationConfig = 'config_relation.yaml';
 
-    public $requiredPermissions = ['catalog.access_stores'];
+    public $requiredPermissions = ['tiipiik.catalog.manage_stores'];
 
     public $bodyClass = 'compact-container';
 

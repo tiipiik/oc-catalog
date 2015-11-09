@@ -16,6 +16,8 @@ class Groups extends Controller
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
 
+    public $requiredPermissions = ['tiipiik.catalog.manage_groups'];
+
     public function __construct()
     {
         parent::__construct();

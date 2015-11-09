@@ -20,7 +20,7 @@ class CustomFields extends Controller
 
     public $bodyClass = 'compact-container';
 
-    public $requiredPermissions = ['tiipiik.catalog.access_custom_fields'];
+    public $requiredPermissions = ['tiipiik.catalog.manage_custom_fields'];
 
     public function __construct()
     {

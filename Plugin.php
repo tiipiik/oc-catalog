@@ -27,23 +27,23 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'tiipiik.catalog.access_categories' => [
+            'tiipiik.catalog.manage_categories' => [
                 'tab' => 'Catalog',
                 'label' => 'tiipiik.catalog::lang.settings.access_categories'
             ],
-            'tiipiik.catalog.access_products' => [
+            'tiipiik.catalog.manage_products' => [
                 'tab' => 'Catalog',
                 'label' => 'tiipiik.catalog::lang.settings.access_products'
             ],
-            'tiipiik.catalog.access_custom_fields' => [
+            'tiipiik.catalog.manage_custom_fields' => [
                 'tab' => 'Catalog',
                 'label' => 'tiipiik.catalog::lang.settings.access_custom_fields'
             ],
-            'tiipiik.catalog.access_groups' => [
+            'tiipiik.catalog.manage_groups' => [
                 'tab' => 'Catalog',
                 'label' => 'tiipiik.catalog::lang.settings.access_groups'
             ],
-            'tiipiik.catalog.access_stores' => [
+            'tiipiik.catalog.manage_stores' => [
                 'tab' => 'Catalog',
                 'label' => 'Manage Stores'
             ],
@@ -77,35 +77,35 @@ class Plugin extends PluginBase
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('tiipiik/catalog/categories'),
                         'attributes'  => ['data-menu-item'=>'categories'],
-                        'permissions' => ['tiipiik.catalog.access_categories'],
+                        'permissions' => ['tiipiik.catalog.manage_categories'],
                     ],
                     'reorder' => [
                         'label'       => 'tiipiik.catalog::lang.categories.reorder_category',
                         'icon'        => 'icon-exchange',
                         'url'         => Backend::url('tiipiik/catalog/categories/reorder'),
                         'attributes'  => ['data-menu-item'=>'categories'],
-                        'permissions' => ['tiipiik.catalog.access_categories'],
+                        'permissions' => ['tiipiik.catalog.manage_categories'],
                     ],
                     'products' => [
                         'label'       => 'tiipiik.catalog::lang.products.menu_label',
                         'icon'        => 'icon-th',
                         'url'         => Backend::url('tiipiik/catalog/products'),
                         'attributes'  => ['data-menu-item'=>'products'],
-                        'permissions' => ['tiipiik.catalog.access_products'],
+                        'permissions' => ['tiipiik.catalog.manage_products'],
                     ],
                     'customfields' => [
                         'label'       => 'tiipiik.catalog::lang.custom_fields.menu_label',
                         'icon'        => 'icon-list-alt',
                         'url'         => Backend::url('tiipiik/catalog/customfields'),
                         'attributes'  => ['data-menu-item'=>'custom_fields'],
-                        'permissions' => ['tiipiik.catalog.access_custom_fields'],
+                        'permissions' => ['tiipiik.catalog.manage_custom_fields'],
                     ],
                     'groups' => [
                         'label'       => 'Groups',
                         'icon'        => 'icon-list-alt',
                         'url'         => Backend::url('tiipiik/catalog/groups'),
                         'attributes'  => ['data-menu-item'=>'groups'],
-                        'permissions' => ['tiipiik.catalog.access_groups'],
+                        'permissions' => ['tiipiik.catalog.manage_groups'],
 
                     ],
                     'stores' => [
@@ -113,7 +113,7 @@ class Plugin extends PluginBase
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('tiipiik/catalog/stores'),
                         'attributes'  => ['data-menu-item'=>'stores'],
-                        'permissions' => ['tiipiik.catalog.access_stores'],
+                        'permissions' => ['tiipiik.catalog.manage_stores'],
                     ],
                 ]
             ]
