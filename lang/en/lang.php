@@ -40,7 +40,7 @@ return [
         'display_name_label' => 'Display name',
         'default_value_label' => 'Default value',
         'template_code_ph' => 'Name for using in templates',
-        'display_name_ph' => 'Display name for fromtend',
+        'display_name_ph' => 'Display name for frontend',
         'default_value_comment' => 'Default value will be added to products only on custom field creation. Updated value will only be added to the products created after this update.',
         'return_to_list' => 'Return to custom fields list',
     ],
@@ -51,7 +51,7 @@ return [
     'groups'  =>  [
         'new_group' => 'New Group',
         'menu_label' => 'Groups',
-        'return_to_list' => 'Return to groupd',
+        'return_to_list' => 'Return to group',
     ],
     'config' => [
         'form' => [
