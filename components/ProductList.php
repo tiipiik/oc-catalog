@@ -27,6 +27,12 @@ class ProductList extends ComponentBase
     public $noProductsMessage;
     public $productParam;
     public $productPageIdParam;
+
+    /**
+     * If the post list should be ordered by another attribute.
+     * @var string
+     */
+    public $sortOrder;
     
 
     public function componentDetails()
@@ -45,6 +51,13 @@ class ProductList extends ComponentBase
                 'description' => 'tiipiik.catalog::lang.component.product_list.param.category_param_desc',
                 'default'     => '{{ :slug }}',
                 'type'        => 'string'
+            ],
+            'sortOrder' => [
+                'title'       => 'tiipiik.catalog::lang.settings.posts_order',
+                'description' => 'tiipiik.catalog::lang.settings.posts_order_description',
+                'type'        => 'dropdown',
+                'default'     => 'published_at desc',
+                'group'       => 'Filter',
             ],
             'useCategoryFilter' => [
                 'title'       => 'tiipiik.catalog::lang.component.product_list.param.usecategoryfilter_param_title',
@@ -104,6 +117,11 @@ class ProductList extends ComponentBase
     {
         return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
+
+    public function getSortOrderOptions()
+    {
+        return Product::$allowedSortingOptions;
+    }
     
     public function onRun()
     {
@@ -155,6 +173,7 @@ class ProductList extends ComponentBase
         
         $products = Product::with('customfields')->with('categories')->listFrontEnd([
             'page' => $this->property('pageParam'),
+            'sort'       => $this->property('sortOrder'),
             'perPage' => $this->property('productsPerPage'),
             'categories' => $categories,
         ]);

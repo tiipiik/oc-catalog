@@ -84,6 +84,8 @@ return [
         'access_products' => 'Manage products',
         'access_custom_fields' => 'Manage custom fields for products',
         'access_groups' => 'Manage groups',
+        'posts_order' => 'Product order',
+        'posts_order_description' => 'Change the order products are displayed',
     ],
     'catalog' => [
         'delete_confirm' => 'Do you really want to delete this product ?',
