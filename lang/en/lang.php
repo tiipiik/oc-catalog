@@ -86,6 +86,8 @@ return [
         'access_groups' => 'Manage groups',
         'posts_order' => 'Product order',
         'posts_order_description' => 'Change the order products are displayed',
+        'use_secure_urls' => 'Use secure urls',
+        'use_secure_urls_desc' => 'Check to activate secure urls generation',
     ],
     'catalog' => [
         'delete_confirm' => 'Do you really want to delete this product ?',

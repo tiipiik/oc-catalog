@@ -101,8 +101,7 @@ class Categories extends ComponentBase
         $categories = Category::orderBy('name');
         
         // If param for displaying subcategories is checked
-        if ($this->property('subCategories') == 1)
-        {
+        if ($this->property('subCategories') == 1) {
             $category = Category::whereSlug($this->property('slug'))->first();
             $categories->whereParentId($category->id);
         }
@@ -121,5 +120,4 @@ class Categories extends ComponentBase
 
         return $categories;
     }
-
 }

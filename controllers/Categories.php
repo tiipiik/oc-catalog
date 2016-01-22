@@ -52,7 +52,6 @@ class Categories extends Controller
      */
     public function reorder_onMove()
     {
-        
         $sourceNode = Category::find(post('sourceNode'));
         $targetNode = post('targetNode') ? Category::find(post('targetNode')) : null;
 
