@@ -14,5 +14,17 @@
         <div class="col-xs-12 col-sm-4">
             <img src="{{ product.featured_images[0].thumb(300, 300) }}" title="{{ product.featured_images[0].title }}" alt="{{ product.featured_images[0].description }}">
         </div>
+        {% if product.categories|length != 0 %}
+        <div class="row">
+            <h4>Related categories</h4>
+            <ul>
+                {% for category in product.categories %}
+                <li>
+                    <a href="{{ category.url }}" title="{{ category.name }}">{{ category.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
     </div>
 </div>

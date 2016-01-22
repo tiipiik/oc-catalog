@@ -131,10 +131,8 @@ class ProductList extends ComponentBase
         $category = $this->category = $this->loadCategory();
         
         // Return error only if category filter is not used
-        if ($this->property('useCategoryFilter') == 0)
-        {
-            if (!$category)
-            {
+        if ($this->property('useCategoryFilter') == 0) {
+            if (!$category) {
                 $this->setStatusCode(404);
                 return $this->controller->run('404');
             }
@@ -165,8 +163,7 @@ class ProductList extends ComponentBase
     {
         $categories = $this->category ? $this->category->id : null;
         
-        if ($this->property('useCategoryFilter') == 1 && $this->property('categoryFilter') != '')
-        {
+        if ($this->property('useCategoryFilter') == 1 && $this->property('categoryFilter') != '') {
             $category = Category::whereSlug($this->property('categoryFilter'))->first();
             $categories = $category->id;
         }
@@ -179,14 +176,11 @@ class ProductList extends ComponentBase
         ]);
         
         // Injects related custom fields
-        $products->each(function($product)
-        {
+        $products->each(function($product) {
             $product->setUrl($this->property('productPage'), $this->controller);
 
-            if ($product->customfields)
-            {
-                foreach ($product->customfields as $customfield)
-                {
+            if ($product->customfields) {
+                foreach ($product->customfields as $customfield) {
                     $fieldId = $customfield['custom_field_id'];
                     // Grab custom field template code
                     $field = CustomField::find($fieldId);

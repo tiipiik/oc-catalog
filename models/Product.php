@@ -200,7 +200,6 @@ class Product extends Model
         self::updateCustomFieldsAndValues('create');
     }
     
-    
     /*
      * Get group before update to handle group change
      */
@@ -209,7 +208,6 @@ class Product extends Model
         $product = self::find($this->id);
         self::$product_group = $product->group_id;  
     }
-    
     
     public function afterUpdate()
     {   
@@ -224,8 +222,7 @@ class Product extends Model
         // Find the related custom value
         $customValues = CustomValueModel::where('product_id', '=', $this->id)->get();
         
-        $customValues->each(function($value)
-        {
+        $customValues->each(function($value) {
             // Delete relation
             $relation = DB::table('tiipiik_catalog_csf_csv')
                 ->where('custom_value_id', '=', $value->id)
@@ -236,32 +233,26 @@ class Product extends Model
         });
     }
     
-    
     public function updateCustomFieldsAndValues($context)
     {
         // If updating, delete fields and values only if group has changed
-        if ($context == 'update' && self::$product_group != $this->group_id)
-        {
+        if ($context == 'update' && self::$product_group != $this->group_id) {
             CustomValueModel::whereProductId($this->id)->delete();
         }
                     
         // Get custom fields from group
         $custom_field_ids = DB::table('tiipiik_catalog_group_field')->where('group_id', '=', $this->group_id)->get();
         
-        if ($custom_field_ids)
-        {
-            foreach ($custom_field_ids as $custom_field_id)
-            {
+        if ($custom_field_ids) {
+            foreach ($custom_field_ids as $custom_field_id) {
                 $field_exists = CustomValueModel::whereProductId($this->id)
                     ->whereCustomFieldId($custom_field_id->custom_field_id)
                     ->first();
                 
-                if (!$field_exists)
-                {
+                if (!$field_exists) {
                     $custom_fields = CustomFieldModel::whereId($custom_field_id->custom_field_id)->get();
                     
-                    $custom_fields->each(function($custom_field)
-                    {
+                    $custom_fields->each(function($custom_field) {
                         // Add to product as custom value, with default value
                         $custom_value = CustomValueModel::create([
                             'product_id' => $this->id,
@@ -276,8 +267,6 @@ class Product extends Model
             }
         }
     }
-
-
 
     /**
      * Sets the "url" attribute with a URL to this object

@@ -4,42 +4,32 @@
 1.0.2:
     - Change product price and discount price type from integer to decimal
     - Fix multiple deletion for custom fields
-1.0.3:
-    - Remove deprecated idParam
+1.0.3: Remove deprecated idParam
 1.0.4:
     - Changed product price and discount price default values to 0.00
     - Changed custom value update field type to textarea
     - Fixed Cancel button links in products
     - Fixed duplicate custom fields on update
-1.0.5:
-    - Fix category param in Product list component
-1.0.6:
-    - Remove translatable defaut not found messages from Categories and Product list components
-1.1.0:
-    - New category filter to display products outside the catalog pages
+1.0.5: Fix category param in Product list component
+1.0.6: Remove translatable defaut not found messages from Categories and Product list components
+1.1.0: New category filter to display products outside the catalog pages
 1.2.0:
     - Added option groups
     - create_groups_table.php
     - Fix some translations
-1.2.1:
-    - Fix users permissions, Fix paths for RC compatibility
-1.2.2:
-    - Fix RC compatibility
-1.2.3:
-    - Fix validation for decimal prices and discount
-1.2.4:
-    - Product price and discount validation messages are translatable
+1.2.1: Fix users permissions, Fix paths for RC compatibility
+1.2.2: Fix RC compatibility
+1.2.3: Fix validation for decimal prices and discount
+1.2.4: Product price and discount validation messages are translatable
 1.2.5:
     - Changed product description from textarea to richeditor
     - Added Publish / Unpublish product
     - add_is_published_to_products.php
-1.2.6:
-    - Fix proper display for product description
+1.2.6: Fix proper display for product description
 1.2.7:
     - Fix correct display for product count on categories
     - Added Polish localisation by @gzysiol, thanks !
-1.3.0:
-    - New method for accessing custom fields
+1.3.0: New method for accessing custom fields
 1.4.0:
     - Add Stores
     - create_stores_table.php
@@ -48,25 +38,17 @@
     - WARNING -> "long" and "lat" fields will be removed on next update !
     - add_group_to_stores.php
     #- feed_tables.php
-1.6.0:
-    - Custom fields are now available in Products and Stores lists
-1.6.1:
-    - WARNING, in ProductList component, product urls are now displayed with product.url, this can possibly break your links !
-1.6.2:
-    - Fixed product attributes injection in product details page
-1.6.3:
-    - Fixed missing variable declaration, thanks to @igorblumberg
-1.6.4:
-    - Filters enabled in products and customfields backend
-1.6.5:
-    - Selecting render view in categories is now in dropdown mode
-1.6.6:
-    - Fix for return to product list button link, thanks to @dogiedog
-1.6.7:
-    - Permissions fixed properly, please verify your settings. Thanks to @Andris Vasers
-1.6.8:
-    - German translation added + fix in english translation, thanks to @VDLP
-1.6.9:
-    - Translation fix -> German is Dutch, thanks to @VDLP
-1.6.10:
-    - Added support for sorting products
+1.6.0: Custom fields are now available in Products and Stores lists
+1.6.1: WARNING, in ProductList component, product urls are now displayed with product.url, this can possibly break your links !
+1.6.2: Fixed product attributes injection in product details page
+1.6.3: Fixed missing variable declaration, thanks to @igorblumberg
+1.6.4: Filters enabled in products and customfields backend
+1.6.5: Selecting render view in categories is now in dropdown mode
+1.6.6: Fix for return to product list button link, thanks to @dogiedog
+1.6.7: Permissions fixed properly, please verify your settings. Thanks to @Andris Vasers
+1.6.8: German translation added + fix in english translation, thanks to @VDLP
+1.6.9: Translation fix -> German is Dutch, thanks to @VDLP
+1.6.10: Added support for sorting products
+1.6.11:
+    - Added category links to ProductDetails component, with regular or secure urls,
+    - PSR-2 compliance

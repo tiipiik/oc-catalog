@@ -84,9 +84,7 @@ class Category extends Model
      */
     public function setUrl($pageName, $controller)
     {
-        $params = [
-            'slug' => $this->slug,
-        ];
+        $params = ['slug' => $this->slug];
 
         return $this->url = $controller->pageUrl($pageName, $params);
     }
@@ -98,5 +96,4 @@ class Category extends Model
         
         return $category;
     }
-
 }
