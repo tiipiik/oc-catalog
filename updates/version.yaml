@@ -52,3 +52,4 @@
 1.6.11:
     - Added category links to ProductDetails component, with regular or secure urls,
     - PSR-2 compliance
+1.7.0: Added support for Static Pages Menu plugin
