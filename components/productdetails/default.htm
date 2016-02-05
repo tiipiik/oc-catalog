@@ -10,6 +10,10 @@
             <br><b>Items available</b> : {{  product.items_available  }}
             <br><b>Custom field Options</b> : {{  product.options  }}
             <br><b>Custom field Options 2</b> : {{  product.testme  }}
+            {% if product.brand %}
+            <hr>
+            Brand : <a href="{{ product.brand.url }}" title="{{ product.brand.name }}">{{ product.brand.name }}</a>
+            {% endif %}
         </div>
         <div class="col-xs-12 col-sm-4">
             <img src="{{ product.featured_images[0].thumb(300, 300) }}" title="{{ product.featured_images[0].title }}" alt="{{ product.featured_images[0].description }}">

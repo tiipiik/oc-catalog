@@ -6,16 +6,14 @@ use Model;
 use Tiipiik\Catalog\Models\CustomField as CustomFieldModel;
 use Tiipiik\Catalog\Models\CustomValue as CustomValueModel;
 use Tiipiik\Catalog\Models\Group;
-
 use SystemException;
-// throw new SystemException('Message');
-
 
 class Product extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     
     private static $product_group;
+    private static $brand;
 
     /**
      * @var string The database table used by the model.
@@ -83,6 +81,7 @@ class Product extends Model
     
     public $belongsTo = [
         'group' => ['Tiipiik\Catalog\Models\Group'],
+        'brand' => ['Tiipiik\Catalog\Models\Brand'],
     ];
     
     public $hasMany = [
@@ -90,7 +89,11 @@ class Product extends Model
     ];
     
     public $belongsToMany = [
-        'categories' => ['Tiipiik\Catalog\Models\Category', 'table' => 'tiipiik_catalog_prods_cats', 'order' => 'name'],
+        'categories' => [
+            'Tiipiik\Catalog\Models\Category',
+            'table' => 'tiipiik_catalog_prods_cats',
+            'order' => 'name'
+        ],
         'stores' => [
             'Tiipiik\Catalog\Models\Store',
             'table' => 'tiipiik_catalog_products_stores',
@@ -108,12 +111,12 @@ class Product extends Model
         parent::boot();
 
         // Check the translate plugin is installed
-        if (!class_exists('RainLab\Translate\Behaviors\TranslatableModel'))
+        if (!class_exists('RainLab\Translate\Behaviors\TranslatableModel')) {
             return;
+        }
 
         // Extend the constructor of the model
-        self::extend(function($model){
-
+        self::extend(function ($model) {
             // Implement the translatable behavior
             $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
 
@@ -124,8 +127,7 @@ class Product extends Model
      * Lists products for the front end
      * @param  array $options Display options
      * @return self
-     */ 
-    //public function listFrontEnd($options)
+     */
     public function scopeListFrontEnd($query, $options)
     {
         /*
@@ -137,6 +139,7 @@ class Product extends Model
             'sort' => 'title',
             'search' => '',
             'categories' => null,
+            'brand' => null,
         ], $options));
 
         $searchableFields = ['title', 'slug', 'description'];
@@ -170,9 +173,23 @@ class Product extends Model
          * Categories
          */
         if ($categories !== null) {
-            if (!is_array($categories)) $categories = [$categories];
-            $obj = $obj->whereHas('categories', function($q) use ($categories) {
+            if (!is_array($categories)) {
+                $categories = [$categories];
+            }
+            $obj = $obj->whereHas('categories', function ($q) use ($categories) {
                 $q->whereIn('id', $categories);
+            });
+        }
+
+        /*
+         * Brand
+         */
+        if ($brand !== null) {
+            if (!is_array($brand)) {
+                $brand = [$brand];
+            }
+            $obj = $obj->whereHas('brand', function ($q) use ($brand) {
+                $q->whereIn('id', $brand);
             });
         }
             
@@ -187,8 +204,34 @@ class Product extends Model
      */
     public function scopeFilterCategories($query, $categories)
     {
-        return $query->whereHas('categories', function($q) use ($categories) {
+        return $query->whereHas('categories', function ($q) use ($categories) {
             $q->whereIn('id', $categories);
+        });
+    }
+
+    /**
+     * Allows filtering for specifc groups
+     * @param  Illuminate\Query\Builder  $query      QueryBuilder
+     * @param  array                     $groups List of group ids
+     * @return Illuminate\Query\Builder              QueryBuilder
+     */
+    public function scopeFilterGroups($query, $groups)
+    {
+        return $query->whereHas('group', function ($q) use ($groups) {
+            $q->whereIn('id', $groups);
+        });
+    }
+
+    /**
+     * Allows filtering for specifc brands
+     * @param  Illuminate\Query\Builder  $query      QueryBuilder
+     * @param  array                     $brands List of brand ids
+     * @return Illuminate\Query\Builder              QueryBuilder
+     */
+    public function scopeFilterBrands($query, $brands)
+    {
+        return $query->whereHas('brand', function ($q) use ($brands) {
+            $q->whereIn('id', $brands);
         });
     }
     
@@ -206,11 +249,11 @@ class Product extends Model
     public function beforeUpdate()
     {
         $product = self::find($this->id);
-        self::$product_group = $product->group_id;  
+        self::$product_group = $product->group_id;
     }
     
     public function afterUpdate()
-    {   
+    {
         self::updateCustomFieldsAndValues('update');
     }
     
@@ -222,7 +265,7 @@ class Product extends Model
         // Find the related custom value
         $customValues = CustomValueModel::where('product_id', '=', $this->id)->get();
         
-        $customValues->each(function($value) {
+        $customValues->each(function ($value) {
             // Delete relation
             $relation = DB::table('tiipiik_catalog_csf_csv')
                 ->where('custom_value_id', '=', $value->id)
@@ -241,7 +284,9 @@ class Product extends Model
         }
                     
         // Get custom fields from group
-        $custom_field_ids = DB::table('tiipiik_catalog_group_field')->where('group_id', '=', $this->group_id)->get();
+        $custom_field_ids = DB::table('tiipiik_catalog_group_field')
+            ->where('group_id', '=', $this->group_id)
+            ->get();
         
         if ($custom_field_ids) {
             foreach ($custom_field_ids as $custom_field_id) {
@@ -252,7 +297,7 @@ class Product extends Model
                 if (!$field_exists) {
                     $custom_fields = CustomFieldModel::whereId($custom_field_id->custom_field_id)->get();
                     
-                    $custom_fields->each(function($custom_field) {
+                    $custom_fields->each(function ($custom_field) {
                         // Add to product as custom value, with default value
                         $custom_value = CustomValueModel::create([
                             'product_id' => $this->id,
@@ -261,7 +306,10 @@ class Product extends Model
                         ]);
                                     
                         // Create relation between custom value and custom field for this product
-                        DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$custom_value->id.'", "'.$custom_field->id.'")');
+                        DB::insert(
+                            'insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id)
+                            values ("'.$custom_value->id.'", "'.$custom_field->id.'")'
+                        );
                     });
                 }
             }

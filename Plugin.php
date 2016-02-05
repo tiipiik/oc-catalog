@@ -118,6 +118,13 @@ class Plugin extends PluginBase
                         'attributes'  => ['data-menu-item'=>'stores'],
                         'permissions' => ['tiipiik.catalog.manage_stores'],
                     ],
+                    'brands' => [
+                        'label'       => 'Brands',
+                        'icon'        => 'icon-list-ul',
+                        'url'         => Backend::url('tiipiik/catalog/brands'),
+                        'attributes'  => ['data-menu-item'=>'brands'],
+                        //'permissions' => ['tiipiik.catalog.manage_stores'],
+                    ],
                 ]
             ]
         ];

@@ -4,27 +4,27 @@
 
 fields:
     name:
-        label: tiipiik.catalog::lang.products.title
+        label: Name
         placeholder: tiipiik.catalog::lang.products.title_ph
         span: left
 
     slug:
-        label: tiipiik.catalog::lang.products.slug
+        label: Slug
         placeholder: tiipiik.catalog::lang.products.slug_ph
         span: right
         attributes:
-            data-input-preset: 'input[name="Category[name]"]'
+            data-input-preset: 'input[name="Brand[name]"]'
             data-input-preset-type: slug
             data-input-preset-closest-parent: form
 
     description:
-        label: tiipiik.catalog::lang.products.description
+        label: Description
         placeholder: tiipiik.catalog::lang.products.description
         type: textarea
 
 secondaryTabs:
     fields:
-        cover:
+        cover_image:
             label: Image
             type: fileupload
             mode: image

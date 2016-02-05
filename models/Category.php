@@ -36,7 +36,11 @@ class Category extends Model
     protected $guarded = ['*'];
     
     public $belongsToMany = [
-        'products' => ['Tiipiik\Catalog\Models\Product', 'table' => 'tiipiik_catalog_prods_cats', 'order' => 'title'],
+        'products' => [
+            'Tiipiik\Catalog\Models\Product',
+            'table' => 'tiipiik_catalog_prods_cats',
+            'order' => 'title'
+        ],
     ];
 
     public $attachOne = [
@@ -284,7 +288,9 @@ class Category extends Model
     protected static function getCategoryPageUrl($pageCode, $category, $theme)
     {
         $page = CmsPage::loadCached($theme, $pageCode);
-        if (!$page) return;
+        if (!$page) {
+            return;
+        }
 
         $properties = $page->getComponentProperties('categories');
         if (!isset($properties['slug'])) {

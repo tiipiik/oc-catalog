@@ -8,21 +8,17 @@ class AddIsPublishedToProducts extends Migration
 
     public function up()
     {
-        Schema::table('tiipiik_catalog_products', function($table)
-        {
+        Schema::table('tiipiik_catalog_products', function ($table) {
             $table->boolean('is_published')->after('id')->default(0);
         });
     }
 
     public function down()
     {
-        if (Schema::hasColumn('tiipiik_catalog_products', 'is_published'))
-        {
-            Schema::table('tiipiik_catalog_products', function($table)
-            {
+        if (Schema::hasColumn('tiipiik_catalog_products', 'is_published')) {
+            Schema::table('tiipiik_catalog_products', function ($table) {
                 $table->dropColumn('is_published');
             });
         }
     }
-
 }

@@ -1,0 +1,16 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+list: $/tiipiik/catalog/models/brand/columns.yaml
+modelClass: Tiipiik\Catalog\Models\Brand
+title: Manage Brands
+recordUrl: tiipiik/catalog/brands/update/:id
+noRecordsMessage: backend::lang.list.no_records
+recordsPerPage: 20
+showSetup: true
+showSorting: true
+
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: backend::lang.list.search_prompt

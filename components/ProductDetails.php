@@ -9,9 +9,8 @@ use Tiipiik\Catalog\Models\Product as ProductModel;
 class ProductDetails extends ComponentBase
 {
     protected $product;
-
     protected $categoryPage;
-
+    protected $brandPage;
     protected $secureUrls;
 
     public function componentDetails()
@@ -38,6 +37,13 @@ class ProductDetails extends ComponentBase
                 'default'     => 'category',
                 'group'       => 'Links',
             ],
+            'brandPage' => [
+                'title'       => 'Brand',
+                'description' => 'desc',
+                'type'        => 'dropdown',
+                'default'     => 'brand',
+                'group'       => 'Links',
+            ],
             'secureUrls' => [
                 'title'       => 'tiipiik.catalog::lang.settings.use_secure_urls',
                 'description' => 'tiipiik.catalog::lang.settings.use_secure_urls_desc',
@@ -50,7 +56,12 @@ class ProductDetails extends ComponentBase
     
     public function getCategoryPageOptions()
     {
-        return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }
+
+    public function getBrandPageOptions()
+    {
+        return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     public function onRun()
@@ -76,20 +87,28 @@ class ProductDetails extends ComponentBase
     {
         $slug = $this->property('slug');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
+        $this->brandPage = $this->page['brandPage'] = $this->property('brandPage');
         $this->secureUrls = $this->page['secureUrls'] = $this->property('secureUrls');
         
         $product = ProductModel::whereSlug($slug)
-            ->with('categories')
-            ->with('customfields')
             ->whereIsPublished(1)
+            ->with('categories')
+            ->with('brand')
+            ->with('customfields')
             ->first();
 
         if (isset($product->categories)) {
-            $product->categories->each(function($category) {
+            $product->categories->each(function ($category) {
                 $category->url = ($this->secureUrls)
                     ? secure_url($this->categoryPage.'/'.$category->slug)
                     : url($this->categoryPage.'/'.$category->slug);
             });
+        }
+
+        if (isset($product->brand)) {
+            $product->brand->url = ($this->secureUrls)
+                ? secure_url($this->brandPage.'/'.$product->brand->slug)
+                : url($this->brandPage.'/'.$product->brand->slug);
         }
 
         if (isset($product->customfields)) {
@@ -103,5 +122,4 @@ class ProductDetails extends ComponentBase
         
         return $product;
     }
-
 }

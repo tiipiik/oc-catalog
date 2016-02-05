@@ -2,17 +2,24 @@
 # Filter Scope Definitions
 # ===================================
 scopes:
-
     category:
-
         # Filter name
         label: tiipiik.catalog::lang.products.category
-
         # Model Class name
         modelClass: Tiipiik\Catalog\Models\Category
-
         # Model attribute to display for the name
         nameFrom: name
-
         # Apply query scope
         scope: FilterCategories
+
+    group:
+        label: Group
+        modelClass: Tiipiik\Catalog\Models\Group
+        nameFrom: name
+        scope: FilterGroups
+
+    brand:
+        label: Brand
+        modelClass: Tiipiik\Catalog\Models\Brand
+        nameFrom: name
+        scope: FilterBrands

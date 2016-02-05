@@ -6,32 +6,38 @@ columns:
     id:
         label: tiipiik.catalog::lang.products.id
         invisible: true
-    
+
     title:
         label: tiipiik.catalog::lang.products.title
-    
+
     categories:
         label: tiipiik.catalog::lang.products.category
         relation: categories
         select: name
         searchable: true
         sortable: false
-    
+
     group:
         label: Group
         relation: group
         select: name
         sortable: false
-    
+
+    brand:
+        label: Brand
+        relation: brand
+        select: name
+        sortable: false
+
     price:
         label: tiipiik.catalog::lang.products.price
-    
+
     discount_price:
         label: tiipiik.catalog::lang.products.discount_price
-        
+
     items_available:
         label: tiipiik.catalog::lang.products.items_available
-    
+
     is_published:
         label: tiipiik.catalog::lang.products.published
         type: switch

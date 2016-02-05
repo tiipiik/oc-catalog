@@ -31,10 +31,17 @@ class Group extends Model
 
     
     public $belongsToMany = [
-        'products' => ['Tiipiik\Catalog\Models\Product', 'table' => 'tiipiik_catalog_group_product', 'order' => 'name'],
-        'custom_fields' => ['Tiipiik\Catalog\Models\CustomField','table' => 'tiipiik_catalog_group_field','order' => 'name'],
+        'products' => [
+            'Tiipiik\Catalog\Models\Product',
+            'table' => 'tiipiik_catalog_group_product',
+            'order' => 'name'
+        ],
+        'custom_fields' => [
+            'Tiipiik\Catalog\Models\CustomField',
+            'table' => 'tiipiik_catalog_group_field',
+            'order' => 'name'
+        ],
     ];
-    
     
      /**
      * Add translation support to this model, if available.
@@ -44,12 +51,12 @@ class Group extends Model
     {
         parent::boot();
 
-        if (!class_exists('RainLab\Translate\Behaviors\TranslatableModel'))
+        if (!class_exists('RainLab\Translate\Behaviors\TranslatableModel')) {
             return;
+        }
 
-        self::extend(function($model){
+        self::extend(function ($model) {
             $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
         });
     }
-
 }
