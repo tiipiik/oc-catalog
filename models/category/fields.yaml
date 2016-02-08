@@ -20,7 +20,7 @@ fields:
     description:
         label: tiipiik.catalog::lang.products.description
         placeholder: tiipiik.catalog::lang.products.description
-        type: textarea
+        type: richeditor
 
 secondaryTabs:
     fields:

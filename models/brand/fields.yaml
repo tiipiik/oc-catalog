@@ -24,7 +24,7 @@ fields:
     description:
         label: Description
         placeholder: tiipiik.catalog::lang.products.description
-        type: textarea
+        type: richeditor
 
 secondaryTabs:
     fields:

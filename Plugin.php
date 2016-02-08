@@ -82,7 +82,7 @@ class Plugin extends PluginBase
                 'sideMenu' => [
                     'categories' => [
                         'label'       => 'tiipiik.catalog::lang.categories.menu_label',
-                        'icon'        => 'icon-list-ul',
+                        'icon'        => 'icon-sitemap',
                         'url'         => Backend::url('tiipiik/catalog/categories'),
                         'attributes'  => ['data-menu-item'=>'categories'],
                         'permissions' => ['tiipiik.catalog.manage_categories'],
@@ -116,18 +116,18 @@ class Plugin extends PluginBase
                         'permissions' => ['tiipiik.catalog.manage_groups'],
 
                     ],
+                    'brands' => [
+                        'label'       => 'Brands',
+                        'icon'        => 'icon-copyright',
+                        'url'         => Backend::url('tiipiik/catalog/brands'),
+                        'attributes'  => ['data-menu-item'=>'brands'],
+                        'permissions' => ['tiipiik.catalog.manage_stores'],
+                    ],
                     'stores' => [
                         'label'       => 'Stores',
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('tiipiik/catalog/stores'),
                         'attributes'  => ['data-menu-item'=>'stores'],
-                        'permissions' => ['tiipiik.catalog.manage_stores'],
-                    ],
-                    'brands' => [
-                        'label'       => 'Brands',
-                        'icon'        => 'icon-list-ul',
-                        'url'         => Backend::url('tiipiik/catalog/brands'),
-                        'attributes'  => ['data-menu-item'=>'brands'],
                         'permissions' => ['tiipiik.catalog.manage_stores'],
                     ],
                 ]

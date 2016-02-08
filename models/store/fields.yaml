@@ -27,14 +27,6 @@ fields:
         placeholder: Store description
         type: richeditor
 
-    lat:
-        label: Latitude
-        span: left
-
-    long:
-        label: Longitude
-        span: right
-
     group:
         tab: Group
         label: Group

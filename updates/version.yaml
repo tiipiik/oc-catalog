@@ -58,3 +58,8 @@
     - Added Store Details component,
     - Added links to brand and stores in Product List component,
     - create_brands_table.php
+1.8.1:
+    - Changed icons for Brands and Categories,
+    - Description fields for Categories, Brands and Stores are now richeditors,
+    - Fixed titles and links in Brand management,
+    - Fixed permissions for Brands
