@@ -11,6 +11,7 @@ class ProductDetails extends ComponentBase
     protected $product;
     protected $categoryPage;
     protected $brandPage;
+    protected $storePage;
     protected $secureUrls;
 
     public function componentDetails()
@@ -41,7 +42,12 @@ class ProductDetails extends ComponentBase
                 'title'       => 'Brand',
                 'description' => 'desc',
                 'type'        => 'dropdown',
-                'default'     => 'brand',
+                'group'       => 'Links',
+            ],
+            'storePage' => [
+                'title'       => 'Store',
+                'description' => 'desc',
+                'type'        => 'dropdown',
                 'group'       => 'Links',
             ],
             'secureUrls' => [
@@ -64,6 +70,11 @@ class ProductDetails extends ComponentBase
         return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    public function getStorePageOptions()
+    {
+        return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }
+
     public function onRun()
     {
         $product = $this->loadProduct();
@@ -77,6 +88,7 @@ class ProductDetails extends ComponentBase
         }
         
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
+        $this->storePage = $this->page['storePage'] = $this->property('storePage');
         $this->product = $this->page['product'] = $product;
         
         $this->page->title = $product->title;
@@ -88,25 +100,35 @@ class ProductDetails extends ComponentBase
         $slug = $this->property('slug');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
         $this->brandPage = $this->page['brandPage'] = $this->property('brandPage');
+        $this->storePage = $this->page['storePage'] = $this->property('storePage');
         $this->secureUrls = $this->page['secureUrls'] = $this->property('secureUrls');
         
         $product = ProductModel::whereSlug($slug)
             ->whereIsPublished(1)
+            ->with('customfields')
             ->with('categories')
             ->with('brand')
-            ->with('customfields')
+            ->with('stores')
             ->first();
 
         if (isset($product->categories)) {
             $product->categories->each(function ($category) {
-                $category->url = ($this->secureUrls)
+                $category->url = ($this->property('secureUrls') == 1)
                     ? secure_url($this->categoryPage.'/'.$category->slug)
                     : url($this->categoryPage.'/'.$category->slug);
             });
         }
 
+        if (isset($product->stores)) {
+            $product->stores->each(function ($store) {
+                $store->url = ($this->property('secureUrls') == 1)
+                    ? secure_url($this->storePage.'/'.$store->slug)
+                    : url($this->storePage.'/'.$store->slug);
+            });
+        }
+
         if (isset($product->brand)) {
-            $product->brand->url = ($this->secureUrls)
+            $product->brand->url = ($this->property('secureUrls') == 1)
                 ? secure_url($this->brandPage.'/'.$product->brand->slug)
                 : url($this->brandPage.'/'.$product->brand->slug);
         }

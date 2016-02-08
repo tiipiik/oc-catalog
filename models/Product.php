@@ -14,6 +14,7 @@ class Product extends Model
     
     private static $product_group;
     private static $brand;
+    private static $stores;
 
     /**
      * @var string The database table used by the model.
@@ -140,6 +141,7 @@ class Product extends Model
             'search' => '',
             'categories' => null,
             'brand' => null,
+            'stores' => null,
         ], $options));
 
         $searchableFields = ['title', 'slug', 'description'];
@@ -190,6 +192,18 @@ class Product extends Model
             }
             $obj = $obj->whereHas('brand', function ($q) use ($brand) {
                 $q->whereIn('id', $brand);
+            });
+        }
+
+        /*
+         * Stores
+         */
+        if ($stores !== null) {
+            if (!is_array($stores)) {
+                $stores = [$stores];
+            }
+            $obj = $obj->whereHas('stores', function ($q) use ($stores) {
+                $q->whereIn('id', $stores);
             });
         }
             

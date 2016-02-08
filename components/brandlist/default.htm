@@ -1,0 +1,22 @@
+{% set brand_list = __SELF__.brands %}
+
+{% if not brand_list|length %}
+<p class="alert alert-info">{{ __SELF__.noBrandMessage }}</p>
+{% else %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            {% for brand in brand_list %}
+            <div class="col-xs-6 col-md-3">
+                <a href="{{ __SELF__.brandPage|app }}/{{ brand.slug }}" class="thumbnail text-center">
+                    {% if store.image %}
+                    <img src="{{ brand.cover_image.thumb(300, 300) }}" title="{{ brand.cover_image.title }}" alt="{{ brand.cover_image.description }}">
+                    {% endif %}
+                    {{ brand.name }}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -14,6 +14,12 @@
             <hr>
             Brand : <a href="{{ product.brand.url }}" title="{{ product.brand.name }}">{{ product.brand.name }}</a>
             {% endif %}
+            {% if product.stores %}
+            <hr>
+            {% for store in product.stores %}
+            Store : <a href="{{ store.url }}" title="{{ store.name }}">{{ store.name }}</a>
+            {% endfor %}
+            {% endif %}
         </div>
         <div class="col-xs-12 col-sm-4">
             <img src="{{ product.featured_images[0].thumb(300, 300) }}" title="{{ product.featured_images[0].title }}" alt="{{ product.featured_images[0].description }}">

@@ -55,9 +55,12 @@ class Brand extends Model
     /**
      * @var array Relations
      */
-
     public $attachOne = [
         'cover_image' => ['System\Models\File', 'order' => 'sort_order'],
+    ];
+    
+    public $hasMany = [
+        'products' => ['Tiipiik\Catalog\Models\Product'],
     ];
 
      /**
@@ -75,6 +78,26 @@ class Brand extends Model
         self::extend(function ($model) {
             $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
         });
+    }
+
+    /**
+     * Lists brands for the front end
+     * @param  array $options Display options
+     * @return self
+     */
+    public function scopeListFrontEnd($query, $options)
+    {
+        extract(array_merge([
+            'page' => 1,
+            'perPage' => 30,
+            'sort' => 'name',
+            'search' => '',
+        ], $options));
+
+        $obj = $this->newQuery();
+        $obj = $obj->wherePublished(1);
+
+        return $obj->paginate($perPage, $page);
     }
 
     /**

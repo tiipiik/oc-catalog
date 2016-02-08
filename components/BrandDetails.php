@@ -2,12 +2,11 @@
 
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
-use Tiipiik\Catalog\Models\Store;
-use Tiipiik\Catalog\Models\CustomField;
+use Tiipiik\Catalog\Models\Brand;
 
-class StoreDetails extends ComponentBase
+class BrandDetails extends ComponentBase
 {
-    public $store;
+    public $brand;
     public $productPage;
     public $noProductsMessage;
     public $secureUrls;
@@ -15,30 +14,29 @@ class StoreDetails extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'Store details',
-            'description' => 'Display details about a store.'
+            'name'        => 'Brand Details',
+            'description' => 'Display details of selected brand'
         ];
     }
-
 
     public function defineProperties()
     {
         return [
             'slug' => [
-                'title'       => 'Store slug',
-                'description' => 'Parameter used to find store from it\'s slug',
+                'title'       => 'Brand slug',
+                'description' => 'Parameter used to find brand from it\'s slug',
                 'default'     => '{{ :slug }}',
                 'type'        => 'string',
             ],
             'products' => [
                 'title'       => 'Display products',
-                'description' => 'Add products related to this store in the view.',
+                'description' => 'Add products related to this brand in the view.',
                 'default'     => '0',
                 'type'        => 'checkbox',
                 'group'       => 'Products',
             ],
             'productPage' => [
-                'title'       => 'Page for product details',
+                'title'       => 'Page for products details',
                 'description' => '',
                 'type'        => 'dropdown',
                 'default'     => 'product-details/:slug',
@@ -68,12 +66,9 @@ class StoreDetails extends ComponentBase
 
     public function onRun()
     {
-        $this->store = $this->page['store'] = $this->loadStore();
+        $this->brand = $this->page['brand'] = $this->loadBrand();
         
-        if (!$this->store) {
-            // The line below works but return a line of details
-            //return Response::make( $this->controller->run('404'), 404 );
-            // Use this instead
+        if (!$this->brand) {
             $this->setStatusCode(404);
             return $this->controller->run('404');
         }
@@ -82,39 +77,29 @@ class StoreDetails extends ComponentBase
         $this->noProductsMessage = $this->property('noProductsMessage');
     }
 
-    protected function loadStore()
+    protected function loadBrand()
     {
-        $store = null;
+        $brand = null;
         $slug = $this->property('slug');
         
-        $store = Store::whereSlug($slug)->with('customfields')->whereIsActivated(1);
+        $brand = Brand::whereSlug($slug)->wherePublished(1);
         
         // Do we display related products ?
         if ($this->property('products') == 1) {
-            $store = $store->with(['products' => function ($q) {
+            $brand = $brand->with(['products' => function ($q) {
                 $q->whereIsPublished(1);
             }]);
         }
-        $store = $store->first();
-        
-        // Injects related custom fields
-        if (isset($store->customfields)) {
-            foreach ($store->customfields as $customfield) {
-                $fieldId = $customfield['custom_field_id'];
-                // Grab custom field template code
-                $field = CustomField::find($fieldId);
-                $store->attributes[$field->template_code] = $customfield->value;
-            }
-        }
+        $brand = $brand->first();
 
-        if (isset($store->products)) {
-            $store->products->each(function ($product) {
+        if (isset($brand->products)) {
+            $brand->products->each(function ($product) {
                 $product->url = ($this->property('secureUrls') == 1)
                     ? secure_url($this->property('productPage').'/'.$product->slug)
                     : url($this->property('productPage').'/'.$product->slug);
             });
         }
         
-        return $store;
+        return $brand;
     }
 }

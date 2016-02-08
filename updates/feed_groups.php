@@ -12,5 +12,4 @@ class SeedGroupsTables extends Seeder
         Group::create(['name' => 'Motorbikes']);
         Group::create(['name' => 'Accessories']);
     }
-
 }

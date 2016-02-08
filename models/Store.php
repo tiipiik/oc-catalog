@@ -68,7 +68,6 @@ class Store extends Model
         'cover_image' => ['System\Models\File'],
     ];
     
-    
      /**
      * Add translation support to this model, if available.
      * @return void
@@ -79,11 +78,12 @@ class Store extends Model
         parent::boot();
 
         // Check the translate plugin is installed
-        if (!class_exists('RainLab\Translate\Behaviors\TranslatableModel'))
+        if (!class_exists('RainLab\Translate\Behaviors\TranslatableModel')) {
             return;
+        }
 
         // Extend the constructor of the model
-        self::extend(function($model){
+        self::extend(function ($model) {
 
             // Implement the translatable behavior
             $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
@@ -91,13 +91,11 @@ class Store extends Model
         });
     }
     
-    
     /**
      * Lists stores for the front end
      * @param  array $options Display options
      * @return self
-     */ 
-    //public function listFrontEnd($options)
+     */
     public function scopeListFrontEnd($query, $options)
     {
         /*
@@ -116,7 +114,6 @@ class Store extends Model
         return $obj->paginate($perPage, $page);
     }
     
-    
     /*
      * Add existing custom fields to newly created stores
      */
@@ -125,19 +122,17 @@ class Store extends Model
         self::updateCustomFieldsAndValues('create');
     }
     
-    
     /*
      * Get group before update to handle group change
      */
     public function beforeUpdate()
     {
         $store = self::find($this->id);
-        self::$store_group = $store->group_id; 
+        self::$store_group = $store->group_id;
     }
     
-    
     public function afterUpdate()
-    {   
+    {
         self::updateCustomFieldsAndValues('update');
     }
     
@@ -149,8 +144,7 @@ class Store extends Model
         // Find the related custom value
         $customValues = CustomValueModel::where('store_id', '=', $this->id)->get();
         
-        $customValues->each(function($value)
-        {
+        $customValues->each(function ($value) {
             // Delete relation
             $relation = DB::table('tiipiik_catalog_csf_csv')
                 ->where('custom_value_id', '=', $value->id)
@@ -161,32 +155,28 @@ class Store extends Model
         });
     }
     
-    
     public function updateCustomFieldsAndValues($context)
     {
         // If updating, delete fields and values only if group has changed
-        if ($context == 'update' && self::$store_group != $this->group_id)
-        {
+        if ($context == 'update' && self::$store_group != $this->group_id) {
             CustomValueModel::whereStoreId($this->id)->delete();
         }
         
         // Get custom fields from group
-        $custom_field_ids = DB::table('tiipiik_catalog_group_field')->where('group_id', '=', $this->group_id)->get();
+        $custom_field_ids = DB::table('tiipiik_catalog_group_field')
+            ->where('group_id', '=', $this->group_id)
+            ->get();
         
-        if ($custom_field_ids)
-        {
-            foreach ($custom_field_ids as $custom_field_id)
-            {
+        if ($custom_field_ids) {
+            foreach ($custom_field_ids as $custom_field_id) {
                 $field_exists = CustomValueModel::whereStoreId($this->id)
                     ->whereCustomFieldId($custom_field_id->custom_field_id)
                     ->first();
                 
-                if (!$field_exists)
-                {
+                if (!$field_exists) {
                     $custom_fields = CustomFieldModel::whereId($custom_field_id->custom_field_id)->get();
                     
-                    $custom_fields->each(function($custom_field)
-                    {
+                    $custom_fields->each(function ($custom_field) {
                         // Add to product as custom value, with default value
                         $custom_value = new CustomValueModel();
                         $custom_value->store_id = $this->id;
@@ -195,7 +185,10 @@ class Store extends Model
                         $custom_value->save();
                                     
                         // Create relation between custom value and custom field for this product
-                        DB::insert('insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id) values ("'.$custom_value->id.'", "'.$custom_field->id.'")');
+                        DB::insert(
+                            'insert into tiipiik_catalog_csf_csv (custom_value_id, custom_field_id)
+                            values ("'.$custom_value->id.'", "'.$custom_field->id.'")'
+                        );
                     });
                 }
             }

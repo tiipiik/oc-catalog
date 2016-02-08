@@ -1,26 +1,26 @@
-{% set store = __SELF__.store %}
+{% set brand = __SELF__.brand %}
 
 <div class="jumbotron">
-    <h1>{{ store.name }}</h1>
+    <h1>{{ brand.name }}</h1>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-8">
-            {{ store.description|raw }}
+            {{ brand.description|raw }}
         </div>
         <div class="col-xs-12 col-sm-4">
-            <img src="{{ store.cover_image.thumb(300, 300) }}" title="{{ store.cover_image.title }}" alt="{{ store.cover_image.description }}">
+            <img src="{{ brand.cover_image.thumb(300, 300) }}" title="{{ brand.cover_image.title }}" alt="{{ brand.cover_image.description }}">
         </div>
     </div>
 
-    {% if not store.products|length %}
+    {% if not brand.products|length %}
     <p class="alert alert-info">{{ __SELF__.noProductsMessage }}</p>
     {% else %}
     <div class="row">
         <div class="col-xs-12">
             <h2>Related products</h2>
             <div class="row">
-                {% for product in store.products %}
+                {% for product in brand.products %}
                 <div class="col-xs-6 col-md-3">
                     <a href="{{ product.url }}" class="thumbnail text-center">
                         {% if product.featured_images[0] %}

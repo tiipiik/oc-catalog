@@ -7,7 +7,7 @@ fields:
         label:  Store name
         placeholder: store name
         span: left
-        
+
     slug:
         label: Store slug
         span: right
@@ -17,11 +17,11 @@ fields:
             data-input-preset-type: slug
             data-input-preset-closest-parent: form
             data-input-preset-closest-parent: form
-        
+
     is_activated:
         label: Is actiavted
         type: switch
-                
+
     description:
         label: Store description
         placeholder: Store description
@@ -30,11 +30,11 @@ fields:
     lat:
         label: Latitude
         span: left
-    
+
     long:
         label: Longitude
         span: right
-        
+
     group:
         tab: Group
         label: Group
@@ -43,11 +43,10 @@ fields:
 
 secondaryTabs:
     fields:
-    
+
         cover_image:
             label: Store cover image
             type: fileupload
             mode: image
             imageHeight: 260
             imageWidth: 260
-        

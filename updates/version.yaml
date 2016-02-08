@@ -54,5 +54,7 @@
     - PSR-2 compliance
 1.7.0: Added support for Static Pages Menu plugin
 1.8.0:
-    - Added Brands
+    - Added Brands with Brand Lst and Brand Details components,
+    - Added Store Details component,
+    - Added links to brand and stores in Product List component,
     - create_brands_table.php

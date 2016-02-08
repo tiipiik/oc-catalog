@@ -17,6 +17,10 @@ fields:
             data-input-preset-type: slug
             data-input-preset-closest-parent: form
 
+    published:
+        label: Is published
+        type: switch
+
     description:
         label: Description
         placeholder: tiipiik.catalog::lang.products.description

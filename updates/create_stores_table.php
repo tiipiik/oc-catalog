@@ -8,8 +8,7 @@ class CreateStoresTable extends Migration
 
     public function up()
     {
-        Schema::create('tiipiik_catalog_stores', function($table)
-        {
+        Schema::create('tiipiik_catalog_stores', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name')->nullable();
@@ -21,8 +20,7 @@ class CreateStoresTable extends Migration
             $table->timestamps();
         });
         
-        Schema::create('tiipiik_catalog_products_stores', function($table)
-        {
+        Schema::create('tiipiik_catalog_products_stores', function ($table) {
             $table->engine = 'InnoDB';
             $table->integer('product_id')->unsigned();
             $table->integer('store_id')->unsigned();
@@ -35,5 +33,4 @@ class CreateStoresTable extends Migration
         Schema::dropIfExists('tiipiik_catalog_stores');
         Schema::dropIfExists('tiipiik_catalog_products_stores');
     }
-
 }

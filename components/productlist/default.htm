@@ -2,45 +2,45 @@
 {% set product_list = __SELF__.products %}
 
 {% if (category) %}
-<div class="row">
-    <div class="col-xs-12">
-        <h3>Viewing products of {{ category.name }}</h3>
-        <div class="row">
-            {% if (category.description) != '' %}
-            <div class="col-xs-{% if not (category.cover) %}12{% else %}8{% endif %}">
-                {{ category.description }}
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Viewing products of {{ category.name }}</h3>
+            <div class="row">
+                {% if (category.description) != '' %}
+                <div class="col-xs-{% if not (category.cover) %}12{% else %}8{% endif %}">
+                    {{ category.description }}
+                </div>
+                {% endif %}
+                {% if (category.cover != '') %}
+                <div class="col-xs-{% if not (category.description) %}12{% else %}4{% endif %}">
+                    <img src="{{ category.cover.thumb(300, 300) }}" title="{{ category.cover.title }}" alt="{{ category.cover.description }}">
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
-            {% if (category.cover != '') %}
-            <div class="col-xs-{% if not (category.description) %}12{% else %}4{% endif %}">
-                <img src="{{ category.cover.thumb(300, 300) }}" title="{{ category.cover.title }}" alt="{{ category.cover.description }}">
-            </div>
-            {% endif %}
         </div>
     </div>
-</div>
-<br>
-{% endif %}
+    <br>
+    {% endif %}
 
-{% if not product_list|length %}
-<p class="alert alert-info">{{ __SELF__.noProductsMessage }}</p>
-{% else %}
-<div class="row">
-    <div class="col-xs-12">
-        <div class="row">
-            {% for product in product_list %}
-            <div class="col-xs-6 col-md-3">
-                <a href="{{ product.url }}" class="thumbnail text-center">
-                    {% if product.featured_images[0] %}
-                    <img src="{{ product.featured_images[0].thumb(300, 300) }}" title="{{ product.featured_images[0].title }}" alt="{{ product.featured_images[0].description }}">
-                    {% endif %}
-                    {{ product.title }}
-                </a>
+    {% if not product_list|length %}
+    <p class="alert alert-info">{{ __SELF__.noProductsMessage }}</p>
+    {% else %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                {% for product in product_list %}
+                <div class="col-xs-6 col-md-3">
+                    <a href="{{ product.url }}" class="thumbnail text-center">
+                        {% if product.featured_images[0] %}
+                        <img src="{{ product.featured_images[0].thumb(300, 300) }}" title="{{ product.featured_images[0].title }}" alt="{{ product.featured_images[0].description }}">
+                        {% endif %}
+                        {{ product.title }}
+                    </a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
 
     {% if product_list %}
         {% partial __SELF__ ~ "::pagination" %}

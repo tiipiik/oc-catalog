@@ -8,8 +8,7 @@ class CreateTables extends Migration
 
     public function up()
     {
-        Schema::create('tiipiik_catalog_categories', function($table)
-        {
+        Schema::create('tiipiik_catalog_categories', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('parent_id')->unsigned()->index()->nullable();
@@ -22,8 +21,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
         
-        Schema::create('tiipiik_catalog_products', function($table)
-        {
+        Schema::create('tiipiik_catalog_products', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('title')->nullable();
@@ -35,8 +33,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
         
-        Schema::create('tiipiik_catalog_custom_fields', function($table)
-        {
+        Schema::create('tiipiik_catalog_custom_fields', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->string('template_code')->nullable();
@@ -45,8 +42,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
         
-        Schema::create('tiipiik_catalog_custom_values', function($table)
-        {
+        Schema::create('tiipiik_catalog_custom_values', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->integer('product_id')->unsigned()->nullable()->index();
@@ -56,8 +52,7 @@ class CreateTables extends Migration
         });
         
         // Relation between categories and products
-        Schema::create('tiipiik_catalog_prods_cats', function($table)
-        {
+        Schema::create('tiipiik_catalog_prods_cats', function ($table) {
             $table->engine = 'InnoDB';
             $table->integer('product_id')->unsigned();
             $table->integer('category_id')->unsigned();
@@ -65,14 +60,12 @@ class CreateTables extends Migration
         });
         
         // Relation between custom fields and custom values
-        Schema::create('tiipiik_catalog_csf_csv', function($table)
-        {
+        Schema::create('tiipiik_catalog_csf_csv', function ($table) {
             $table->engine = 'InnoDB';
             $table->integer('custom_value_id')->unsigned();
             $table->integer('custom_field_id')->unsigned();
             $table->primary(['custom_value_id', 'custom_field_id']);
         });
-        
     }
 
     public function down()
@@ -84,5 +77,4 @@ class CreateTables extends Migration
         Schema::dropIfexists('tiipiik_catalog_prods_cats');
         Schema::dropIfExists('tiipiik_catalog_csf_csv');
     }
-
 }

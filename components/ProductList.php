@@ -148,8 +148,9 @@ class ProductList extends ComponentBase
             $queryArr['page'] = '';
             $paginationUrl = Request::url() . '?' . http_build_query($queryArr);
 
-            if ($currentPage > ($lastPage = $products->lastPage()) && $currentPage > 1)
+            if ($currentPage > ($lastPage = $products->lastPage()) && $currentPage > 1) {
                 return Redirect::to($paginationUrl . $lastPage);
+            }
 
             $this->page['paginationUrl'] = $paginationUrl;
         }
@@ -176,7 +177,7 @@ class ProductList extends ComponentBase
         ]);
         
         // Injects related custom fields
-        $products->each(function($product) {
+        $products->each(function ($product) {
             $product->setUrl($this->property('productPage'), $this->controller);
 
             if ($product->customfields) {
@@ -186,24 +187,24 @@ class ProductList extends ComponentBase
                     $field = CustomField::find($fieldId);
                     $product->attributes[$field->template_code] = $customfield->value;
                 }
-            } 
+            }
         });
         
         return $products;
     }
     
     protected function loadCategory()
-    {        
+    {
         $category = Category::make()->categoryDetails([
             'category' => $this->property('categorySlug'),
         ]);
         
-        if (empty($category))
+        if (empty($category)) {
             return null;
+        }
             
         $this->page->title = $category->name;
         
         return $category;
     }
-
 }

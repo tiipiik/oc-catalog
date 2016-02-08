@@ -8,6 +8,8 @@ use Tiipiik\Catalog\Models\CustomField;
 
 class StoreList extends ComponentBase
 {
+    public $stores;
+    public $storePage;
 
     public function componentDetails()
     {
@@ -62,7 +64,6 @@ class StoreList extends ComponentBase
         return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
     
-    
     public function onRun()
     {
         // Use strict method only to avoid conflicts whith other plugins
@@ -79,8 +80,9 @@ class StoreList extends ComponentBase
             $queryArr['page'] = '';
             $paginationUrl = Request::url() . '?' . http_build_query($queryArr);
 
-            if ($currentPage > ($lastPage = $stores->lastPage()) && $currentPage > 1)
+            if ($currentPage > ($lastPage = $stores->lastPage()) && $currentPage > 1) {
                 return Redirect::to($paginationUrl . $lastPage);
+            }
 
             $this->page['paginationUrl'] = $paginationUrl;
         }
@@ -88,7 +90,6 @@ class StoreList extends ComponentBase
         $this->noStoreMessage = $this->property('noStoreMessage');
         $this->storeSlug = $this->property('storeSlug');
     }
-    
     
     public function listStores()
     {
@@ -98,21 +99,17 @@ class StoreList extends ComponentBase
         ]);
         
         // Injects related custom fields
-        $stores->each(function($store)
-        {
-            if ($store->customfields)
-            {
-                foreach ($store->customfields as $customfield)
-                {
+        $stores->each(function ($store) {
+            if ($store->customfields) {
+                foreach ($store->customfields as $customfield) {
                     $fieldId = $customfield['custom_field_id'];
                     // Grab custom field template code
                     $field = CustomField::find($fieldId);
                     $store->attributes[$field->template_code] = $customfield->value;
                 }
-            } 
+            }
         });
         
         return $stores;
     }
-
 }

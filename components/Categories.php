@@ -108,13 +108,14 @@ class Categories extends ComponentBase
         
         $categories = $categories->get();
         
-        if (!$categories)
+        if (!$categories) {
             return null;
+        }
         
         /*
          * Add a "url" helper attribute for linking to each category
          */
-        $categories->each(function($category){
+        $categories->each(function ($category) {
             $category->setUrl($this->productCategoryPage, $this->controller);
         });
 

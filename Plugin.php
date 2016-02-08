@@ -11,7 +11,6 @@ use Tiipiik\Catalog\Models\Product;
  */
 class Plugin extends PluginBase
 {
-
     /**
      * Returns information about this plugin.
      *
@@ -50,6 +49,10 @@ class Plugin extends PluginBase
                 'tab' => 'Catalog',
                 'label' => 'Manage Stores'
             ],
+            'tiipiik.catalog.manage_brands' => [
+                'tab' => 'Catalog',
+                'label' => 'Manage Brands'
+            ],
         ];
     }
 
@@ -61,6 +64,8 @@ class Plugin extends PluginBase
             '\Tiipiik\Catalog\Components\ProductDetails' => 'product_details',
             '\Tiipiik\Catalog\Components\StoreList' => 'store_list',
             '\Tiipiik\Catalog\Components\StoreDetails' => 'store_details',
+            '\Tiipiik\Catalog\Components\BrandList' => 'brand_list',
+            '\Tiipiik\Catalog\Components\BrandDetails' => 'brand_details',
         ];
     }
 
@@ -123,7 +128,7 @@ class Plugin extends PluginBase
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('tiipiik/catalog/brands'),
                         'attributes'  => ['data-menu-item'=>'brands'],
-                        //'permissions' => ['tiipiik.catalog.manage_stores'],
+                        'permissions' => ['tiipiik.catalog.manage_stores'],
                     ],
                 ]
             ]

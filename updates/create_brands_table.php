@@ -22,6 +22,13 @@ class CreateBrandsTable extends Migration
         Schema::table('tiipiik_catalog_products', function ($table) {
             $table->integer('brand_id')->after('group_id')->unsigned();
         });
+        
+        Schema::create('tiipiik_catalog_products_brands', function ($table) {
+            $table->engine = 'InnoDB';
+            $table->integer('product_id')->unsigned();
+            $table->integer('brand_id')->unsigned();
+            $table->primary(['product_id', 'brand_id']);
+        });
     }
 
     public function down()

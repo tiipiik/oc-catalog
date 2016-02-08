@@ -49,5 +49,4 @@ class SeedTables extends Seeder
         Group::create(['name' => 'Accessories']);
         Group::create(['name' => 'Stores']);
     }
-
 }
