@@ -6,6 +6,7 @@ use Model;
 use Tiipiik\Catalog\Models\CustomField as CustomFieldModel;
 use Tiipiik\Catalog\Models\CustomValue as CustomValueModel;
 use Tiipiik\Catalog\Models\Group;
+use Tiipiik\Catalog\Models\Settings;
 use SystemException;
 
 class Product extends Model
@@ -247,6 +248,11 @@ class Product extends Model
         return $query->whereHas('brand', function ($q) use ($brands) {
             $q->whereIn('id', $brands);
         });
+    }
+
+    public function filterFields($fields, $context = null)
+    {
+        $fields->stores->hidden = (Settings::get('activate_stores') == 1) ? false : true;
     }
     
     /*

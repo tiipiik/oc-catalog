@@ -5,6 +5,7 @@ use Backend;
 use System\Classes\PluginBase;
 use Tiipiik\Catalog\Models\Category;
 use Tiipiik\Catalog\Models\Product;
+use Tiipiik\Catalog\Models\Settings;
 
 /**
  * Catalog Plugin Information File
@@ -53,6 +54,10 @@ class Plugin extends PluginBase
                 'tab' => 'Catalog',
                 'label' => 'Manage Brands'
             ],
+            'tiipiik.catalog.manage_settings' => [
+                'tab' => 'Catalog',
+                'label' => 'Manage Settings'
+            ],
         ];
     }
 
@@ -71,7 +76,7 @@ class Plugin extends PluginBase
 
     public function registerNavigation()
     {
-        return [
+        $nav =  [
             'catalog' => [
                 'label'       => 'tiipiik.catalog::lang.plugin_name',
                 'url'         => Backend::url('tiipiik/catalog/products'),
@@ -114,7 +119,6 @@ class Plugin extends PluginBase
                         'url'         => Backend::url('tiipiik/catalog/groups'),
                         'attributes'  => ['data-menu-item'=>'groups'],
                         'permissions' => ['tiipiik.catalog.manage_groups'],
-
                     ],
                     'brands' => [
                         'label'       => 'Brands',
@@ -123,16 +127,21 @@ class Plugin extends PluginBase
                         'attributes'  => ['data-menu-item'=>'brands'],
                         'permissions' => ['tiipiik.catalog.manage_stores'],
                     ],
-                    'stores' => [
-                        'label'       => 'Stores',
-                        'icon'        => 'icon-list-ul',
-                        'url'         => Backend::url('tiipiik/catalog/stores'),
-                        'attributes'  => ['data-menu-item'=>'stores'],
-                        'permissions' => ['tiipiik.catalog.manage_stores'],
-                    ],
                 ]
             ]
         ];
+
+        if (Settings::get('activate_stores') == 1) {
+            $nav['catalog']['sideMenu']['stores'] = [
+                'label'       => 'Stores',
+                'icon'        => 'icon-list-ul',
+                'url'         => Backend::url('tiipiik/catalog/stores'),
+                'attributes'  => ['data-menu-item'=>'stores'],
+                'permissions' => ['tiipiik.catalog.manage_stores'],
+            ];
+        }
+
+        return $nav;
     }
 
     public function boot()
@@ -162,5 +171,20 @@ class Plugin extends PluginBase
                 return Category::resolveMenuItem($item, $url, $theme);
             }
         });
+    }
+
+    public function registerSettings()
+    {
+        return [
+            'config' => [
+                'label'       => 'Catalog',
+                'description' => 'Manage Catalog settings.',
+                'category'    => 'Catalog',
+                'icon'        => 'icon-gear',
+                'class'       => 'Tiipiik\Catalog\Models\Settings',
+                'permissions' => ['tiipiik.booking.manage_settings'],
+                'order'       => 500,
+            ]
+        ];
     }
 }

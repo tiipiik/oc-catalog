@@ -3,13 +3,13 @@
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Tiipiik\Catalog\Models\Brand;
+use Tiipiik\Catalog\Models\Settings;
 
 class BrandDetails extends ComponentBase
 {
     public $brand;
     public $productPage;
     public $noProductsMessage;
-    public $secureUrls;
 
     public function componentDetails()
     {
@@ -49,13 +49,6 @@ class BrandDetails extends ComponentBase
                 'default'     => 'No product related to this brand',
                 'group'       => 'Products',
             ],
-            'secureUrls' => [
-                'title'       => 'tiipiik.catalog::lang.settings.use_secure_urls',
-                'description' => 'tiipiik.catalog::lang.settings.use_secure_urls_desc',
-                'type'        => 'checkbox',
-                'default'     => 'false',
-                'group'       => 'Links',
-            ],
         ];
     }
     
@@ -94,7 +87,7 @@ class BrandDetails extends ComponentBase
 
         if (isset($brand->products)) {
             $brand->products->each(function ($product) {
-                $product->url = ($this->property('secureUrls') == 1)
+                $product->url = (Settings::get('secure_urls') == 1)
                     ? secure_url($this->property('productPage').'/'.$product->slug)
                     : url($this->property('productPage').'/'.$product->slug);
             });

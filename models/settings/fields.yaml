@@ -1,0 +1,14 @@
+fields:
+    activate_stores:
+        span: left
+        type: switch
+        label: Actiavte Stores
+        comment: Check to activate Stores in the Catalog
+        default: false
+
+    secure_urls:
+        span: left
+        type: switch
+        label: Use secure urls
+        comment: Check to always generate secure urls in the product lists
+        default: false

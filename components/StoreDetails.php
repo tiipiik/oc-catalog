@@ -4,13 +4,13 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Tiipiik\Catalog\Models\Store;
 use Tiipiik\Catalog\Models\CustomField;
+use Tiipiik\Catalog\Models\Settings;
 
 class StoreDetails extends ComponentBase
 {
     public $store;
     public $productPage;
     public $noProductsMessage;
-    public $secureUrls;
 
     public function componentDetails()
     {
@@ -50,13 +50,6 @@ class StoreDetails extends ComponentBase
                 'type'        => 'string',
                 'default'     => 'No product related to this brand',
                 'group'       => 'Products',
-            ],
-            'secureUrls' => [
-                'title'       => 'tiipiik.catalog::lang.settings.use_secure_urls',
-                'description' => 'tiipiik.catalog::lang.settings.use_secure_urls_desc',
-                'type'        => 'checkbox',
-                'default'     => 'false',
-                'group'       => 'Links',
             ],
         ];
     }
@@ -109,7 +102,7 @@ class StoreDetails extends ComponentBase
 
         if (isset($store->products)) {
             $store->products->each(function ($product) {
-                $product->url = ($this->property('secureUrls') == 1)
+                $product->url = (Settings::get('secure_urls') == 1)
                     ? secure_url($this->property('productPage').'/'.$product->slug)
                     : url($this->property('productPage').'/'.$product->slug);
             });

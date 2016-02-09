@@ -63,3 +63,7 @@
     - Description fields for Categories, Brands and Stores are now richeditors,
     - Fixed titles and links in Brand management,
     - Fixed permissions for Brands
+1.8.2:
+    - Moved secure urls activation to settings
+    - Activate / Deactivate Stores from Settings
+    - PSR-2 compliance

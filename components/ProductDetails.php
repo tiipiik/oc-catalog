@@ -4,6 +4,7 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Tiipiik\Catalog\Models\CustomField;
 use Tiipiik\Catalog\Models\Category;
+use Tiipiik\Catalog\Models\Settings;
 use Tiipiik\Catalog\Models\Product as ProductModel;
 
 class ProductDetails extends ComponentBase
@@ -12,7 +13,6 @@ class ProductDetails extends ComponentBase
     protected $categoryPage;
     protected $brandPage;
     protected $storePage;
-    protected $secureUrls;
 
     public function componentDetails()
     {
@@ -48,13 +48,6 @@ class ProductDetails extends ComponentBase
                 'title'       => 'Store',
                 'description' => 'desc',
                 'type'        => 'dropdown',
-                'group'       => 'Links',
-            ],
-            'secureUrls' => [
-                'title'       => 'tiipiik.catalog::lang.settings.use_secure_urls',
-                'description' => 'tiipiik.catalog::lang.settings.use_secure_urls_desc',
-                'type'        => 'checkbox',
-                'default'     => 'false',
                 'group'       => 'Links',
             ],
         ];
@@ -113,7 +106,7 @@ class ProductDetails extends ComponentBase
 
         if (isset($product->categories)) {
             $product->categories->each(function ($category) {
-                $category->url = ($this->property('secureUrls') == 1)
+                $category->url = (Settings::get('secure_urls') == 1)
                     ? secure_url($this->categoryPage.'/'.$category->slug)
                     : url($this->categoryPage.'/'.$category->slug);
             });
@@ -121,14 +114,14 @@ class ProductDetails extends ComponentBase
 
         if (isset($product->stores)) {
             $product->stores->each(function ($store) {
-                $store->url = ($this->property('secureUrls') == 1)
+                $store->url = (Settings::get('secure_urls') == 1)
                     ? secure_url($this->storePage.'/'.$store->slug)
                     : url($this->storePage.'/'.$store->slug);
             });
         }
 
         if (isset($product->brand)) {
-            $product->brand->url = ($this->property('secureUrls') == 1)
+            $product->brand->url = (Settings::get('secure_urls') == 1)
                 ? secure_url($this->brandPage.'/'.$product->brand->slug)
                 : url($this->brandPage.'/'.$product->brand->slug);
         }
