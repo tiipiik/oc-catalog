@@ -13,3 +13,7 @@ columns:
 
     slug:
         label: Slug
+
+    published:
+        label: Published
+        type: switch

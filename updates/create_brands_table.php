@@ -34,6 +34,7 @@ class CreateBrandsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tiipiik_catalog_brands');
+        Schema::dropIfExists('tiipiik_catalog_products_brands');
         
         if (Schema::hasColumn('tiipiik_catalog_products', 'brand_id')) {
             Schema::table('tiipiik_catalog_products', function ($table) {

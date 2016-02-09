@@ -1,0 +1,12 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+
+    update_existing:
+        label: Update existing brands
+        comment: Check this box to update brands that have exactly the same ID, name or slug.
+        type: checkbox
+        default: true
+        span: left

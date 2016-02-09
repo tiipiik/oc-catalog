@@ -21,7 +21,7 @@ class Brand extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['name', 'slug', 'description'];
+    protected $fillable = ['name', 'slug', 'description', 'published'];
 
     public $translatable = ['name', 'description'];
     
@@ -47,8 +47,8 @@ class Brand extends Model
         'created_at desc' => 'Created (descending)',
         'updated_at asc' => 'Updated (ascending)',
         'updated_at desc' => 'Updated (descending)',
-        'published_at asc' => 'Published (ascending)',
-        'published_at desc' => 'Published (descending)',
+        //'published_at asc' => 'Published (ascending)',
+        //'published_at desc' => 'Published (descending)',
         'random' => 'Random'
     );
 

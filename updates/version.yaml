@@ -67,3 +67,6 @@
     - Moved secure urls activation to settings
     - Activate / Deactivate Stores from Settings
     - PSR-2 compliance
+1.9.0:
+    - Import / Export Brands
+    - fix_brand_published.php

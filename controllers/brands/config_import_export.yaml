@@ -1,0 +1,19 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+import:
+    title: Import brands
+    list: $/tiipiik/catalog/models/brandimport/columns.yaml
+    form: $/tiipiik/catalog/models/brandimport/fields.yaml
+    modelClass: Tiipiik\Catalog\Models\BrandImport
+    redirect: tiipiik/catalog/brands
+    permissions: tiipiik.catalog.manage_import_export
+
+export:
+    title: Export brands
+    list: $/tiipiik/catalog/models/brandexport/columns.yaml
+    form: $/tiipiik/catalog/models/brandexport/fields.yaml
+    modelClass: Tiipiik\Catalog\Models\BrandExport
+    redirect: tiipiik/catalog/brands
+    permissions: tiipiik.catalog.manage_import_export

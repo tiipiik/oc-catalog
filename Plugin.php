@@ -54,6 +54,10 @@ class Plugin extends PluginBase
                 'tab' => 'Catalog',
                 'label' => 'Manage Brands'
             ],
+            'tiipiik.catalog.manage_import_export' => [
+                'tab' => 'Catalog',
+                'label' => 'Manage Imports and Exports'
+            ],
             'tiipiik.catalog.manage_settings' => [
                 'tab' => 'Catalog',
                 'label' => 'Manage Settings'

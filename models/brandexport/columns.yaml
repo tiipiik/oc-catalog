@@ -1,0 +1,14 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+
+    id: ID
+    name: Name
+    slug: Slug
+    description: Description
+    published: Published
+    created_at: Created at
+    updated_at: Updated at
+    published_at: Published at
