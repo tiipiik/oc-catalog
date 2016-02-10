@@ -8,7 +8,7 @@ modelClass: Tiipiik\Catalog\Models\Product
 recordUrl: tiipiik/catalog/products/update/:id
 noRecordsMessage: backend::lang.list.no_records
 recordsPerPage: 20
-showCheckboxes: false
+showCheckboxes: true
 showSetup: true
 showSorting: true
 

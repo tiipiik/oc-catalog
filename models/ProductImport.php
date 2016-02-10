@@ -1,20 +1,17 @@
 <?php namespace Tiipiik\Catalog\Models;
 
-use Tiipiik\Catalog\Models\Brand;
 use Backend\Models\ImportModel;
+use Tiipiik\Catalog\Models\Product;
 
-/**
- * BrandImport Model
- */
-class BrandImport extends ImportModel
+class ProductImport extends ImportModel
 {
-    public $table = 'tiipiik_catalog_brands';
+    public $table = 'tiipiik_catalog_products';
 
     /**
      * @var array The rules to be applied to the data.
      */
     public $rules = [
-        'name' => 'required',
+        'title' => 'required',
         'slug' => 'required',
     ];
 
@@ -23,21 +20,21 @@ class BrandImport extends ImportModel
         foreach ($results as $row => $data) {
             try {
 
-                if (!$name = array_get($data, 'name')) {
-                    $this->logSkipped($row, 'Missing brand name');
+                if (!$title = array_get($data, 'title')) {
+                    $this->logSkipped($row, 'Missing product title');
                     continue;
                 }
 
                 /*
                  * Find or create
                  */
-                $brand = Brand::make();
+                $product = Product::make();
 
                 if ($this->update_existing) {
-                    $brand = $this->findDuplicateBrand($data) ?: $brand;
+                    $product = $this->findDuplicateProduct($data) ?: $product;
                 }
 
-                $brandExists = $brand->exists;
+                $productExists = $product->exists;
 
                 /*
                  * Set attributes
@@ -45,34 +42,34 @@ class BrandImport extends ImportModel
                 $except = ['id'];
 
                 foreach (array_except($data, $except) as $attribute => $value) {
-                    $brand->{$attribute} = $value ?: null;
+                    $product->{$attribute} = $value ?: null;
                 }
 
-                $brand->save();
+                $product->save();
 
                 /*
                  * Log results
                  */
-                $brandExists ? $this->logUpdated() : $this->logCreated();
+                $productExists ? $this->logUpdated() : $this->logCreated();
             } catch (\Exception $ex) {
                 $this->logError($row, $ex->getMessage());
             }
         }
     }
 
-    protected function findDuplicateBrand($data)
+    protected function findDuplicateProduct($data)
     {
         if ($id = array_get($data, 'id')) {
-            return Brand::find($id);
+            return Product::find($id);
         }
 
-        $name = array_get($data, 'name');
-        $brand = Brand::whereName($name);
+        $title = array_get($data, 'name');
+        $product = Product::whereTitle($title);
 
         if ($slug = array_get($data, 'slug')) {
-            $brand->orWhere('slug', $slug);
+            $product->orWhere('slug', $slug);
         }
 
-        return $brand->first();
+        return $product->first();
     }
 }

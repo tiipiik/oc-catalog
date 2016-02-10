@@ -1,0 +1,19 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+import:
+    title: Import products
+    list: $/tiipiik/catalog/models/productimport/columns.yaml
+    form: $/tiipiik/catalog/models/productimport/fields.yaml
+    modelClass: Tiipiik\Catalog\Models\ProductImport
+    redirect: tiipiik/catalog/products
+    permissions: tiipiik.catalog.manage_import_export
+
+export:
+    title: Export products
+    list: $/tiipiik/catalog/models/productexport/columns.yaml
+    form: $/tiipiik/catalog/models/productexport/fields.yaml
+    modelClass: Tiipiik\Catalog\Models\ProductExport
+    redirect: tiipiik/catalog/products
+    permissions: tiipiik.catalog.manage_import_export

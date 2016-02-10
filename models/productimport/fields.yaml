@@ -1,0 +1,12 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+
+    update_existing:
+        label: Update existing products
+        comment: Check this box to update products that have exactly the same ID, title or slug.
+        type: checkbox
+        default: true
+        span: left

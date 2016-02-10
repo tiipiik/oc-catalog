@@ -1,0 +1,17 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+
+    id: ID
+    title: Title
+    slug: Slug
+    description: Description
+    items_available: Items available
+    price: Price
+    discount_price: Discount price
+    is_published: Published
+    created_at: Created at
+    updated_at: Updated at
+    #published_at: Published at
