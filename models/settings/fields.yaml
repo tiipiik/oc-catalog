@@ -2,7 +2,7 @@ fields:
     activate_stores:
         span: left
         type: switch
-        label: Actiavte Stores
+        label: Activate Stores
         comment: Check to activate Stores in the Catalog
         default: false
 

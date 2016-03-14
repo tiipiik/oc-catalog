@@ -37,7 +37,7 @@
     - Add custom fields to stores
     - WARNING -> "long" and "lat" fields will be removed on next update !
     - add_group_to_stores.php
-    #- feed_tables.php
+    - feed_tables.php
 1.6.0: Custom fields are now available in Products and Stores lists
 1.6.1: WARNING, in ProductList component, product urls are now displayed with product.url, this can possibly break your links !
 1.6.2: Fixed product attributes injection in product details page
@@ -73,3 +73,6 @@
 1.10.0:
     - Import / Export Products
     - fix_product_published.php
+1.11.0:
+    - Add Meta fields to Products, Brands and Stores
+    - add_meta_fields.php

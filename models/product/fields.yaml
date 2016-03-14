@@ -65,6 +65,18 @@ tabs:
             type: relation
             required: true
 
+        meta_title:
+            tab: SEO
+            type: text
+            label: Meta title
+            placeholder: Define meta title
+
+        meta_desc:
+            tab: SEO
+            type: textarea
+            label: Meta description
+            placeholder: Define meta description
+
         brand:
             tab: Brand
             type: relation

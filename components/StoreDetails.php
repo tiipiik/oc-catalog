@@ -61,18 +61,25 @@ class StoreDetails extends ComponentBase
 
     public function onRun()
     {
-        $this->store = $this->page['store'] = $this->loadStore();
-        
-        if (!$this->store) {
-            // The line below works but return a line of details
-            //return Response::make( $this->controller->run('404'), 404 );
-            // Use this instead
+        $store = $this->loadStore();
+
+        if (!$store) {
             $this->setStatusCode(404);
             return $this->controller->run('404');
         }
+
+        $this->store = $this->page['store'] = $store;
         
         $this->productPage = $this->property('productPage');
         $this->noProductsMessage = $this->property('noProductsMessage');
+
+        $this->page->title = ($store->meta_title != null)
+            ? $store->meta_title
+            : $store->title;
+
+        $this->page->description = ($store->meta_desc != null)
+            ? $store->meta_desc
+            : $store->description;
     }
 
     protected function loadStore()

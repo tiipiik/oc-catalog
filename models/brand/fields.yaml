@@ -21,10 +21,25 @@ fields:
         label: Is published
         type: switch
 
-    description:
-        label: Description
-        placeholder: tiipiik.catalog::lang.products.description
-        type: richeditor
+tabs:
+    fields:
+        description:
+            tab: Details
+            label: Description
+            placeholder: tiipiik.catalog::lang.products.description
+            type: richeditor
+
+        meta_title:
+            tab: SEO
+            type: text
+            label: Meta title
+            placeholder: Define meta title
+
+        meta_desc:
+            tab: SEO
+            type: textarea
+            label: Meta description
+            placeholder: Define meta description
 
 secondaryTabs:
     fields:

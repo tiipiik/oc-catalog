@@ -59,15 +59,25 @@ class BrandDetails extends ComponentBase
 
     public function onRun()
     {
-        $this->brand = $this->page['brand'] = $this->loadBrand();
-        
-        if (!$this->brand) {
+        $brand = $this->loadBrand();
+
+        if (!$brand) {
             $this->setStatusCode(404);
             return $this->controller->run('404');
         }
+
+        $this->brand = $this->page['brand'] = $brand;
         
         $this->productPage = $this->property('productPage');
         $this->noProductsMessage = $this->property('noProductsMessage');
+        
+        $this->page->title = ($brand->meta_title != null)
+            ? $brand->meta_title
+            : $brand->title;
+
+        $this->page->description = ($brand->meta_desc != null)
+            ? $brand->meta_desc
+            : $brand->description;
     }
 
     protected function loadBrand()

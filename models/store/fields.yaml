@@ -22,16 +22,31 @@ fields:
         label: Is actiavted
         type: switch
 
-    description:
-        label: Store description
-        placeholder: Store description
-        type: richeditor
+tabs:
+    fields:
+        description:
+            tab: Details
+            label: Store description
+            placeholder: Store description
+            type: richeditor
 
-    group:
-        tab: Group
-        label: Group
-        type: relation
-        required: true
+        meta_title:
+            tab: SEO
+            type: text
+            label: Meta title
+            placeholder: Define meta title
+
+        meta_desc:
+            tab: SEO
+            type: textarea
+            label: Meta description
+            placeholder: Define meta description
+
+        group:
+            tab: Group
+            label: Group
+            type: relation
+            required: true
 
 secondaryTabs:
     fields:

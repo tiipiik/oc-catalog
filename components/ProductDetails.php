@@ -84,8 +84,13 @@ class ProductDetails extends ComponentBase
         $this->storePage = $this->page['storePage'] = $this->property('storePage');
         $this->product = $this->page['product'] = $product;
         
-        $this->page->title = $product->title;
-        $this->page->description = $product->description;
+        $this->page->title = ($product->meta_title != null)
+            ? $product->meta_title
+            : $product->title;
+
+        $this->page->description = ($product->meta_desc != null)
+            ? $product->meta_desc
+            : $product->description;
     }
 
     protected function loadProduct()
