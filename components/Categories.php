@@ -106,6 +106,13 @@ class Categories extends ComponentBase
             $categories->whereParentId($category->id);
         }
         
+       // Hide empty categories
+        if($this->property('displayEmpty') === 0 || $this->property('displayEmpty') === false) {
+            $categories->whereHas('products', function($query){
+                $query->whereIsPublished(1);
+            });
+        }
+        
         $categories = $categories->get();
         
         if (!$categories) {
