@@ -107,8 +107,8 @@ class Categories extends ComponentBase
         }
         
        // Hide empty categories
-        if($this->property('displayEmpty') === 0 || $this->property('displayEmpty') === false) {
-            $categories->whereHas('products', function($query){
+        if ($this->property('displayEmpty') == 0 || $this->property('displayEmpty') === false) {
+            $categories->whereHas('products', function ($query) {
                 $query->whereIsPublished(1);
             });
         }
