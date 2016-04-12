@@ -78,3 +78,4 @@
     - add_meta_fields.php
 1.11.1: Fix hide empty categories, thanks to @alvaro-canepa
 1.11.2: 1.11.1 PSR-2 compliant, fixed correct parameter
+1.11.3: Fix deprecated @, thanks to @alvaro-canepa
