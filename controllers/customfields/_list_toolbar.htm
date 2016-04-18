@@ -8,13 +8,13 @@
                 checked: $('.control-list').listWidget('getChecked')
             })"
             data-request="onDelete"
-            data-request-confirm="Are you sure?"
-            data-trigger-type="enable"
+            data-request-confirm="<?= e(trans('tiipiik.catalog::lang.catalog.delete_confirm')) ?>"
+            data-trigger-action="enable"
             data-trigger=".control-list input[type=checkbox]"
             data-trigger-condition="checked"
-            data-request-success="$el.prop('disabled', false)"
+            data-request-success="$(this).prop('disabled', true)"
             data-stripe-load-indicator>
-            <?= e(trans('backend::lang.form.delete')) ?>
+            <?= e(trans('backend::lang.list.delete_selected')) ?>
         </button>
     </div>
 </div>

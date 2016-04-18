@@ -81,3 +81,4 @@
 1.11.3: Fix deprecated @, thanks to @alvaro-canepa
 1.11.4: Fix deprecated @ in stores
 1.11.5: Fix Product creation when no Brand is selected, thanks to @dolphin
+1.11.6: Fix multiple custom fields deletion and translation, thanks to @dolphin

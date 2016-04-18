@@ -90,7 +90,7 @@ return [
         'use_secure_urls_desc' => 'Check to activate secure urls generation',
     ],
     'catalog' => [
-        'delete_confirm' => 'Do you really want to delete this product ?',
+        'delete_confirm' => 'Do you really want to delete these items ?',
         'delete_custom_field_confirm' => 'Do you really want to delete this custom field ?',
         'delete_group_confirm' => 'Do you really want to delete this group ?',
         'delete_category_confirm' => 'Do you really want to delete this category ?',
