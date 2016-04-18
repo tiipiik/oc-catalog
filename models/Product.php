@@ -258,6 +258,16 @@ class Product extends Model
     /*
      * Add existing custom fields to newly created product
      */
+    public function beforeCreate()
+    {
+        if (is_null($this->brand_id)) {
+            $this->brand_id = 0;
+        }
+    }
+    
+    /*
+     * Add existing custom fields to newly created product
+     */
     public function afterCreate()
     {
         self::updateCustomFieldsAndValues('create');
