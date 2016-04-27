@@ -37,7 +37,6 @@
     - Add custom fields to stores
     - WARNING -> "long" and "lat" fields will be removed on next update !
     - add_group_to_stores.php
-    - feed_tables.php
 1.6.0: Custom fields are now available in Products and Stores lists
 1.6.1: WARNING, in ProductList component, product urls are now displayed with product.url, this can possibly break your links !
 1.6.2: Fixed product attributes injection in product details page
@@ -76,6 +75,7 @@
 1.11.0:
     - Add Meta fields to Products, Brands and Stores
     - add_meta_fields.php
+    #- feed_tables.php
 1.11.1: Fix hide empty categories, thanks to @alvaro-canepa
 1.11.2: 1.11.1 PSR-2 compliant, fixed correct parameter
 1.11.3: Fix deprecated @, thanks to @alvaro-canepa
