@@ -84,3 +84,5 @@
 1.11.6: Fix multiple custom fields deletion and translation, thanks to @dolphin
 1.11.7: Fix bug on feed table at install
 1.11.8: Fix deprecated @ on category reorder
+1.11.9 : Russian localization, thanks to @Develop-FM
+1.11.10 : Latvian localization, thanks to @Andris Vasers
