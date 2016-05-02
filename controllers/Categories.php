@@ -40,7 +40,7 @@ class Categories extends Controller
         $this->pageTitle = 'Reorder Categories';
 
         $toolbarConfig = $this->makeConfig();
-        $toolbarConfig->buttons = '@/plugins/tiipiik/catalog/controllers/categories/_reorder_toolbar.htm';
+        $toolbarConfig->buttons = '$/tiipiik/catalog/controllers/categories/_reorder_toolbar.htm';
 
         $this->vars['toolbar'] = $this->makeWidget('Backend\Widgets\Toolbar', $toolbarConfig);
         $this->vars['records'] = Category::make()->getEagerRoot();
