@@ -15,12 +15,14 @@ class Products extends Controller
         'Backend.Behaviors.ListController',
         'Backend.Behaviors.RelationController',
         'Backend.Behaviors.ImportExportController',
+        'Backend.Behaviors.ReorderController',
     ];
 
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
     public $relationConfig = 'config_relation.yaml';
     public $importExportConfig = 'config_import_export.yaml';
+    public $reorderConfig = 'config_reorder.yaml';
 
     public $requiredPermissions = ['tiipiik.catalog.manage_products'];
 
@@ -62,4 +64,14 @@ class Products extends Controller
 
         return $this->listRefresh();
     }
+
+    /**
+     * From Benefreke MenuManager plugin
+     * Update the menu item position
+     */
+    /*
+    public function reorder_onMove()
+    {
+    }
+    */
 }

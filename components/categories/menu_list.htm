@@ -4,6 +4,66 @@
 <h4>{{ __SELF__.subCategoriesTitle }}</h4>
 {% endif %}
 
+<pre>
+    {{ category_list }}
+</pre>
+
+{% set category_list = categories.product_categories %}
+{% if category_list %}
+    {% set depth = 0 %}
+    {% for category in category_list %}
+        {% set oldDepth = depth %}
+        {% set depth = category.nest_depth %}
+        {% set isActive = category.slug == categories.currentProductCategorySlug %}{# category.isActive #}
+        {% set isChildActive = 0 %}{# category.isChildActive #}
+        {% set hasChilds = 0 %}{# category.hasChildren #}
+        {% if oldDepth > depth %}
+            {% for idx in 1..(oldDepth-depth) %}
+                </li></ul>
+            {% endfor %}
+        {% elseif depth > 0 and oldDepth == depth %}
+            </li>
+        {% endif %}
+        {% if depth == 0 %}
+            <p class="category-title {% if active %}active{% endif %}">
+                {% spaceless %}
+                <a href="{{ category.url }}" class="{% if isActive %}active{% endif %}">
+                    {{ category.name }}
+                </a>
+                {% endspaceless %}
+            </p>
+        {% elseif depth == 1 %}
+            {% if oldDepth < depth %}
+                <ul class="category">
+            {% endif %}
+            <li class="{% if hasChilds %}category{% endif %} {% if isActive %}active{% endif %} {% if isChildActive %}up{% endif %}">
+                {% if hasChilds %}<span class="toggle"></span>{% endif %}
+                {% spaceless %}
+                <a href="{{ category.url }}">
+                    {{ category.name }}
+                </a>
+                {% endspaceless %}
+        {% elseif depth > 1 %}
+            {% if oldDepth < depth %}
+                <ul>
+            {% endif %}
+            <li class="{% if hasChilds %}category{% endif %} {% if isActive %}active{% endif %} {% if isChildActive %}up{% endif %}">
+                {% spaceless %}
+                <a href="{{ category.url }}">
+                    {{ category.name }}
+                </a>
+                {% endspaceless %}
+        {% endif %}
+    {% endfor %}
+    {% if depth > 0 %}
+        {% for idx in 1..(depth) %}
+            </li></ul>
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+
+
 {% if not category_list|length %}
 <p class="alert alert-info">{{ __SELF__.noProductCategoriesMessage }}</p>
 {% else %}

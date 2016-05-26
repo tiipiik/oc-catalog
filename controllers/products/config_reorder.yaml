@@ -1,0 +1,17 @@
+# ===================================
+#  Reorder Behavior Config
+# ===================================
+
+# Reorder Title
+title: Reorder Products
+
+# Attribute name
+nameFrom: title
+
+# Model Class name
+modelClass: Tiipiik\Catalog\Models\Product
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: reorder_toolbar

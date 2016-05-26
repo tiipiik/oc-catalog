@@ -7,11 +7,11 @@ use Tiipiik\Catalog\Models\CustomField as CustomFieldModel;
 use Tiipiik\Catalog\Models\CustomValue as CustomValueModel;
 use Tiipiik\Catalog\Models\Group;
 use Tiipiik\Catalog\Models\Settings;
-use SystemException;
 
 class Product extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\Sortable;
     
     private static $product_group;
     private static $brand;
@@ -56,7 +56,9 @@ class Product extends Model
         'updated_at desc' => 'Updated (descending)',
         //'published_at asc' => 'Published (ascending)',
         //'published_at desc' => 'Published (descending)',
-        'random' => 'Random'
+        'random' => 'Random',
+        'sort_order asc' => 'Reordered (ascending)',
+        'sort_order desc' => 'Reordered (descending)'
     );
 
     /**
