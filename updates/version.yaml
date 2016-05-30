@@ -75,7 +75,6 @@
 1.11.0:
     - Add Meta fields to Products, Brands and Stores
     - add_meta_fields.php
-    - feed_tables.php
 1.11.1: Fix hide empty categories, thanks to @alvaro-canepa
 1.11.2: PSR-2 compliant, fixed correct parameter
 1.11.3: Fix deprecated @, thanks to @alvaro-canepa
@@ -89,3 +88,5 @@
 1.11.12:
     - Add sort order to products
     - add_sort_order_to_products.php
+    #- feed_tables.php
+1.11.13: Remove feed after install
