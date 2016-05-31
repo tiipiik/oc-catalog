@@ -2,7 +2,7 @@
     <a
         href="<?= Backend::url('tiipiik/catalog/brands/create') ?>"
         class="btn btn-primary oc-icon-plus">
-        New Brand
+        <?= e(trans('tiipiik.catalog::lang.brands.new')) ?>
     </a>
 
     <button
@@ -26,12 +26,12 @@
             <a
                 href="<?= Backend::url('tiipiik/catalog/brands/export') ?>"
                 class="btn btn-default oc-icon-download">
-                Export brands
+                <?= e(trans('tiipiik.catalog::lang.brands.export')) ?>
             </a>
             <a
                 href="<?= Backend::url('tiipiik/catalog/brands/import') ?>"
                 class="btn btn-default oc-icon-upload">
-                Import brands
+                <?= e(trans('tiipiik.catalog::lang.brands.import')) ?>
             </a>
         </div>
     <?php endif ?>

@@ -129,7 +129,7 @@ class Plugin extends PluginBase
                         'icon'        => 'icon-copyright',
                         'url'         => Backend::url('tiipiik/catalog/brands'),
                         'attributes'  => ['data-menu-item'=>'brands'],
-                        'permissions' => ['tiipiik.catalog.manage_stores'],
+                        'permissions' => ['tiipiik.catalog.manage_brands'],
                     ],
                 ]
             ]

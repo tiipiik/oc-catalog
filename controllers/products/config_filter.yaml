@@ -13,13 +13,13 @@ scopes:
         scope: FilterCategories
 
     group:
-        label: Group
+        label: tiipiik.catalog::lang.config.form.group_name
         modelClass: Tiipiik\Catalog\Models\Group
         nameFrom: name
         scope: FilterGroups
 
     brand:
-        label: Brand
+        label: tiipiik.catalog::lang.config.form.brand_name
         modelClass: Tiipiik\Catalog\Models\Brand
         nameFrom: name
         scope: FilterBrands

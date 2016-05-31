@@ -15,8 +15,8 @@ class BrandList extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'Brand List',
-            'description' => 'Display a list of brands'
+            'name'        => 'tiipiik.catalog::lang.component.brand_list.name',
+            'description' => 'tiipiik.catalog::lang.component.brand_list.description'
         ];
     }
 
@@ -24,25 +24,26 @@ class BrandList extends ComponentBase
     {
         return [
             'brandPage' => [
-                'title'       => 'Page for brand details',
-                'description' => 'Define witch page to use to display brand details',
+                'title'       => 'tiipiik.catalog::lang.component.brand_list.param.brand_page_title',
+                'description' => 'tiipiik.catalog::lang.component.brand_list.param.brand_page_desc',
                 'type'        => 'dropdown',
                 'default'     => 'stores/:slug',
             ],
             'brandSlug' => [
-                'title'       => 'Brand slug param',
-                'description' => 'Used to generate links to brand details page',
+                'title'       => 'tiipiik.catalog::lang.component.brand_list.param.brand_slug_title',
+                'description' => 'tiipiik.catalog::lang.component.brand_list.param.brand_slug_desc',
                 'default'     => '{{ :slug }}',
                 'type'        => 'string',
             ],
             'noBrandMessage' => [
-                'title'        => 'No brand message',
-                'description'  => '',
+                'title'        => 'tiipiik.catalog::lang.component.brand_list.param.no_brand_message_title',
+                'description'  => 'tiipiik.catalog::lang.component.brand_list.param.no_brand_message_desc',
                 'type'         => 'string',
-                'default'      => 'No brand found',
+                'default'      => 'tiipiik.catalog::lang.component.brand_list.param.no_brand_message_default',
             ],
             'brandsPerPage' => [
-                'title'             => 'Brands per page',
+                'title'             => 'tiipiik.catalog::lang.component.brand_list.param.brands_per_page_title',
+                'description'       => 'tiipiik.catalog::lang.component.brand_list.param.brands_per_page_desc',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => '',
@@ -50,8 +51,8 @@ class BrandList extends ComponentBase
                 'group'             => 'Pagination',
             ],
             'pageParam' => [
-                'title'       => 'Page param',
-                'description' => '',
+                'title'       => 'tiipiik.catalog::lang.component.brand_list.param.page_param_title',
+                'description' => 'tiipiik.catalog::lang.component.brand_list.param.page_param_desc',
                 'type'        => 'string',
                 'default'     => '{{ :page }}',
                 'group'       => 'Pagination',

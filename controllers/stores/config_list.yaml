@@ -9,7 +9,7 @@ list: $/tiipiik/catalog/models/store/columns.yaml
 modelClass: Tiipiik\Catalog\Models\Store
 
 # List Title
-title: Manage Stores
+title: tiipiik.catalog::lang.settings.access_stores
 
 # Link URL for each record
 recordUrl: tiipiik/catalog/stores/update/:id

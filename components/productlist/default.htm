@@ -8,7 +8,7 @@
             <div class="row">
                 {% if (category.description) != '' %}
                 <div class="col-xs-{% if not (category.cover) %}12{% else %}8{% endif %}">
-                    {{ category.description }}
+                    {{ category.description|raw }}
                 </div>
                 {% endif %}
                 {% if (category.cover != '') %}

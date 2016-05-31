@@ -14,8 +14,8 @@ class StoreList extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'Store List',
-            'description' => 'Display a list of stores.'
+            'name'        => 'tiipiik.catalog::lang.component.store_list.name',
+            'description' => 'tiipiik.catalog::lang.component.store_list.description'
         ];
     }
 
@@ -23,25 +23,26 @@ class StoreList extends ComponentBase
     {
         return [
             'storePage' => [
-                'title'       => 'Page for store details',
-                'description' => '',
+                'title'       => 'tiipiik.catalog::lang.component.store_list.param.store_page_title',
+                'description' => 'tiipiik.catalog::lang.component.store_list.param.store_page_desc',
                 'type'        => 'dropdown',
                 'default'     => 'stores/:slug',
             ],
             'storeSlug' => [
-                'title'       => 'Store slug param',
-                'description' => '',
+                'title'       => 'tiipiik.catalog::lang.component.store_list.param.store_slug_title',
+                'description' => 'tiipiik.catalog::lang.component.store_list.param.store_slug_desc',
                 'default'     => '{{ :slug }}',
                 'type'        => 'string',
             ],
             'noStoreMessage' => [
-                'title'        => 'No store message',
-                'description'  => '',
+                'title'        => 'tiipiik.catalog::lang.component.store_list.param.no_store_message_title',
+                'description'  => 'tiipiik.catalog::lang.component.store_list.param.no_store_message_desc',
                 'type'         => 'string',
-                'default'      => 'No store found',
+                'default'      => 'tiipiik.catalog::lang.component.store_list.param.no_store_message_default',
             ],
             'storesPerPage' => [
-                'title'             => 'Stores per page',
+                'title'             => 'tiipiik.catalog::lang.component.store_list.param.stores_per_page_title',
+                'description'       => 'tiipiik.catalog::lang.component.store_list.param.stores_per_page_desc',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => '',
@@ -49,8 +50,8 @@ class StoreList extends ComponentBase
                 'group'             => 'Pagination',
             ],
             'pageParam' => [
-                'title'       => 'Page param',
-                'description' => '',
+                'title'       => 'tiipiik.catalog::lang.component.store_list.param.page_param_title',
+                'description' => 'tiipiik.catalog::lang.component.store_list.param.page_param_desc',
                 'type'        => 'string',
                 'default'     => '{{ :page }}',
                 'group'       => 'Pagination',

@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('tiipiik/catalog/products') ?>">Products</a></li>
+        <li><a href="<?= Backend::url('tiipiik/catalog/products') ?>"><?= e(trans('tiipiik.catalog::lang.products.menu_label')) ?></a></li>
         <li><?= e(trans($this->pageTitle)) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -19,7 +19,7 @@
                 data-handler="onExportLoadForm"
                 data-keyboard="false"
                 class="btn btn-primary">
-                Export products
+                <?= e(trans('tiipiik.catalog::lang.products.export')) ?>
             </button>
         </div>
     </div>

@@ -3,7 +3,7 @@
 # ===================================
 list: $/tiipiik/catalog/models/brand/columns.yaml
 modelClass: Tiipiik\Catalog\Models\Brand
-title: Manage Brands
+title: tiipiik.catalog::lang.config.list.brand_title
 recordUrl: tiipiik/catalog/brands/update/:id
 noRecordsMessage: backend::lang.list.no_records
 recordsPerPage: 20

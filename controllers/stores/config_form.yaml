@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: Store
+name: tiipiik.catalog::lang.config.form.store_name
 
 # Model Form Field configuration
 form: $/tiipiik/catalog/models/store/fields.yaml
@@ -16,12 +16,12 @@ defaultRedirect: tiipiik/catalog/stores
 
 # Create page
 create:
-    title: Create Store
+    title: tiipiik.catalog::lang.config.form.store_create_title
     redirect: tiipiik/catalog/stores/update/:id
     redirectClose: tiipiik/catalog/stores
 
 # Update page
 update:
-    title: Edit Store
+    title: tiipiik.catalog::lang.config.form.store_update_title
     redirect: tiipiik/catalog/stores
     redirectClose: tiipiik/catalog/stores

@@ -3,7 +3,7 @@
 # ===================================
 
 import:
-    title: Import products
+    title: tiipiik.catalog::lang.products.import
     list: $/tiipiik/catalog/models/productimport/columns.yaml
     form: $/tiipiik/catalog/models/productimport/fields.yaml
     modelClass: Tiipiik\Catalog\Models\ProductImport
@@ -11,7 +11,7 @@ import:
     permissions: tiipiik.catalog.manage_import_export
 
 export:
-    title: Export products
+    title: tiipiik.catalog::lang.products.export
     list: $/tiipiik/catalog/models/productexport/columns.yaml
     form: $/tiipiik/catalog/models/productexport/fields.yaml
     modelClass: Tiipiik\Catalog\Models\ProductExport

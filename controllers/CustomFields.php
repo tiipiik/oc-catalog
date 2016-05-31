@@ -37,13 +37,14 @@ class CustomFields extends Controller
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
 
             foreach ($checkedIds as $customFieldId) {
-                if ((!$customField = CustomField::find($customFieldId)))
+                if ((!$customField = CustomField::find($customFieldId))) {
                     continue;
+                }
 
                 $customField->delete();
             }
 
-            Flash::success('Successfully deleted these custom fields.');
+            Flash::success(e(trans('tiipiik.catalog::lang.custom_fields.delete_success')));
         }
 
         return $this->listRefresh();

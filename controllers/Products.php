@@ -59,7 +59,7 @@ class Products extends Controller
                 $item->delete();
             }
 
-            Flash::success('Successfully deleted those items.');
+            Flash::success(e(trans('tiipiik.catalog::lang.products.delete_success')));
         }
 
         return $this->listRefresh();

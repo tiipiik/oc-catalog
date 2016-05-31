@@ -3,7 +3,7 @@
 # ===================================
 
 import:
-    title: Import brands
+    title: tiipiik.catalog::lang.brands.import
     list: $/tiipiik/catalog/models/brandimport/columns.yaml
     form: $/tiipiik/catalog/models/brandimport/fields.yaml
     modelClass: Tiipiik\Catalog\Models\BrandImport
@@ -11,7 +11,7 @@ import:
     permissions: tiipiik.catalog.manage_import_export
 
 export:
-    title: Export brands
+    title: tiipiik.catalog::lang.brands.export
     list: $/tiipiik/catalog/models/brandexport/columns.yaml
     form: $/tiipiik/catalog/models/brandexport/fields.yaml
     modelClass: Tiipiik\Catalog\Models\BrandExport

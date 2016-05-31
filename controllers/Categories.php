@@ -37,7 +37,7 @@ class Categories extends Controller
         // Ensure the correct sidemenu is active
         BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'reorder');
 
-        $this->pageTitle = 'Reorder Categories';
+        $this->pageTitle = 'tiipiik.catalog::lang.categories.reorder';
 
         $toolbarConfig = $this->makeConfig();
         $toolbarConfig->buttons = '$/tiipiik/catalog/controllers/categories/_reorder_toolbar.htm';

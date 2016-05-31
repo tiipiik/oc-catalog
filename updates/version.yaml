@@ -88,5 +88,9 @@
 1.11.12:
     - Add sort order to products
     - add_sort_order_to_products.php
-    #- feed_tables.php
 1.11.13: Remove feed after install
+1.11.14:
+    - Fix Brand permissions, thanks to @VDLP for pointing it,
+    - Added missing translations strings to backend translations
+    - Fix default category description display in Product List component
+    #- feed_tables.php

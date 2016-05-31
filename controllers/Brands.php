@@ -55,7 +55,7 @@ class Brands extends Controller
                 $brand->delete();
             }
 
-            Flash::success('Successfully deleted those brands.');
+            Flash::success(e(trans('tiipiik.catalog::lang.brands.delete_success')));
         }
 
         return $this->listRefresh();

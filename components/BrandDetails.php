@@ -14,8 +14,8 @@ class BrandDetails extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'Brand Details',
-            'description' => 'Display details of selected brand'
+            'name'        => 'tiipiik.catalog::lang.component.brand_details.name',
+            'description' => 'tiipiik.catalog::lang.component.brand_details.description'
         ];
     }
 
@@ -23,30 +23,30 @@ class BrandDetails extends ComponentBase
     {
         return [
             'slug' => [
-                'title'       => 'Brand slug',
-                'description' => 'Parameter used to find brand from it\'s slug',
+                'title'       => 'tiipiik.catalog::lang.component.brand_details.param.slug_title',
+                'description' => 'tiipiik.catalog::lang.component.brand_details.param.slug_desc',
                 'default'     => '{{ :slug }}',
                 'type'        => 'string',
             ],
             'products' => [
-                'title'       => 'Display products',
-                'description' => 'Add products related to this brand in the view.',
+                'title'       => 'tiipiik.catalog::lang.component.brand_details.param.products_title',
+                'description' => 'tiipiik.catalog::lang.component.brand_details.param.products_desc',
                 'default'     => '0',
                 'type'        => 'checkbox',
                 'group'       => 'Products',
             ],
             'productPage' => [
-                'title'       => 'Page for products details',
-                'description' => '',
+                'title'       => 'tiipiik.catalog::lang.component.brand_details.param.product_page_title',
+                'description' => 'tiipiik.catalog::lang.component.brand_details.param.product_page_desc',
                 'type'        => 'dropdown',
                 'default'     => 'product-details/:slug',
                 'group'       => 'Products',
             ],
             'noProductsMessage' => [
-                'title'       => 'Message if no products',
-                'description' => '',
+                'title'       => 'tiipiik.catalog::lang.component.brand_details.param.no_product_message_title',
+                'description' => 'tiipiik.catalog::lang.component.brand_details.param.no_product_message_desc',
                 'type'        => 'string',
-                'default'     => 'No product related to this brand',
+                'default'     => 'tiipiik.catalog::lang.component.brand_details.param.no_product_message_default',
                 'group'       => 'Products',
             ],
         ];
