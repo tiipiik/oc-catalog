@@ -93,4 +93,6 @@
     - Fix Brand permissions, thanks to @VDLP for pointing it,
     - Added missing translations strings to backend translations
     - Fix default category description display in Product List component
+1.1.15:
+    - Fix sort order default value for products, thanks to @Shane for pointing it
     #- feed_tables.php

@@ -10,7 +10,7 @@ class AddSortOrderToProducts extends Migration
     public function up()
     {
         Schema::table('tiipiik_catalog_products', function ($table) {
-            $table->boolean('sort_order')->after('discount_price');
+            $table->boolean('sort_order')->after('discount_price')->default(0);
         });
         // Create default order to make sortable wroks
         $products = Product::all();
