@@ -64,14 +64,4 @@ class Products extends Controller
 
         return $this->listRefresh();
     }
-
-    /**
-     * From Benefreke MenuManager plugin
-     * Update the menu item position
-     */
-    /*
-    public function reorder_onMove()
-    {
-    }
-    */
 }

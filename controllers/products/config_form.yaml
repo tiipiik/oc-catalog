@@ -14,5 +14,5 @@ create:
 
 update:
     title: tiipiik.catalog::lang.config.form.update_title
-    redirect: tiipiik/catalog/products
+    redirect: tiipiik/catalog/products/update/:id
     redirectClose: tiipiik/catalog/products

@@ -95,4 +95,6 @@
     - Fix default category description display in Product List component
 1.1.15:
     - Fix sort order default value for products, thanks to @Shane for pointing it
+1.1.16:
+    - Updating a product's group will now update custom field list, thanks to @Shane for suggesting it
     #- feed_tables.php
