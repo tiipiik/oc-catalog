@@ -65,7 +65,7 @@ class Store extends Model
     ];
     
     public $attachOne = [
-        'cover_image' => ['System\Models\File'],
+        'cover_image' => ['System\Models\File', 'delete' => true],
     ];
     
      /**

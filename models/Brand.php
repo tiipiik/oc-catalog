@@ -56,7 +56,7 @@ class Brand extends Model
      * @var array Relations
      */
     public $attachOne = [
-        'cover_image' => ['System\Models\File', 'order' => 'sort_order'],
+        'cover_image' => ['System\Models\File', 'order' => 'sort_order', 'delete' => true],
     ];
     
     public $hasMany = [

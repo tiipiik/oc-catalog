@@ -44,7 +44,7 @@ class Category extends Model
     ];
 
     public $attachOne = [
-        'cover' => ['System\Models\File']
+        'cover' => ['System\Models\File', 'delete' => true]
     ];
     
      /**

@@ -80,7 +80,7 @@ class Product extends Model
      * @var array Relations
      */
     public $attachMany = [
-        'featured_images' => ['System\Models\File'],
+        'featured_images' => ['System\Models\File', 'delete' => true],
     ];
     
     public $belongsTo = [
