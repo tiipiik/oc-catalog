@@ -99,4 +99,6 @@
     - Updating a product's group will now update custom field list, thanks to @Shane for suggesting it
 1.11.17:
     - Added customfield array in product details component
+1.11.18:
+    - Fixes for product list pagination and images not being deleted from system files when a record is deleted, thanks to @terraform12
     #- feed_tables.php
