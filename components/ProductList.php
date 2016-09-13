@@ -170,7 +170,7 @@ class ProductList extends ComponentBase
         }
         
         $products = Product::with('customfields')->with('categories')->listFrontEnd([
-            'page' => $this->property('pageParam'),
+            'page' => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage' => $this->property('productsPerPage'),
             'categories' => $categories,
