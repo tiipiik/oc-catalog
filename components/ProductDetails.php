@@ -137,6 +137,7 @@ class ProductDetails extends ComponentBase
                 // Grab custom field template code
                 $field = CustomField::find($fieldId);
                 $product->attributes[$field->template_code] = $customfield->value;
+                $product->attributes['customfields'][$field->display_name] = $customfield->value;
             }
         }
         

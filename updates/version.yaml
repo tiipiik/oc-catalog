@@ -97,4 +97,6 @@
     - Fix sort order default value for products, thanks to @Shane for pointing it
 1.11.16:
     - Updating a product's group will now update custom field list, thanks to @Shane for suggesting it
+1.11.17:
+    - Added customfield array in product details component
     #- feed_tables.php
