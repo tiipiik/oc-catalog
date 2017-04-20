@@ -31,4 +31,10 @@ class Categories extends Controller
         BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'categories');
     }
 
+    public function reorder()
+    {
+        BackendMenu::setContext('Tiipiik.Catalog', 'catalog', 'reorder');
+
+        $this->asExtension('ReorderController')->reorder();
+    }
 }
