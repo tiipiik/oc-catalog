@@ -123,10 +123,6 @@ class Categories extends ComponentBase
          * Add a "url" helper attribute for linking to each category
          */
         $categories->each(function ($category) {
-            //$category->setUrl($this->productCategoryPage, $this->controller);
-        });
-
-        $categories->each(function ($category) {
             $category->setUrl($this->productCategoryPage, $this->controller);
             $category->isActive = $category->slug == $this->currentProductCategorySlug;
             $category->isChildActive = Category::hasActiveChild(

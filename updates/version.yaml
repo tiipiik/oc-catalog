@@ -102,3 +102,5 @@
 1.11.18:
     - Fixes for product list pagination and images not being deleted from system files when a record is deleted, thanks to @terraform12
     #- feed_tables.php
+1.11.19:
+    - Implemented native October reorder behavior in Categories controller, thanks to @slowpokefarm
