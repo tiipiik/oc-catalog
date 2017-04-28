@@ -18,19 +18,26 @@ fields:
             data-input-preset-type: slug
             data-input-preset-closest-parent: form
 
+
     is_published:
         label: tiipiik.catalog::lang.products.published
         type: switch
+        span: auto
 
 tabs:
     fields:
+        sku:
+            tab: tiipiik.catalog::lang.products.details_tab_title
+            label:  tiipiik.catalog::lang.products.sku
+            placeholder: tiipiik.catalog::lang.products.sku_ph
+            span: auto
 
         items_available:
             tab: tiipiik.catalog::lang.products.details_tab_title
             type: number
             label: tiipiik.catalog::lang.products.items_available
             placeholder: tiipiik.catalog::lang.products.items_available_ph
-            span: full
+            span: auto
 
         price:
             tab: tiipiik.catalog::lang.products.details_tab_title

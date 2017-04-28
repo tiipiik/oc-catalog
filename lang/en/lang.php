@@ -11,6 +11,8 @@ return [
         'title_ph' => 'Title',
         'slug' => 'Slug',
         'slug_ph' => 'Slug',
+        'sku' => 'SKU',
+        'sku_ph' => 'Define stock keeping unit ID',
         'published' => 'Published',
         'details_tab_title' => 'Details',
         'items_available' => 'Items available',

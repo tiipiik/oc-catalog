@@ -10,6 +10,9 @@ columns:
     title:
         label: tiipiik.catalog::lang.products.title
 
+    sku:
+        label: tiipiik.catalog::lang.products.sku
+
     categories:
         label: tiipiik.catalog::lang.products.category
         relation: categories
