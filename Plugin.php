@@ -1,10 +1,10 @@
-<?php namespace Tiipiik\Catalog;
+<?php
+namespace Tiipiik\Catalog;
 
-use Event;
 use Backend;
+use Event;
 use System\Classes\PluginBase;
 use Tiipiik\Catalog\Models\Category;
-use Tiipiik\Catalog\Models\Product;
 use Tiipiik\Catalog\Models\Settings;
 
 /**
@@ -20,10 +20,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'tiipiik.catalog::lang.plugin_name',
+            'name' => 'tiipiik.catalog::lang.plugin_name',
             'description' => 'tiipiik.catalog::lang.plugin_description',
-            'author'      => 'Tiipiik',
-            'icon'        => 'icon-th'
+            'author' => 'Tiipiik',
+            'icon' => 'icon-th',
         ];
     }
 
@@ -32,35 +32,35 @@ class Plugin extends PluginBase
         return [
             'tiipiik.catalog.manage_categories' => [
                 'tab' => 'Catalog',
-                'label' => 'tiipiik.catalog::lang.settings.access_categories'
+                'label' => 'tiipiik.catalog::lang.settings.access_categories',
             ],
             'tiipiik.catalog.manage_products' => [
                 'tab' => 'Catalog',
-                'label' => 'tiipiik.catalog::lang.settings.access_products'
+                'label' => 'tiipiik.catalog::lang.settings.access_products',
             ],
             'tiipiik.catalog.manage_custom_fields' => [
                 'tab' => 'Catalog',
-                'label' => 'tiipiik.catalog::lang.settings.access_custom_fields'
+                'label' => 'tiipiik.catalog::lang.settings.access_custom_fields',
             ],
             'tiipiik.catalog.manage_groups' => [
                 'tab' => 'Catalog',
-                'label' => 'tiipiik.catalog::lang.settings.access_groups'
+                'label' => 'tiipiik.catalog::lang.settings.access_groups',
             ],
             'tiipiik.catalog.manage_stores' => [
                 'tab' => 'Catalog',
-                'label' => 'Manage Stores'
+                'label' => 'tiipiik.catalog::lang.settings.access_stores',
             ],
             'tiipiik.catalog.manage_brands' => [
                 'tab' => 'Catalog',
-                'label' => 'Manage Brands'
+                'label' => 'tiipiik.catalog::lang.settings.access_brands',
             ],
             'tiipiik.catalog.manage_import_export' => [
                 'tab' => 'Catalog',
-                'label' => 'Manage Imports and Exports'
+                'label' => 'tiipiik.catalog::lang.settings.access_import_export',
             ],
             'tiipiik.catalog.manage_settings' => [
                 'tab' => 'Catalog',
-                'label' => 'Manage Settings'
+                'label' => 'tiipiik.catalog::lang.settings.access_settings',
             ],
         ];
     }
@@ -80,67 +80,67 @@ class Plugin extends PluginBase
 
     public function registerNavigation()
     {
-        $nav =  [
+        $nav = [
             'catalog' => [
-                'label'       => 'tiipiik.catalog::lang.plugin_name',
-                'url'         => Backend::url('tiipiik/catalog/products'),
-                'icon'        => 'icon-th',
+                'label' => 'tiipiik.catalog::lang.plugin_name',
+                'url' => Backend::url('tiipiik/catalog/products'),
+                'icon' => 'icon-th',
                 'permissions' => ['tiipiik.catalog.*'],
-                'order'       => 20,
+                'order' => 20,
 
                 'sideMenu' => [
                     'categories' => [
-                        'label'       => 'tiipiik.catalog::lang.categories.menu_label',
-                        'icon'        => 'icon-sitemap',
-                        'url'         => Backend::url('tiipiik/catalog/categories'),
-                        'attributes'  => ['data-menu-item'=>'categories'],
+                        'label' => 'tiipiik.catalog::lang.categories.menu_label',
+                        'icon' => 'icon-sitemap',
+                        'url' => Backend::url('tiipiik/catalog/categories'),
+                        'attributes' => ['data-menu-item' => 'categories'],
                         'permissions' => ['tiipiik.catalog.manage_categories'],
                     ],
                     'reorder' => [
-                        'label'       => 'tiipiik.catalog::lang.categories.reorder_category',
-                        'icon'        => 'icon-exchange',
-                        'url'         => Backend::url('tiipiik/catalog/categories/reorder'),
-                        'attributes'  => ['data-menu-item'=>'categories'],
+                        'label' => 'tiipiik.catalog::lang.categories.reorder_category',
+                        'icon' => 'icon-exchange',
+                        'url' => Backend::url('tiipiik/catalog/categories/reorder'),
+                        'attributes' => ['data-menu-item' => 'categories'],
                         'permissions' => ['tiipiik.catalog.manage_categories'],
                     ],
                     'products' => [
-                        'label'       => 'tiipiik.catalog::lang.products.menu_label',
-                        'icon'        => 'icon-th',
-                        'url'         => Backend::url('tiipiik/catalog/products'),
-                        'attributes'  => ['data-menu-item'=>'products'],
+                        'label' => 'tiipiik.catalog::lang.products.menu_label',
+                        'icon' => 'icon-th',
+                        'url' => Backend::url('tiipiik/catalog/products'),
+                        'attributes' => ['data-menu-item' => 'products'],
                         'permissions' => ['tiipiik.catalog.manage_products'],
                     ],
                     'customfields' => [
-                        'label'       => 'tiipiik.catalog::lang.custom_fields.menu_label',
-                        'icon'        => 'icon-list-alt',
-                        'url'         => Backend::url('tiipiik/catalog/customfields'),
-                        'attributes'  => ['data-menu-item'=>'custom_fields'],
+                        'label' => 'tiipiik.catalog::lang.custom_fields.menu_label',
+                        'icon' => 'icon-list-alt',
+                        'url' => Backend::url('tiipiik/catalog/customfields'),
+                        'attributes' => ['data-menu-item' => 'custom_fields'],
                         'permissions' => ['tiipiik.catalog.manage_custom_fields'],
                     ],
                     'groups' => [
-                        'label'       => 'Groups',
-                        'icon'        => 'icon-list-alt',
-                        'url'         => Backend::url('tiipiik/catalog/groups'),
-                        'attributes'  => ['data-menu-item'=>'groups'],
+                        'label' => 'tiipiik.catalog::lang.groups.menu_label',
+                        'icon' => 'icon-list-alt',
+                        'url' => Backend::url('tiipiik/catalog/groups'),
+                        'attributes' => ['data-menu-item' => 'groups'],
                         'permissions' => ['tiipiik.catalog.manage_groups'],
                     ],
                     'brands' => [
-                        'label'       => 'Brands',
-                        'icon'        => 'icon-copyright',
-                        'url'         => Backend::url('tiipiik/catalog/brands'),
-                        'attributes'  => ['data-menu-item'=>'brands'],
+                        'label' => 'tiipiik.catalog::lang.brands.menu_label',
+                        'icon' => 'icon-copyright',
+                        'url' => Backend::url('tiipiik/catalog/brands'),
+                        'attributes' => ['data-menu-item' => 'brands'],
                         'permissions' => ['tiipiik.catalog.manage_brands'],
                     ],
-                ]
-            ]
+                ],
+            ],
         ];
 
         if (Settings::get('activate_stores') == 1) {
             $nav['catalog']['sideMenu']['stores'] = [
-                'label'       => 'Stores',
-                'icon'        => 'icon-list-ul',
-                'url'         => Backend::url('tiipiik/catalog/stores'),
-                'attributes'  => ['data-menu-item'=>'stores'],
+                'label' => 'tiipiik.catalog::lang.stores.menu_label',
+                'icon' => 'icon-list-ul',
+                'url' => Backend::url('tiipiik/catalog/stores'),
+                'attributes' => ['data-menu-item' => 'stores'],
                 'permissions' => ['tiipiik.catalog.manage_stores'],
             ];
         }
@@ -165,7 +165,7 @@ class Plugin extends PluginBase
                 return [];
             }
 
-            if ($type == 'all-catalog-categories'|| $type == 'catalog-category') {
+            if ($type == 'all-catalog-categories' || $type == 'catalog-category') {
                 return Category::getMenuTypeInfo($type);
             }
         });
@@ -181,14 +181,14 @@ class Plugin extends PluginBase
     {
         return [
             'config' => [
-                'label'       => 'Catalog',
-                'description' => 'Manage Catalog settings.',
-                'category'    => 'Catalog',
-                'icon'        => 'icon-gear',
-                'class'       => 'Tiipiik\Catalog\Models\Settings',
+                'label' => 'tiipiik.catalog::lang.settings.menu_label',
+                'description' => 'tiipiik.catalog::lang.settings.menu_desc',
+                'category' => 'tiipiik.catalog::lang.plugin_name',
+                'icon' => 'icon-gear',
+                'class' => 'Tiipiik\Catalog\Models\Settings',
                 'permissions' => ['tiipiik.booking.manage_settings'],
-                'order'       => 500,
-            ]
+                'order' => 500,
+            ],
         ];
     }
 }

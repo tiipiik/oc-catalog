@@ -2,13 +2,13 @@ fields:
     activate_stores:
         span: left
         type: switch
-        label: Activate Stores
-        comment: Check to activate Stores in the Catalog
+        label: tiipiik.catalog::lang.settings.activate_stores
+        comment: tiipiik.catalog::lang.settings.activate_stores_desc
         default: false
 
     secure_urls:
         span: left
         type: switch
-        label: Use secure urls
-        comment: Check to always generate secure urls in the product lists
+        label: tiipiik.catalog::lang.settings.use_secure_urls
+        comment: tiipiik.catalog::lang.settings.use_secure_urls_desc
         default: false

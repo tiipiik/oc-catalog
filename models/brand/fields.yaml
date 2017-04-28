@@ -4,12 +4,12 @@
 
 fields:
     name:
-        label: Name
+        label: tiipiik.catalog::lang.brands.name
         placeholder: tiipiik.catalog::lang.products.title_ph
         span: left
 
     slug:
-        label: Slug
+        label: tiipiik.catalog::lang.brands.slug
         placeholder: tiipiik.catalog::lang.products.slug_ph
         span: right
         attributes:
@@ -18,33 +18,33 @@ fields:
             data-input-preset-closest-parent: form
 
     published:
-        label: Is published
+        label: tiipiik.catalog::lang.products.published
         type: switch
 
 tabs:
     fields:
         description:
-            tab: Details
-            label: Description
+            tab: tiipiik.catalog::lang.brands.details
+            label: tiipiik.catalog::lang.brands.description
             placeholder: tiipiik.catalog::lang.products.description
             type: richeditor
 
         meta_title:
             tab: SEO
             type: text
-            label: Meta title
-            placeholder: Define meta title
+            label: tiipiik.catalog::lang.products.meta_title
+            placeholder: tiipiik.catalog::lang.products.meta_title_ph
 
         meta_desc:
             tab: SEO
             type: textarea
-            label: Meta description
-            placeholder: Define meta description
+            label: tiipiik.catalog::lang.products.meta_desc
+            placeholder: tiipiik.catalog::lang.products.meta_desc_ph
 
 secondaryTabs:
     fields:
         cover_image:
-            label: Image
+            label: tiipiik.catalog::lang.categories.image
             type: fileupload
             mode: image
             imageHeight: 260

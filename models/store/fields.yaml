@@ -4,14 +4,14 @@
 
 fields:
     name:
-        label:  Store name
-        placeholder: store name
+        label:  tiipiik.catalog::lang.stores.name
+        placeholder: tiipiik.catalog::lang.stores.name
         span: left
 
     slug:
-        label: Store slug
+        label: tiipiik.catalog::lang.stores.slug
         span: right
-        placeholder: Store slug
+        placeholder: tiipiik.catalog::lang.stores.slug
         attributes:
             data-input-preset: 'input[name="Store[name]"]'
             data-input-preset-type: slug
@@ -19,32 +19,32 @@ fields:
             data-input-preset-closest-parent: form
 
     is_activated:
-        label: Is actiavted
+        label: tiipiik.catalog::lang.stores.is_activated
         type: switch
 
 tabs:
     fields:
         description:
-            tab: Details
-            label: Store description
-            placeholder: Store description
+            tab: tiipiik.catalog::lang.brands.details
+            label: tiipiik.catalog::lang.stores.description
+            placeholder: tiipiik.catalog::lang.stores.description
             type: richeditor
 
         meta_title:
             tab: SEO
             type: text
-            label: Meta title
-            placeholder: Define meta title
+            label: tiipiik.catalog::lang.products.meta_title
+            placeholder: tiipiik.catalog::lang.products.meta_title_ph
 
         meta_desc:
             tab: SEO
             type: textarea
-            label: Meta description
-            placeholder: Define meta description
+            label: tiipiik.catalog::lang.products.meta_desc
+            placeholder: tiipiik.catalog::lang.products.meta_desc_ph
 
         group:
-            tab: Group
-            label: Group
+            tab: tiipiik.catalog::lang.products.group
+            label: tiipiik.catalog::lang.products.group
             type: relation
             required: true
 
@@ -52,7 +52,7 @@ secondaryTabs:
     fields:
 
         cover_image:
-            label: Store cover image
+            label: tiipiik.catalog::lang.stores.cover_image
             type: fileupload
             mode: image
             imageHeight: 260

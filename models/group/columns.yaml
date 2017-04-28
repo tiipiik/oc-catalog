@@ -8,4 +8,4 @@ columns:
         searchable: true
         invisible: true
     name:
-        label: Name
+        label: tiipiik.catalog::lang.groups.name

@@ -4,4 +4,4 @@
 
 fields:
     name:
-        label: Name
+        label: tiipiik.catalog::lang.groups.name
