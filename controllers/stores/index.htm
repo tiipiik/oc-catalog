@@ -1,2 +1,7 @@
-
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('tiipiik/catalog/stores') ?>"><?= e(trans('tiipiik.catalog::lang.stores.menu_label')) ?></a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
 <?= $this->listRender() ?>
