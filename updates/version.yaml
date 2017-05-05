@@ -104,6 +104,6 @@
 1.11.19:
     - Implemented native October reorder behavior in Categories controller, thanks to @slowpokefarm
 1.11.20:
-    - Added sku codes for products
+    - Added sku codes for products, thanks to @slowpokefarm
     - add_sku_to_products.php
     #- feed_tables.php
