@@ -9,17 +9,17 @@ columns:
         invisible: true
     
     name:
-        Label: Name
+        Label: tiipiik.catalog::lang.stores.name
     
     slug:
-        label: Slug
+        label: tiipiik.catalog::lang.stores.slug
     
     group:
-        label: Group
+        label: tiipiik.catalog::lang.products.group
         type: relation
         select: name
         sortable: false
     
     is_activated:
-        label: Is activated
+        label: tiipiik.catalog::lang.stores.is_activated
         type: switch

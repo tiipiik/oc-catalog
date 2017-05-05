@@ -17,7 +17,7 @@ columns:
     default_value:
         label: tiipiik.catalog::lang.custom_fields.default_value_label
     groups:
-        label: Groups
+        label: tiipiik.catalog::lang.groups.menu_label
         relation: groups
         select: name
         sortable: false

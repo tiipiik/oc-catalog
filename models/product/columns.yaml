@@ -10,6 +10,9 @@ columns:
     title:
         label: tiipiik.catalog::lang.products.title
 
+    sku:
+        label: tiipiik.catalog::lang.products.sku
+
     categories:
         label: tiipiik.catalog::lang.products.category
         relation: categories
@@ -18,13 +21,13 @@ columns:
         sortable: false
 
     group:
-        label: Group
+        label: tiipiik.catalog::lang.products.group
         relation: group
         select: name
         sortable: false
 
     brand:
-        label: Brand
+        label: tiipiik.catalog::lang.products.brand
         relation: brand
         select: name
         sortable: false

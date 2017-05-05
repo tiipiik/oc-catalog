@@ -18,19 +18,26 @@ fields:
             data-input-preset-type: slug
             data-input-preset-closest-parent: form
 
+
     is_published:
         label: tiipiik.catalog::lang.products.published
         type: switch
+        span: auto
 
 tabs:
     fields:
+        sku:
+            tab: tiipiik.catalog::lang.products.details_tab_title
+            label:  tiipiik.catalog::lang.products.sku
+            placeholder: tiipiik.catalog::lang.products.sku_ph
+            span: auto
 
         items_available:
             tab: tiipiik.catalog::lang.products.details_tab_title
             type: number
             label: tiipiik.catalog::lang.products.items_available
             placeholder: tiipiik.catalog::lang.products.items_available_ph
-            span: full
+            span: auto
 
         price:
             tab: tiipiik.catalog::lang.products.details_tab_title
@@ -55,38 +62,45 @@ tabs:
             placeholder: tiipiik.catalog::lang.products.description_ph
             type: richeditor
 
+        customfields:
+            tab: tiipiik.catalog::lang.products.details_tab_title
+            label: tiipiik.catalog::lang.products.custom_fields
+            type: partial
+            path: customfields_partial
+            # commentAbove: 
+
         categories:
             tab: tiipiik.catalog::lang.products.category_tab_title
             type: relation
             commentAbove: tiipiik.catalog::lang.products.categories_cmt
 
         group:
-            tab: Group
+            tab: tiipiik.catalog::lang.products.group
             type: relation
             required: true
 
         meta_title:
             tab: SEO
             type: text
-            label: Meta title
-            placeholder: Define meta title
+            label: tiipiik.catalog::lang.products.meta_title
+            placeholder: tiipiik.catalog::lang.products.meta_title_ph
 
         meta_desc:
             tab: SEO
             type: textarea
-            label: Meta description
-            placeholder: Define meta description
+            label: tiipiik.catalog::lang.products.meta_desc
+            placeholder: tiipiik.catalog::lang.products.meta_desc_ph
 
         brand:
-            tab: Brand
+            tab: tiipiik.catalog::lang.products.brand
             type: relation
             required: false
-            emptyOption: -- No brand --
+            emptyOption: tiipiik.catalog::lang.products.brand_empty
 
         stores:
-            tab: Stores
+            tab: tiipiik.catalog::lang.products.stores
             type: relation
-            commentAbove: Select the store this product is related to
+            commentAbove: tiipiik.catalog::lang.products.stores_cmt
 
 secondaryTabs:
     fields:

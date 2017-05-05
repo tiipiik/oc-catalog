@@ -9,11 +9,11 @@ columns:
         invisible: true
 
     name:
-        label: Name
+        label: tiipiik.catalog::lang.brands.name
 
     slug:
-        label: Slug
+        label: tiipiik.catalog::lang.brands.slug
 
     published:
-        label: Published
+        label: tiipiik.catalog::lang.brands.published
         type: switch

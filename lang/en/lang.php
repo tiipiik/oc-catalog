@@ -3,7 +3,7 @@
 return [
     'plugin_name' => 'Catalog',
     'plugin_description' => 'Provide a full catalog',
-    'products'  =>  [
+    'products' => [
         'new_product' => 'New Product',
         'menu_label' => 'Products',
         'id' => 'ID',
@@ -11,6 +11,8 @@ return [
         'title_ph' => 'Title',
         'slug' => 'Slug',
         'slug_ph' => 'Slug',
+        'sku' => 'SKU',
+        'sku_ph' => 'Define stock keeping unit ID',
         'published' => 'Published',
         'details_tab_title' => 'Details',
         'items_available' => 'Items available',
@@ -23,6 +25,11 @@ return [
         'discount_price_ph' => 'Discount price',
         'featured_images' => 'Featured images',
         'category' => 'Category',
+        'group' => 'Group',
+        'brand' => 'Brand',
+        'brand_empty' => '-- No brand --',
+        'stores' => 'Stores',
+        'stores_cmt' => 'Select the store this product is related to',
         'category_tab_title' => 'Categories',
         'categories_cmt' => 'Select categories the product belongs to',
         'return_to_list' => 'Return to product list',
@@ -30,8 +37,15 @@ return [
         'import' => 'Import products',
         'reorder' => 'Reorder products',
         'delete_success' => 'Successfully deleted those products.',
+        'custom_fields' => 'Custom Fields',
+        'custom_fields_relation' => 'Custom Fields',
+        'custom_fields_empty' => 'Product has no custom fields',
+        'meta_title' => 'Meta title',
+        'meta_title_ph' => 'Define meta title',
+        'meta_desc' => 'Meta description',
+        'meta_desc_ph' => 'Define meta description',
     ],
-    'categories'  =>  [
+    'categories' => [
         'new_category' => 'New Category',
         'reorder_category' => 'Manage Categories Order',
         'menu_label' => 'Categories',
@@ -39,9 +53,10 @@ return [
         'export' => 'Export categories',
         'import' => 'Import categories',
         'reorder' => 'Reorder categories',
+        'image' => 'Image',
     ],
-    'custom_fields'  =>  [
-        'new_category' => 'New Custom Field',
+    'custom_fields' => [
+        'new_custom_field' => 'New Custom Field',
         'menu_label' => 'Custom Fields',
         'template_code_label' => 'Template Code',
         'display_name_label' => 'Display name',
@@ -52,29 +67,40 @@ return [
         'return_to_list' => 'Return to custom fields list',
         'delete_success' => 'Successfully deleted those custom fields.',
     ],
-    'custom_value'  =>  [
+    'custom_value' => [
         'name_label' => 'Custom Value',
         'value_label' => 'Value',
     ],
-    'groups'  =>  [
+    'groups' => [
         'new' => 'New Group',
         'menu_label' => 'Groups',
         'return_to_list' => 'Return to group',
+        'name' => 'Name',
     ],
-    'stores'  =>  [
+    'stores' => [
         'new' => 'New Store',
         'menu_label' => 'Stores',
         'return_to_list' => 'Return to store',
         'export' => 'Export stores',
         'import' => 'Import stores',
+        'is_activated' => 'Is activated',
+        'name' => 'Store name',
+        'slug' => 'Store slug',
+        'description' => 'Store description',
+        'cover_image' => 'Store cover image',
     ],
-    'brands'  =>  [
+    'brands' => [
         'new' => 'New Brand',
         'menu_label' => 'Brands',
         'return_to_list' => 'Return to brand',
         'delete_success' => 'Successfully deleted those brands.',
         'export' => 'Export brands',
         'import' => 'Import brands',
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'published' => 'Published',
+        'details' => 'Details',
+        'description' => 'Description',
     ],
     'config' => [
         'form' => [
@@ -111,16 +137,22 @@ return [
         ],
     ],
     'settings' => [
+        'menu_label' => 'Catalog',
+        'menu_desc' => 'Manage Catalog settings.',
         'access_categories' => 'Manage product categories',
         'access_products' => 'Manage products',
         'access_custom_fields' => 'Manage custom fields for products',
         'access_groups' => 'Manage groups',
         'access_stores' => 'Manage stores',
         'access_brands' => 'Manage brands',
+        'access_import_export' => 'Manage Imports and Exports',
+        'access_settings' => 'Manage Settings',
         'posts_order' => 'Product order',
         'posts_order_description' => 'Change the order products are displayed',
         'use_secure_urls' => 'Use secure urls',
-        'use_secure_urls_desc' => 'Check to activate secure urls generation',
+        'use_secure_urls_desc' => 'Check to always generate secure urls in the product lists',
+        'activate_stores' => 'Activate Stores',
+        'activate_stores_desc' => 'Check to activate Stores in the Catalog',
     ],
     'catalog' => [
         'delete_confirm' => 'Do you really want to delete these items ?',
@@ -212,7 +244,7 @@ return [
                 'product_page_desc' => '',
                 'no_product_message_title' => 'Message if no products',
                 'no_product_message_desc' => '',
-                'no_product_message_Default' => 'No product related to this brand',
+                'no_product_message_default' => 'No product related to this brand',
             ],
         ],
         'store_list' => [
@@ -247,12 +279,12 @@ return [
 
                 'no_product_message_title' => 'Message if no products',
                 'no_product_message_desc' => '',
-                'no_product_message_default' => 'No product related to this brand',
+                'no_product_message_default' => 'No product related to this store',
             ],
         ],
     ],
     'validation' => [
         'price_regex' => 'The price must be a valid monetary value.',
         'discount_price_regex' => 'The discount price must be a valid monetary value.',
-    ]
+    ],
 ];

@@ -25,5 +25,5 @@ secondaryTabs:
     fields:
         groups:
             type: relation
-            label: Group
+            label: tiipiik.catalog::lang.products.group
         

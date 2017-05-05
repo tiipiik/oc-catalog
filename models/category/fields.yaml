@@ -25,7 +25,7 @@ fields:
 secondaryTabs:
     fields:
         cover:
-            label: Image
+            label: tiipiik.catalog::lang.categories.image
             type: fileupload
             mode: image
             imageHeight: 260

@@ -3,10 +3,10 @@
 # ===================================
 
 customfields:
-    label: false # Could not translate in lang.php because it's not parsed in custom field creation form
+    label: tiipiik.catalog::lang.products.custom_fields_relation # Could not translate in lang.php because it's not parsed in custom field creation form
     list: $/tiipiik/catalog/models/customvalue/columns.yaml
     form: $/tiipiik/catalog/models/customvalue/fields.yaml
-    emptyMessage: Product has no custom field
+    emptyMessage: tiipiik.catalog::lang.products.custom_fields_empty
     toolbar: 
         buttons: false
     view:

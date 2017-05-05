@@ -37,4 +37,18 @@ class Categories extends Controller
 
         $this->asExtension('ReorderController')->reorder();
     }
+
+    public function create()
+    {
+        $this->bodyClass = 'compact-container';
+
+        return $this->asExtension('FormController')->create();
+    }
+
+    public function update($recordId = null)
+    {
+        $this->bodyClass = 'compact-container';
+
+        return $this->asExtension('FormController')->update($recordId);
+    }
 }
