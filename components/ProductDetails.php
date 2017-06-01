@@ -9,10 +9,10 @@ use Tiipiik\Catalog\Models\Product as ProductModel;
 
 class ProductDetails extends ComponentBase
 {
-    protected $product;
-    protected $categoryPage;
-    protected $brandPage;
-    protected $storePage;
+    public $product;
+    public $categoryPage;
+    public $brandPage;
+    public $storePage;
 
     public function componentDetails()
     {

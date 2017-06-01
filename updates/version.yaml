@@ -108,4 +108,5 @@
     - add_sku_to_products.php
 1.11.21:
     - Added missing translatable fields
+    - Change variables from protected to public in ProductDetails
     #- feed_tables.php
