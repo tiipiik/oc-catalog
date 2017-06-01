@@ -106,4 +106,6 @@
 1.11.20:
     - Added sku codes for products, thanks to @slowpokefarm
     - add_sku_to_products.php
+1.11.21:
+    - Added missing translatable fields
     #- feed_tables.php

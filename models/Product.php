@@ -64,7 +64,7 @@ class Product extends Model
     /**
      * @var array Translatable fields
      */
-    public $translatable = ['title', 'description'];
+    public $translatable = ['title', 'slug', 'description', 'meta_title', 'meta_desc'];
 
     /**
      * @var array Guarded fields

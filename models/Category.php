@@ -28,7 +28,7 @@ class Category extends Model
     /**
      * @var array Translatable fields
      */
-    public $translatable = ['name', 'description'];
+    public $translatable = ['name', 'slug', 'description'];
     
     /**
      * @var array Guarded fields
