@@ -102,7 +102,7 @@ class Categories extends ComponentBase
         
         // If param for displaying subcategories is checked
         if ($this->property('subCategories') == 1) {
-            $category = Category::whereSlug($this->property('slug'))->first();
+            $category = Category::transWhere('slug', $this->property('slug'))->first();
             $categories->whereParentId($category->id);
         }
         
@@ -114,6 +114,8 @@ class Categories extends ComponentBase
         }
         
         $categories = $categories->get();
+
+        dump($categories);
         
         if (!$categories) {
             return null;

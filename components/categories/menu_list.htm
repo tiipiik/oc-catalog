@@ -4,10 +4,6 @@
 <h4>{{ __SELF__.subCategoriesTitle }}</h4>
 {% endif %}
 
-<pre>
-    {{ category_list }}
-</pre>
-
 {% set category_list = categories.product_categories %}
 {% if category_list %}
     {% set depth = 0 %}

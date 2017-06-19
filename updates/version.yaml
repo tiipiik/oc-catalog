@@ -109,4 +109,6 @@
 1.11.21:
     - Added missing translatable fields
     - Change variables from protected to public in ProductDetails
+1.11.13:
+    - Add homepage link to the plugin details and translate the name of permission tab, thanks to @gergo85
     #- feed_tables.php
