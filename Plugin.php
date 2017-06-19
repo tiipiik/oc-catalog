@@ -24,6 +24,7 @@ class Plugin extends PluginBase
             'description' => 'tiipiik.catalog::lang.plugin_description',
             'author' => 'Tiipiik',
             'icon' => 'icon-th',
+            'homepage' => 'https://github.com/tiipiik/oc-catalog',
         ];
     }
 
@@ -31,35 +32,35 @@ class Plugin extends PluginBase
     {
         return [
             'tiipiik.catalog.manage_categories' => [
-                'tab' => 'Catalog',
+                'tab' => 'tiipiik.catalog::lang.settings.menu_label',
                 'label' => 'tiipiik.catalog::lang.settings.access_categories',
             ],
             'tiipiik.catalog.manage_products' => [
-                'tab' => 'Catalog',
+                'tab' => 'tiipiik.catalog::lang.settings.menu_label',
                 'label' => 'tiipiik.catalog::lang.settings.access_products',
             ],
             'tiipiik.catalog.manage_custom_fields' => [
-                'tab' => 'Catalog',
+                'tab' => 'tiipiik.catalog::lang.settings.menu_label',
                 'label' => 'tiipiik.catalog::lang.settings.access_custom_fields',
             ],
             'tiipiik.catalog.manage_groups' => [
-                'tab' => 'Catalog',
+                'tab' => 'tiipiik.catalog::lang.settings.menu_label',
                 'label' => 'tiipiik.catalog::lang.settings.access_groups',
             ],
             'tiipiik.catalog.manage_stores' => [
-                'tab' => 'Catalog',
+                'tab' => 'tiipiik.catalog::lang.settings.menu_label',
                 'label' => 'tiipiik.catalog::lang.settings.access_stores',
             ],
             'tiipiik.catalog.manage_brands' => [
-                'tab' => 'Catalog',
+                'tab' => 'tiipiik.catalog::lang.settings.menu_label',
                 'label' => 'tiipiik.catalog::lang.settings.access_brands',
             ],
             'tiipiik.catalog.manage_import_export' => [
-                'tab' => 'Catalog',
+                'tab' => 'tiipiik.catalog::lang.settings.menu_label',
                 'label' => 'tiipiik.catalog::lang.settings.access_import_export',
             ],
             'tiipiik.catalog.manage_settings' => [
-                'tab' => 'Catalog',
+                'tab' => 'tiipiik.catalog::lang.settings.menu_label',
                 'label' => 'tiipiik.catalog::lang.settings.access_settings',
             ],
         ];
