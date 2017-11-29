@@ -114,8 +114,6 @@ class Categories extends ComponentBase
         }
         
         $categories = $categories->get();
-
-        dump($categories);
         
         if (!$categories) {
             return null;

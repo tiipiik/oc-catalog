@@ -111,4 +111,6 @@
     - Change variables from protected to public in ProductDetails
 1.11.22:
     - Add homepage link to the plugin details and translate the name of permission tab, thanks to @gergo85
+1.11.23:
+    - Remove unnecessary dump() inside categories component, noticed by @mberizzo
     #- feed_tables.php
