@@ -70,6 +70,7 @@ class Plugin extends PluginBase
     {
         return [
             '\Tiipiik\Catalog\Components\Categories' => 'categories',
+            '\Tiipiik\Catalog\Components\CategoriesAndProducts' => 'categoriesandproducts',
             '\Tiipiik\Catalog\Components\ProductList' => 'product_list',
             '\Tiipiik\Catalog\Components\ProductDetails' => 'product_details',
             '\Tiipiik\Catalog\Components\StoreList' => 'store_list',

@@ -113,4 +113,6 @@
     - Add homepage link to the plugin details and translate the name of permission tab, thanks to @gergo85
 1.11.23:
     - Remove unnecessary dump() inside categories component, noticed by @mberizzo
+1.12.1:
+    - Add new component to display a list of categories and related products
     #- feed_tables.php

@@ -1,0 +1,19 @@
+{% set category_list = __SELF__.categories %}
+{% set category_page = __SELF__.categoryPage %}
+{% set product_page = __SELF__.productPage %}
+
+
+{% if not category_list|length %}
+<p class="alert alert-info">{{ __SELF__.noProductsMessage }}</p>
+{% else %}
+    {% for category in category_list %}
+    <h2><a href="{{ category.url }}">{{ category.name }}</a></h2>
+    <div class="row">
+        {% for product in category.products %}
+        <div class="col-xs-4 text-center">
+            <a href="{{ product.url }}">{{ product.title }}</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+{% endif %}
