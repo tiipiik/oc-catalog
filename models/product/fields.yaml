@@ -62,6 +62,12 @@ tabs:
             placeholder: tiipiik.catalog::lang.products.description_ph
             type: richeditor
 
+        properties:
+            tab: tiipiik.catalog::lang.products.properties
+            type: partial
+            path: properties_partial
+            commentAbove: tiipiik.catalog::lang.products.properties_cmt
+
         customfields:
             tab: tiipiik.catalog::lang.products.details_tab_title
             label: tiipiik.catalog::lang.products.custom_fields

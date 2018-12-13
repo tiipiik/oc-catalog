@@ -1,0 +1,44 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+
+    is_used:
+        label: tiipiik.catalog::lang.properties.is_used
+        type: checkbox
+        span: full
+
+    name:
+        label: tiipiik.catalog::lang.properties.name
+        type: text
+        span: auto
+
+    type:
+        label: tiipiik.catalog::lang.properties.type
+        type: dropdown
+        span: auto
+
+    description:
+        label: tiipiik.catalog::lang.properties.description
+        type: textarea
+        span: full
+
+    values_repeater:
+        label: tiipiik.catalog::lang.properties.values_array
+        type: repeater
+        span: full
+        dependsOn: type
+        form:
+            fields:
+                id:
+                    label: tiipiik.catalog::lang.properties.dropdown_id
+                    type: text
+                    span: auto
+                value:
+                    label: tiipiik.catalog::lang.properties.dropdown_value
+                    type: text
+                    span: auto

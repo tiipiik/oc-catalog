@@ -1,8 +1,9 @@
-<?php namespace Tiipiik\Catalog\Updates;
+<?php
+namespace Tiipiik\Catalog\Updates;
 
+use October\Rain\Database\Updates\Migration;
 use Schema;
 use Tiipiik\Catalog\Models\Product;
-use October\Rain\Database\Updates\Migration;
 
 class AddSortOrderToProducts extends Migration
 {

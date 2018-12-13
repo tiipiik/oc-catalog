@@ -9,9 +9,11 @@ columns:
 
     title:
         label: tiipiik.catalog::lang.products.title
+        searchable: true
 
     sku:
         label: tiipiik.catalog::lang.products.sku
+        searchable: true
 
     categories:
         label: tiipiik.catalog::lang.products.category

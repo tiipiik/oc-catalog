@@ -5,6 +5,13 @@ fields:
         label: tiipiik.catalog::lang.settings.activate_stores
         comment: tiipiik.catalog::lang.settings.activate_stores_desc
         default: false
+        
+    activate_properties:
+        span: left
+        type: switch
+        label: tiipiik.catalog::lang.settings.activate_properties
+        comment: tiipiik.catalog::lang.settings.activate_properties_desc
+        default: false
 
     secure_urls:
         span: left
