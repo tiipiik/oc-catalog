@@ -322,10 +322,11 @@ class Category extends Model
         $children = self::whereParentId($category->id)->get();
 
         if (isset($children) && sizeof($children) != 0) {
-            return true;
+            // return true;
+            return $children;
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -336,8 +337,8 @@ class Category extends Model
         //dump($categoryId . ' / ' . $activeCategorySlug);
         $activeCategoryHasParent = self::whereSlug($activeCategorySlug)->whereParentId($categoryId)->first();
 
-        if (isset($activeCategoryHasParent) && sizeof($activeCategoryHasParent) != 0) {
-            //dump($activeCategoryHasParent);
+        if (! is_null($activeCategoryHasParent)) {
+            // dump($activeCategoryHasParent);
             return true;
         }
 

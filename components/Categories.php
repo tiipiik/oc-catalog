@@ -98,13 +98,15 @@ class Categories extends ComponentBase
 
     protected function loadCategories()
     {
-        $categories = Category::orderBy('name');
-        
-        // If param for displaying subcategories is checked
+        // If param is checked, take only subcategories
         if ($this->property('subCategories') == 1) {
             $category = Category::transWhere('slug', $this->property('slug'))->first();
-            $categories->whereParentId($category->id);
+            $categories = Category::whereParentId($category->id);
+        } else {
+            // Or select all categories of first level
+            $categories = Category::whereNull('parent_id');
         }
+        $categories->orderBy('name');
         
        // Hide empty categories
         if ($this->property('displayEmpty') == 0 || $this->property('displayEmpty') === false) {
@@ -131,6 +133,10 @@ class Categories extends ComponentBase
             );
             $category->hasChildren = Category::hasChildren($category->slug);
         });
+
+        // Reorder categories to tree for navigation
+        // dump('Add tree order');
+        // dump($categories);
 
         return $categories;
     }

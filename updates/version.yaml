@@ -115,4 +115,8 @@
     - Remove unnecessary dump() inside categories component, noticed by @mberizzo
 1.12.1:
     - Add new component to display a list of categories and related products
+1.12.2:
+    - Fix has active parent to categories
+1.12.3:
+    - Fix default menu tree display
     #- feed_tables.php
