@@ -10,6 +10,7 @@ Use Tiipiik.Catalog to search/install this plugin.
 * Multiple categories and levels of categories
 * Manage categories order
 * Create and manage custom fields for Products and Stores
+* NEW : Use product properties instead of with custom fields !
 * Manage Brands
 * Manage optionnal Stores feature
 

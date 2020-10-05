@@ -124,7 +124,6 @@ class Categories extends ComponentBase
      */
     protected function loadCategories()
     {
-        // If param is checked, take only subcategories
         // If param for displaying subcategories is checked
         if ($this->property('subCategories') == 1) {
             $category = Category::transWhere('slug', $this->property('slug'))->first();
