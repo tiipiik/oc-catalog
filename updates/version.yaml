@@ -127,4 +127,4 @@
 1.12.6:
     - Fixed sort_order on products table
     - fix_sort_order_on_products.php
-    - feed_tables.php
+    #- feed_tables.php
