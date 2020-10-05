@@ -333,7 +333,7 @@ class Category extends Model
         }
 
         $paramName = substr(trim($matches[1]), 1);
-        $url       = CmsPage::url($page->getBaseFileName(), [$paramName => $category->slug]);
+        $url = CmsPage::url($page->getBaseFileName(), [$paramName => $category->slug]);
 
         return $url;
     }
@@ -348,10 +348,11 @@ class Category extends Model
         $children = self::whereParentId($category->id)->get();
 
         if (isset($children) && sizeof($children) != 0) {
-            return true;
+            // return true;
+            return $children;
         }
 
-        return false;
+        return null;
     }
 
     /**
