@@ -1,8 +1,9 @@
-<?php namespace Tiipiik\Catalog\Controllers;
+<?php
+namespace Tiipiik\Catalog\Controllers;
 
-use Flash;
 use BackendMenu;
 use Backend\Classes\Controller;
+use Flash;
 use Tiipiik\Catalog\Models\Brand;
 
 /**
@@ -56,6 +57,44 @@ class Brands extends Controller
             }
 
             Flash::success(e(trans('tiipiik.catalog::lang.brands.delete_success')));
+        }
+
+        return $this->listRefresh();
+    }
+
+    public function index_onActivate()
+    {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
+
+            foreach ($checkedIds as $itemId) {
+                if ((!$item = Brand::find($itemId))) {
+                    continue;
+                }
+
+                $item->published = true;
+                $item->save();
+            }
+
+            Flash::success(e(trans('tiipiik.catalog::lang.brands.activate_success')));
+        }
+
+        return $this->listRefresh();
+    }
+
+    public function index_onDeactivate()
+    {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
+
+            foreach ($checkedIds as $itemId) {
+                if ((!$item = Brand::find($itemId))) {
+                    continue;
+                }
+
+                $item->published = false;
+                $item->save();
+            }
+
+            Flash::success(e(trans('tiipiik.catalog::lang.brands.deactivate_success')));
         }
 
         return $this->listRefresh();

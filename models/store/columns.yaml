@@ -16,7 +16,7 @@ columns:
     
     group:
         label: tiipiik.catalog::lang.products.group
-        type: relation
+        relation: group
         select: name
         sortable: false
     

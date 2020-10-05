@@ -1,0 +1,23 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    is_used:
+        label: tiipiik.catalog::lang.properties.is_used
+        type: switch
+        searchable: false
+
+    name:
+        label: tiipiik.catalog::lang.properties.name
+        type: text
+        searchable: true
+
+    type_text:
+        label: tiipiik.catalog::lang.properties.type
+        type: text
+        searchable: false

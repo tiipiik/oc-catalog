@@ -14,6 +14,11 @@
             <hr>
             Brand : <a href="{{ product.brand.url }}" title="{{ product.brand.name }}">{{ product.brand.name }}</a>
             {% endif %}
+
+            {% for property in product.properties %}
+            <p>{{ property.name }}{% if property.pivot.value %}: {{ property.getFinalValue() }}{% endif %}</p>
+            {% endfor %}
+
             {% if product.stores %}
             <hr>
             {% for store in product.stores %}

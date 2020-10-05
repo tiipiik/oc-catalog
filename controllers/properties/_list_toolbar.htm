@@ -1,0 +1,37 @@
+<div data-control="toolbar">
+    <a
+        href="<?= Backend::url('tiipiik/catalog/properties/create') ?>"
+        class="btn btn-primary oc-icon-plus">
+        <?= e(trans('tiipiik.catalog::lang.properties.new')) ?>
+    </a>
+    <div class="btn-group">
+        <button
+            class="btn btn-default oc-icon-toggle-on"
+            disabled="disabled"
+            onclick="$(this).data('request-data', {
+                checked: $('.control-list').listWidget('getChecked')
+            })"
+            data-request="onActivate"
+            data-trigger-action="enable"
+            data-trigger=".control-list input[type=checkbox]"
+            data-trigger-condition="checked"
+            data-request-success="$(this).prop('disabled', true)"
+            data-stripe-load-indicator>
+            <?= e(trans('tiipiik.catalog::lang.properties.activate_selected')) ?>
+        </button>
+        <button
+            class="btn btn-default oc-icon-toggle-off"
+            disabled="disabled"
+            onclick="$(this).data('request-data', {
+                checked: $('.control-list').listWidget('getChecked')
+            })"
+            data-request="onDeactivate"
+            data-trigger-action="enable"
+            data-trigger=".control-list input[type=checkbox]"
+            data-trigger-condition="checked"
+            data-request-success="$(this).prop('disabled', true)"
+            data-stripe-load-indicator>
+            <?= e(trans('tiipiik.catalog::lang.properties.deactivate_selected')) ?>
+        </button>
+    </div>
+</div>

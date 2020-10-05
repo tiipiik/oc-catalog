@@ -10,6 +10,7 @@ columns:
 
     name:
         label: tiipiik.catalog::lang.brands.name
+        searchable: true
 
     slug:
         label: tiipiik.catalog::lang.brands.slug

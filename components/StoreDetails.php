@@ -1,42 +1,52 @@
-<?php namespace Tiipiik\Catalog\Components;
+<?php
+namespace Tiipiik\Catalog\Components;
 
-use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
-use Tiipiik\Catalog\Models\Store;
+use Cms\Classes\Page;
 use Tiipiik\Catalog\Models\CustomField;
 use Tiipiik\Catalog\Models\Settings;
+use Tiipiik\Catalog\Models\Store;
 
 class StoreDetails extends ComponentBase
 {
+    /**
+     * @var mixed
+     */
     public $store;
+    /**
+     * @var mixed
+     */
     public $productPage;
+    /**
+     * @var mixed
+     */
     public $noProductsMessage;
 
     public function componentDetails()
     {
         return [
             'name'        => 'tiipiik.catalog::lang.component.store_details.name',
-            'description' => 'tiipiik.catalog::lang.component.store_details.description'
+            'description' => 'tiipiik.catalog::lang.component.store_details.description',
         ];
     }
 
     public function defineProperties()
     {
         return [
-            'slug' => [
+            'slug'              => [
                 'title'       => 'tiipiik.catalog::lang.component.store_details.param.slug_title',
                 'description' => 'tiipiik.catalog::lang.component.store_details.param.slug_desc',
                 'default'     => '{{ :slug }}',
                 'type'        => 'string',
             ],
-            'products' => [
+            'products'          => [
                 'title'       => 'tiipiik.catalog::lang.component.store_details.param.products_title',
                 'description' => 'tiipiik.catalog::lang.component.store_details.param.products_desc',
                 'default'     => '0',
                 'type'        => 'checkbox',
                 'group'       => 'Products',
             ],
-            'productPage' => [
+            'productPage'       => [
                 'title'       => 'tiipiik.catalog::lang.component.store_details.param.product_page_title',
                 'description' => 'tiipiik.catalog::lang.component.store_details.param.product_page_desc',
                 'type'        => 'dropdown',
@@ -52,42 +62,49 @@ class StoreDetails extends ComponentBase
             ],
         ];
     }
-    
+
     public function getProductPageOptions()
     {
-        return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return ['' => '- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    /**
+     * @return mixed
+     */
     public function onRun()
     {
         $store = $this->loadStore();
 
         if (!$store) {
             $this->setStatusCode(404);
+
             return $this->controller->run('404');
         }
 
         $this->store = $this->page['store'] = $store;
-        
-        $this->productPage = $this->property('productPage');
+
+        $this->productPage       = $this->property('productPage');
         $this->noProductsMessage = $this->property('noProductsMessage');
 
         $this->page->title = ($store->meta_title != null)
-            ? $store->meta_title
-            : $store->title;
+        ? $store->meta_title
+        : $store->title;
 
         $this->page->description = ($store->meta_desc != null)
-            ? $store->meta_desc
-            : $store->description;
+        ? $store->meta_desc
+        : $store->description;
     }
 
+    /**
+     * @return mixed
+     */
     protected function loadStore()
     {
         $store = null;
-        $slug = $this->property('slug');
-        
+        $slug  = $this->property('slug');
+
         $store = Store::whereSlug($slug)->with('customfields')->whereIsActivated(1);
-        
+
         // Do we display related products ?
         if ($this->property('products') == 1) {
             $store = $store->with(['products' => function ($q) {
@@ -95,13 +112,13 @@ class StoreDetails extends ComponentBase
             }]);
         }
         $store = $store->first();
-        
+
         // Injects related custom fields
         if (isset($store->customfields)) {
             foreach ($store->customfields as $customfield) {
                 $fieldId = $customfield['custom_field_id'];
                 // Grab custom field template code
-                $field = CustomField::find($fieldId);
+                $field                                    = CustomField::find($fieldId);
                 $store->attributes[$field->template_code] = $customfield->value;
             }
         }
@@ -109,11 +126,11 @@ class StoreDetails extends ComponentBase
         if (isset($store->products)) {
             $store->products->each(function ($product) {
                 $product->url = (Settings::get('secure_urls') == 1)
-                    ? secure_url($this->property('productPage').'/'.$product->slug)
-                    : url($this->property('productPage').'/'.$product->slug);
+                ? secure_url($this->property('productPage') . '/' . $product->slug)
+                : url($this->property('productPage') . '/' . $product->slug);
             });
         }
-        
+
         return $store;
     }
 }

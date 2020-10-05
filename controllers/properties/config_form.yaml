@@ -1,0 +1,27 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: tiipiik.catalog::lang.config.form.property_name
+
+# Model Form Field configuration
+form: $/tiipiik/catalog/models/property/fields.yaml
+
+# Model Class name
+modelClass: Tiipiik\Catalog\Models\Property
+
+# Default redirect location
+defaultRedirect: tiipiik/catalog/properties
+
+# Create page
+create:
+    title: tiipiik.catalog::lang.config.form.property_create_title
+    redirect: tiipiik/catalog/properties/update/:id
+    redirectClose: tiipiik/catalog/properties
+
+# Update page
+update:
+    title: tiipiik.catalog::lang.config.form.property_update_title
+    redirect: tiipiik/catalog/properties
+    redirectClose: tiipiik/catalog/properties

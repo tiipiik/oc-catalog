@@ -1,35 +1,47 @@
-<?php namespace Tiipiik\Catalog\Components;
+<?php
+namespace Tiipiik\Catalog\Components;
 
-use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
+use Cms\Classes\Page;
 use Tiipiik\Catalog\Models\CustomField;
-use Tiipiik\Catalog\Models\Category;
-use Tiipiik\Catalog\Models\Settings;
 use Tiipiik\Catalog\Models\Product as ProductModel;
+use Tiipiik\Catalog\Models\Settings;
 
 class ProductDetails extends ComponentBase
 {
+    /**
+     * @var mixed
+     */
     public $product;
+    /**
+     * @var mixed
+     */
     public $categoryPage;
+    /**
+     * @var mixed
+     */
     public $brandPage;
+    /**
+     * @var mixed
+     */
     public $storePage;
 
     public function componentDetails()
     {
         return [
             'name'        => 'tiipiik.catalog::lang.component.product_details.name',
-            'description' => 'tiipiik.catalog::lang.component.product_details.description'
+            'description' => 'tiipiik.catalog::lang.component.product_details.description',
         ];
     }
 
     public function defineProperties()
     {
         return [
-            'slug' => [
+            'slug'         => [
                 'title'       => 'tiipiik.catalog::lang.component.product_details.param.id_param_title',
                 'description' => 'tiipiik.catalog::lang.component.product_details.param.id_param_desc',
                 'default'     => '{{ :slug }}',
-                'type'        => 'string'
+                'type'        => 'string',
             ],
             'categoryPage' => [
                 'title'       => 'tiipiik.catalog::lang.component.categories.param.category_page_title',
@@ -38,13 +50,13 @@ class ProductDetails extends ComponentBase
                 'default'     => 'category',
                 'group'       => 'Links',
             ],
-            'brandPage' => [
+            'brandPage'    => [
                 'title'       => 'Brand',
                 'description' => 'desc',
                 'type'        => 'dropdown',
                 'group'       => 'Links',
             ],
-            'storePage' => [
+            'storePage'    => [
                 'title'       => 'Store',
                 'description' => 'desc',
                 'type'        => 'dropdown',
@@ -52,95 +64,99 @@ class ProductDetails extends ComponentBase
             ],
         ];
     }
-    
+
     public function getCategoryPageOptions()
     {
-        return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return ['' => '- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     public function getBrandPageOptions()
     {
-        return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return ['' => '- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     public function getStorePageOptions()
     {
-        return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return ['' => '- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    /**
+     * @return mixed
+     */
     public function onRun()
     {
         $product = $this->loadProduct();
-        
+
         if (!$product) {
             // The line below works but return a line of details
             //return Response::make( $this->controller->run('404'), 404 );
             // Use this instead
             $this->setStatusCode(404);
+
             return $this->controller->run('404');
         }
-        
+
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
-        $this->storePage = $this->page['storePage'] = $this->property('storePage');
-        $this->product = $this->page['product'] = $product;
-        
+        $this->storePage    = $this->page['storePage']    = $this->property('storePage');
+        $this->product      = $this->page['product']      = $product;
+
         $this->page->title = ($product->meta_title != null)
-            ? $product->meta_title
-            : $product->title;
+        ? $product->meta_title
+        : $product->title;
 
         $this->page->description = ($product->meta_desc != null)
-            ? $product->meta_desc
-            : $product->description;
+        ? $product->meta_desc
+        : $product->description;
     }
 
+    /**
+     * @return mixed
+     */
     protected function loadProduct()
     {
-        $slug = $this->property('slug');
+        $slug               = $this->property('slug');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
-        $this->brandPage = $this->page['brandPage'] = $this->property('brandPage');
-        $this->storePage = $this->page['storePage'] = $this->property('storePage');
-        $this->secureUrls = $this->page['secureUrls'] = $this->property('secureUrls');
-        
+        $this->brandPage    = $this->page['brandPage']    = $this->property('brandPage');
+        $this->storePage    = $this->page['storePage']    = $this->property('storePage');
+        $this->secureUrls   = $this->page['secureUrls']   = $this->property('secureUrls');
+
         $product = ProductModel::whereSlug($slug)
             ->whereIsPublished(1)
-            ->with('customfields')
-            ->with('categories')
-            ->with('brand')
-            ->with('stores')
+            ->with('customfields', 'categories', 'brand', 'stores', 'properties')
             ->first();
 
         if (isset($product->categories)) {
             $product->categories->each(function ($category) {
                 $category->url = (Settings::get('secure_urls') == 1)
-                    ? secure_url($this->categoryPage.'/'.$category->slug)
-                    : url($this->categoryPage.'/'.$category->slug);
+                ? secure_url($this->categoryPage . '/' . $category->slug)
+                : url($this->categoryPage . '/' . $category->slug);
             });
         }
 
         if (isset($product->stores)) {
             $product->stores->each(function ($store) {
                 $store->url = (Settings::get('secure_urls') == 1)
-                    ? secure_url($this->storePage.'/'.$store->slug)
-                    : url($this->storePage.'/'.$store->slug);
+                ? secure_url($this->storePage . '/' . $store->slug)
+                : url($this->storePage . '/' . $store->slug);
             });
         }
 
         if (isset($product->brand)) {
             $product->brand->url = (Settings::get('secure_urls') == 1)
-                ? secure_url($this->brandPage.'/'.$product->brand->slug)
-                : url($this->brandPage.'/'.$product->brand->slug);
+            ? secure_url($this->brandPage . '/' . $product->brand->slug)
+            : url($this->brandPage . '/' . $product->brand->slug);
         }
 
         if (isset($product->customfields)) {
             foreach ($product->customfields as $customfield) {
                 $fieldId = $customfield['custom_field_id'];
                 // Grab custom field template code
-                $field = CustomField::find($fieldId);
-                $product->attributes[$field->template_code] = $customfield->value;
+                $field                                                     = CustomField::find($fieldId);
+                $product->attributes[$field->template_code]                = $customfield->value;
                 $product->attributes['customfields'][$field->display_name] = $customfield->value;
             }
         }
-        
+
         return $product;
     }
 }

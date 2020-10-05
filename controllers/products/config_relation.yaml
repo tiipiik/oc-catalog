@@ -11,3 +11,27 @@ customfields:
         buttons: false
     view:
         showCheckboxes: false
+
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+properties:
+    label: tiipiik.catalog::lang.products.properties_relation
+    emptyMessage: tiipiik.catalog::lang.products.properties_empty
+    scope: isUsed
+    view:
+        list: $/tiipiik/catalog/models/property/pivot_columns.yaml
+        toolbarButtons: add|remove
+
+    manage:
+        list: $/tiipiik/catalog/models/property/columns.yaml
+
+    pivot:
+        form:
+            fields:
+                pivot[value]:
+                    label: tiipiik.catalog::lang.properties.value
+                    type: text
+
+        recordsPerPage: 50

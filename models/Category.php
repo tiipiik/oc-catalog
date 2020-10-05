@@ -1,8 +1,9 @@
-<?php namespace Tiipiik\Catalog\Models;
+<?php
+namespace Tiipiik\Catalog\Models;
 
-use Model;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
+use Model;
 
 /**
  * Category Model
@@ -21,8 +22,8 @@ class Category extends Model
      * Validation rules
      */
     public $rules = [
-        'name' => 'required|unique:tiipiik_catalog_categories',
-        'slug' => 'required',
+        'name' => 'required',
+        'slug' => 'required|unique:tiipiik_catalog_categories',
     ];
 
     /**
@@ -31,27 +32,32 @@ class Category extends Model
     public $translatable = [
         'name',
         ['slug', 'index' => true],
-        'description'
+        'description',
     ];
-    
+
     /**
      * @var array Guarded fields
      */
     protected $guarded = ['*'];
-    
+
+    /**
+     * @var array
+     */
     public $belongsToMany = [
         'products' => [
             'Tiipiik\Catalog\Models\Product',
             'table' => 'tiipiik_catalog_prods_cats',
-            'order' => 'title'
         ],
     ];
 
+    /**
+     * @var array
+     */
     public $attachOne = [
-        'cover' => ['System\Models\File', 'delete' => true]
+        'cover' => ['System\Models\File', 'delete' => true],
     ];
-    
-     /**
+
+    /**
      * Add translation support to this model, if available.
      * @return void
      */
@@ -71,17 +77,23 @@ class Category extends Model
             $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
         });
     }
-    
+
     /*
      *
+     */
+    /**
+     * @return mixed
      */
     public function getCategoriesOptions()
     {
         return $this->orderBy('name')->lists('name', 'id');
     }
-    
+
     /*
      * Return the number of product for given category
+     */
+    /**
+     * @return mixed
      */
     public function getProductCountAttribute()
     {
@@ -90,22 +102,30 @@ class Category extends Model
 
     /**
      * Sets the "url" attribute with a URL to this object
-     * @param string $pageName
+     * @param string                 $pageName
      * @param Cms\Classes\Controller $controller
      */
-    public function setUrl($pageName, $controller)
+    public function setUrl($pageName, $controller, array $addParams = null)
     {
         $params = ['slug' => $this->slug];
 
+        if ($addParams && is_array($addParams)) {
+            $params = array_merge($params, $addParams);
+        }
+
         return $this->url = $controller->pageUrl($pageName, $params);
     }
-    
+
+    /**
+     * @param $param
+     * @return mixed
+     */
     public static function categoryDetails($param)
     {
         if (!$category = self::whereSlug($param['category'])->first()) {
             return null;
         }
-        
+
         return $category;
     }
 
@@ -124,8 +144,8 @@ class Category extends Model
      * - cmsPages - a list of CMS pages (objects of the Cms\Classes\Page class),
      *      if the item type requires a CMS page reference to
      *   resolve the item URL.
-     * @param string $type Specifies the menu item type
-     * @return array Returns an array
+     * @param  string $type   Specifies the menu item type
+     * @return array  Returns an array
      */
     public static function getMenuTypeInfo($type)
     {
@@ -140,14 +160,14 @@ class Category extends Model
         if ($type == 'catalog-category') {
             $result = [
                 'references'   => self::listSubCategoryOptions(),
-                'dynamicItems' => true
+                'dynamicItems' => true,
             ];
         }
 
         if ($result) {
             $theme = Theme::getActiveTheme();
 
-            $pages = CmsPage::listInTheme($theme, true);
+            $pages    = CmsPage::listInTheme($theme, true);
             $cmsPages = [];
             foreach ($pages as $page) {
                 if (!$page->hasComponent('categories')) {
@@ -172,6 +192,9 @@ class Category extends Model
         return $result;
     }
 
+    /**
+     * @return mixed
+     */
     protected static function listSubCategoryOptions()
     {
         $category = self::make()->getAllRoot();
@@ -185,7 +208,7 @@ class Category extends Model
                 } else {
                     $result[$category->id] = [
                         'title' => $category->name,
-                        'items' => $iterator($category->children)
+                        'items' => $iterator($category->children),
                     ];
                 }
             }
@@ -207,11 +230,11 @@ class Category extends Model
      *   return all available records.
      * - items - an array of arrays with the same keys (url, isActive, items) + the title key.
      *   The items array should be added only if the $item's $nesting property value is TRUE.
-     * @param \RainLab\Pages\Classes\MenuItem $item Specifies the menu item.
-     * @param \Cms\Classes\Theme $theme Specifies the current theme.
-     * @param string $url Specifies the current page URL, normalized, in lower case
      * The URL is specified relative to the website root, it includes the subdirectory name, if any.
-     * @return mixed Returns an array. Returns null if the item cannot be resolved.
+     * @param  \RainLab\Pages\Classes\MenuItem $item   Specifies the menu item.
+     * @param  \Cms\Classes\Theme              $theme  Specifies the current theme.
+     * @param  string                          $url    Specifies the current page URL, normalized, in lower case
+     * @return mixed                           Returns an array. Returns null if the item cannot be resolved.
      */
     public static function resolveMenuItem($item, $url, $theme)
     {
@@ -234,23 +257,23 @@ class Category extends Model
 
             $pageUrl = \URL::to($pageUrl);
 
-            $result = [];
-            $result['url'] = $pageUrl;
+            $result             = [];
+            $result['url']      = $pageUrl;
             $result['isActive'] = $pageUrl == $url;
-            $result['mtime'] = $category->updated_at;
+            $result['mtime']    = $category->updated_at;
 
             if ($item->nesting) {
                 $categories = $category->getAllRoot();
-                $iterator = function ($categories) use (&$iterator, &$item, &$theme, $url) {
+                $iterator   = function ($categories) use (&$iterator, &$item, &$theme, $url) {
                     $branch = [];
 
                     foreach ($categories as $category) {
 
-                        $branchItem = [];
-                        $branchItem['url'] = self::getCategoryPageUrl($item->cmsPage, $category, $theme);
+                        $branchItem             = [];
+                        $branchItem['url']      = self::getCategoryPageUrl($item->cmsPage, $category, $theme);
                         $branchItem['isActive'] = $branchItem['url'] == $url;
-                        $branchItem['title'] = $category->name;
-                        $branchItem['mtime'] = $category->updated_at;
+                        $branchItem['title']    = $category->name;
+                        $branchItem['mtime']    = $category->updated_at;
 
                         if ($category->children) {
                             $branchItem['items'] = $iterator($category->children);
@@ -266,7 +289,7 @@ class Category extends Model
             }
         } elseif ($item->type == 'all-catalog-categories') {
             $result = [
-                'items' => []
+                'items' => [],
             ];
 
             $categories = self::orderBy('name')->get();
@@ -315,6 +338,9 @@ class Category extends Model
         return $url;
     }
 
+    /**
+     * @param $categoryUrl
+     */
     public static function hasChildren($categoryUrl)
     {
         $category = self::whereSlug($categoryUrl)->firstOrFail();

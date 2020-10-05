@@ -1,41 +1,51 @@
-<?php namespace Tiipiik\Catalog\Components;
+<?php
+namespace Tiipiik\Catalog\Components;
 
-use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
+use Cms\Classes\Page;
 use Tiipiik\Catalog\Models\Brand;
 use Tiipiik\Catalog\Models\Settings;
 
 class BrandDetails extends ComponentBase
 {
+    /**
+     * @var mixed
+     */
     public $brand;
+    /**
+     * @var mixed
+     */
     public $productPage;
+    /**
+     * @var mixed
+     */
     public $noProductsMessage;
 
     public function componentDetails()
     {
         return [
             'name'        => 'tiipiik.catalog::lang.component.brand_details.name',
-            'description' => 'tiipiik.catalog::lang.component.brand_details.description'
+            'description' => 'tiipiik.catalog::lang.component.brand_details.description',
         ];
     }
 
     public function defineProperties()
     {
         return [
-            'slug' => [
+            'slug'              => [
                 'title'       => 'tiipiik.catalog::lang.component.brand_details.param.slug_title',
                 'description' => 'tiipiik.catalog::lang.component.brand_details.param.slug_desc',
                 'default'     => '{{ :slug }}',
                 'type'        => 'string',
             ],
-            'products' => [
+            'products'          => [
                 'title'       => 'tiipiik.catalog::lang.component.brand_details.param.products_title',
                 'description' => 'tiipiik.catalog::lang.component.brand_details.param.products_desc',
                 'default'     => '0',
                 'type'        => 'checkbox',
                 'group'       => 'Products',
             ],
-            'productPage' => [
+            'productPage'       => [
                 'title'       => 'tiipiik.catalog::lang.component.brand_details.param.product_page_title',
                 'description' => 'tiipiik.catalog::lang.component.brand_details.param.product_page_desc',
                 'type'        => 'dropdown',
@@ -51,42 +61,49 @@ class BrandDetails extends ComponentBase
             ],
         ];
     }
-    
+
     public function getProductPageOptions()
     {
-        return [''=>'- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return ['' => '- Select page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    /**
+     * @return mixed
+     */
     public function onRun()
     {
         $brand = $this->loadBrand();
 
         if (!$brand) {
             $this->setStatusCode(404);
+
             return $this->controller->run('404');
         }
 
         $this->brand = $this->page['brand'] = $brand;
-        
-        $this->productPage = $this->property('productPage');
+
+        $this->productPage       = $this->property('productPage');
         $this->noProductsMessage = $this->property('noProductsMessage');
-        
+
         $this->page->title = ($brand->meta_title != null)
-            ? $brand->meta_title
-            : $brand->title;
+        ? $brand->meta_title
+        : $brand->title;
 
         $this->page->description = ($brand->meta_desc != null)
-            ? $brand->meta_desc
-            : $brand->description;
+        ? $brand->meta_desc
+        : $brand->description;
     }
 
+    /**
+     * @return mixed
+     */
     protected function loadBrand()
     {
         $brand = null;
-        $slug = $this->property('slug');
-        
+        $slug  = $this->property('slug');
+
         $brand = Brand::whereSlug($slug)->wherePublished(1);
-        
+
         // Do we display related products ?
         if ($this->property('products') == 1) {
             $brand = $brand->with(['products' => function ($q) {
@@ -98,11 +115,11 @@ class BrandDetails extends ComponentBase
         if (isset($brand->products)) {
             $brand->products->each(function ($product) {
                 $product->url = (Settings::get('secure_urls') == 1)
-                    ? secure_url($this->property('productPage').'/'.$product->slug)
-                    : url($this->property('productPage').'/'.$product->slug);
+                ? secure_url($this->property('productPage') . '/' . $product->slug)
+                : url($this->property('productPage') . '/' . $product->slug);
             });
         }
-        
+
         return $brand;
     }
 }
