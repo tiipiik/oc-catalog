@@ -116,15 +116,9 @@
 1.12.1:
     - Add new component to display a list of categories and related products
 1.12.2:
-    - Fix has active parent to categories
-1.12.3:
-    - Fix default menu tree display
-1.12.4:
-    - fix_brand_not_null_on_products.php
-1.12.5:
     - Added product properties
     - create_properties_table.php
-1.12.6:
+1.12.3:
     - Fixed sort_order on products table
     - fix_sort_order_on_products.php
     #- feed_tables.php
