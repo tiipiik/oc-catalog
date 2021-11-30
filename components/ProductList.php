@@ -204,6 +204,7 @@ class ProductList extends ComponentBase
         }
             
         $this->page->title = $category->name;
+        $this->page->description = $category->description;
         
         return $category;
     }
