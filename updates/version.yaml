@@ -129,4 +129,6 @@
     - fix_sort_order_on_products.php
 1.12.7:
     - Added overwrite for Category meta description inside ProductList component
+1.12.8:
+    - Added composer json fil to get compliant with OctoberCMS
     #- feed_tables.php

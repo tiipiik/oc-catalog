@@ -1,0 +1,8 @@
+{
+    "name": "tiipiik/catalog-plugin",
+    "type": "october-plugin",
+    "description": "Simple Catalog for OctoberCMS",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
